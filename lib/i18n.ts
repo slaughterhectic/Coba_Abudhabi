@@ -87,7 +87,7 @@ const en = {
         title: "Clubs & community",
         ar: "أندية ومجتمع",
         body: "Book clubs, women's circles and cultural groups — each with a permanent address and a standing place in the week.",
-        media: { type: "image" as const, src: "house-explore" },
+        media: { type: "image" as const, src: "club-community" },
       },
       {
         idx: "Three",
@@ -204,6 +204,12 @@ const en = {
       "Introductions, referrals and member perks",
     ],
     kitAlt: "The COBA membership kit — brass-foil keycard, olive notebook, black card wallet and a sage mug on lime plaster.",
+    kitSpots: [
+      { x: 27, y: 25, label: "Black card wallet", side: "right" as const },
+      { x: 71, y: 29, label: "Resident notebook", side: "left" as const },
+      { x: 24, y: 72, label: "Brass-foil keycard", side: "right" as const },
+      { x: 70, y: 73, label: "The house mug", side: "left" as const },
+    ],
     partnershipTitle: "A partnership, not a tenancy.",
     partnershipLede: "You bring your activity, your facilitators and your voice. We provide the space, the marketing, the community and the clients.",
     partnership: [
@@ -248,6 +254,7 @@ const en = {
   },
   house: {
     shopfrontAlt: "The COBA shopfront at Nation Towers Mall — black metal lettering and the owl mark on beige brick.",
+    scrollHint: "Scroll to step inside",
     eyebrow: "Nation Towers Mall, 1st Floor · Abu Dhabi",
     h2: ["A room your members", "photograph unasked."],
     body: "Lime plaster, light oak, brushed brass. Open seven days.",
@@ -388,7 +395,7 @@ const ru: typeof en = {
         title: "Клубы и сообщества",
         ar: "أندية ومجتمع",
         body: "Книжные клубы, женские круги и культурные объединения — у каждого свой постоянный адрес и постоянное место в неделе.",
-        media: { type: "image" as const, src: "house-explore" },
+        media: { type: "image" as const, src: "club-community" },
       },
       {
         idx: "Три",
@@ -505,6 +512,12 @@ const ru: typeof en = {
       "Знакомства, рекомендации и привилегии для участников",
     ],
     kitAlt: "Членский набор COBA — карта с латунным тиснением, оливковый блокнот, чёрный картхолдер и кружка шалфейного цвета на известковой штукатурке.",
+    kitSpots: [
+      { x: 27, y: 25, label: "Чёрный картхолдер", side: "right" as const },
+      { x: 71, y: 29, label: "Блокнот резидента", side: "left" as const },
+      { x: 24, y: 72, label: "Карта с латунным тиснением", side: "right" as const },
+      { x: 70, y: 73, label: "Фирменная кружка", side: "left" as const },
+    ],
     partnershipTitle: "Партнёрство, а не аренда.",
     partnershipLede: "Вы приносите свою деятельность, своих специалистов и свой голос. Мы предоставляем пространство, маркетинг, сообщество и клиентов.",
     partnership: [
@@ -549,6 +562,7 @@ const ru: typeof en = {
   },
   house: {
     shopfrontAlt: "Витрина COBA в Nation Towers Mall — чёрные металлические буквы и знак совы на бежевом кирпиче.",
+    scrollHint: "Прокрутите, чтобы войти",
     eyebrow: "Nation Towers Mall, 1-й этаж · Абу-Даби",
     h2: ["Зал, который ваши участники", "фотографируют без подсказки."],
     body: "Известковая штукатурка, светлый дуб, матовая латунь. Открыто семь дней в неделю.",

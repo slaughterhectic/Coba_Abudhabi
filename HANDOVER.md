@@ -62,6 +62,26 @@ translation. To add a third language, extend the `Lang` type and `DICT` in
 `lib/i18n.ts`, add an `app/<locale>/layout.tsx` + `page.tsx` pair, and add a
 link in `Header.tsx`'s switcher.
 
+## Motion & signature components
+
+The premium pass (August 2026) is built on the `motion` library plus a few
+bespoke components; everything honours `prefers-reduced-motion`:
+
+- `components/motion/Primitives.tsx` — WordsReveal (masked word-by-word
+  headlines), Rise, CurtainReveal, ParallaxDrift, CountUp, StaggerIn/Item.
+- `components/WhyCarousel.tsx` — Embla carousel for the seven reasons.
+- `components/OrbitBadge.tsx` — rotating Create·Explore·Connect seal.
+- `components/KitSpots.tsx` — hover/tap hotspots naming the kit objects.
+- `components/HouseReveal.tsx` — the signature piece: the shopfront photo
+  is split into its two door halves which slide apart with scroll
+  (scrubbing both directions), revealing the specs "inside" the house.
+  Note the inside layer is deliberately static — the doors physically
+  cover it, and scroll-linking its opacity proved flaky under dev HMR.
+- The room filmstrip is two counter-scrolling marquees; the six `act-*`
+  activity shots (science, chess, LEGO, etiquette, mum & toddler, board
+  games) and `club-community.webp` are Higgsfield-generated to the brand
+  interior, added alongside the deck photography.
+
 ## Generated media
 
 Four background clips were generated with Higgsfield (`kling3_0_turbo`), since

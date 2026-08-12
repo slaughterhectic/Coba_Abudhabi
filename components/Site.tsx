@@ -13,6 +13,8 @@ import BgVideo from "@/components/BgVideo";
 import WhyCarousel from "@/components/WhyCarousel";
 import { CheckMark, CrossMark } from "@/components/Icons";
 import OrbitBadge from "@/components/OrbitBadge";
+import KitSpots from "@/components/KitSpots";
+import HouseReveal from "@/components/HouseReveal";
 import {
   CurtainReveal,
   ParallaxDrift,
@@ -30,6 +32,7 @@ const DIMS: Record<string, [number, number]> = {
   "house-connect": [1000, 702],
   "house-create": [1000, 702],
   "house-explore": [1000, 702],
+  "club-community": [1050, 1406],
   idea: [1200, 806],
   invitation: [1500, 844],
   kit: [1000, 1242],
@@ -206,30 +209,34 @@ export default function Site({ lang }: { lang: Lang }) {
             <SectionHead num={c.happens.num} title={c.happens.title} />
             <ul className={s.cards}>
               {c.happens.cards.map((card, i) => (
-                <li key={card.title} data-reveal style={d(0.08 * i)}>
-                  <figure className={`figure ${s.cardFig}`}>
+                <li key={card.title} className={s.happensCard} data-reveal style={d(0.08 * i)}>
+                  <div className={s.happensMedia} aria-hidden="true">
                     {card.media.type === "video" ? (
                       <BgVideo name={card.media.src} />
                     ) : (
                       <Shot
                         name={card.media.src}
-                        alt={`${card.title}.`}
-                        sizes="(max-width: 800px) 100vw, 31vw"
+                        alt=""
+                        sizes="(max-width: 1000px) 100vw, 33vw"
                       />
                     )}
-                  </figure>
-                  <p className="eyebrow" style={{ marginTop: "1.5rem" }}>
-                    {card.idx}
-                  </p>
-                  <div className={s.cardTitle}>
-                    <h3 className="h3">{card.title}</h3>
-                    <span className={`${s.cardAr} ar`} lang="ar">
-                      {card.ar}
-                    </span>
                   </div>
-                  <p className="body" style={{ marginTop: "0.85rem" }}>
-                    {card.body}
-                  </p>
+                  <span className={s.happensNum} aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className={s.happensScrim} aria-hidden="true" />
+                  <div className={s.happensCopy}>
+                    <p className={`eyebrow ${s.happensEyebrow}`}>{card.idx}</p>
+                    <div className={s.cardTitle}>
+                      <h3 className={`h3 ${s.happensTitle}`}>{card.title}</h3>
+                      <span className={`${s.cardAr} ${s.happensAr} ar`} lang="ar">
+                        {card.ar}
+                      </span>
+                    </div>
+                    <p className={s.happensBody}>
+                      <span>{card.body}</span>
+                    </p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -388,8 +395,8 @@ export default function Site({ lang }: { lang: Lang }) {
                   {c.receive.includedEyebrow}
                 </p>
                 <ul className={s.receive}>
-                  {c.receive.items.map((x) => (
-                    <li key={x}>
+                  {c.receive.items.map((x, i) => (
+                    <li key={x} data-reveal style={d(0.12 * i)}>
                       <CheckMark className={s.receiveIcon} />
                       <span>{x}</span>
                     </li>
@@ -397,7 +404,10 @@ export default function Site({ lang }: { lang: Lang }) {
                 </ul>
               </div>
               <CurtainReveal className={`figure ${s.kitFig}`} delay={0.1}>
-                <Shot name="kit" alt={c.receive.kitAlt} sizes="(max-width: 900px) 100vw, 40vw" />
+                <div className={s.kitInner}>
+                  <Shot name="kit" alt={c.receive.kitAlt} sizes="(max-width: 900px) 100vw, 40vw" />
+                  <KitSpots spots={c.receive.kitSpots} />
+                </div>
               </CurtainReveal>
             </div>
 
@@ -440,34 +450,14 @@ export default function Site({ lang }: { lang: Lang }) {
 
         {/* ---------- the house ---------- */}
         <section id="house">
-          <ParallaxDrift className={s.shopfront} strength={6}>
-            <Shot name="shopfront" alt={c.house.shopfrontAlt} sizes="100vw" />
-          </ParallaxDrift>
-          <div className="band">
-            <div className="shell">
-              <div className={s.houseGrid}>
-                <div data-reveal>
-                  <p className="eyebrow">{c.house.eyebrow}</p>
-                  <h2 className="h2" style={{ marginTop: "1.4rem" }}>
-                    {c.house.h2[0]}
-                    <br />
-                    {c.house.h2[1]}
-                  </h2>
-                  <p className="body" style={{ marginTop: "1.8rem" }}>
-                    {c.house.body}
-                  </p>
-                </div>
-                <div className={s.houseSpecs} data-reveal style={d(0.08)}>
-                  {c.house.specs.map(([k, v]) => (
-                    <div key={k}>
-                      <span className="caps">{k}</span>
-                      <span>{v}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          <HouseReveal
+            eyebrow={c.house.eyebrow}
+            h2={c.house.h2}
+            body={c.house.body}
+            specs={c.house.specs}
+            alt={c.house.shopfrontAlt}
+            scrollHint={c.house.scrollHint}
+          />
         </section>
 
         {/* ---------- visit ---------- */}

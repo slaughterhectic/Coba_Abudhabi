@@ -118,12 +118,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.6rem, 3.4vw, 3.2rem);
-}
-
-.cardFig {
-  margin: 0;
-  aspect-ratio: 4 / 3;
+  gap: clamp(1.2rem, 2.4vw, 2rem);
 }
 
 .cardTitle {
@@ -138,6 +133,126 @@
   font-size: 0.98rem;
   color: var(--brass-text);
   flex: none;
+}
+
+/* ---- editorial poster cards — the copy lives on the image, the body
+   unfolds on hover ---- */
+
+.happensCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  aspect-ratio: 3 / 3.9;
+  background: var(--ink);
+  transition: box-shadow 0.6s var(--ease);
+}
+
+.happensCard:hover {
+  box-shadow: 0 34px 50px -30px rgba(28, 27, 23, 0.5);
+}
+
+.happensMedia {
+  position: absolute;
+  inset: 0;
+}
+
+.happensMedia img,
+.happensMedia video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+
+.happensCard:hover .happensMedia img,
+.happensCard:hover .happensMedia video {
+  transform: scale(1.06);
+}
+
+.happensScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 19, 15, 0.9) 0%,
+    rgba(20, 19, 15, 0.42) 42%,
+    rgba(20, 19, 15, 0.1) 70%,
+    rgba(20, 19, 15, 0.24) 100%
+  );
+  transition: opacity 0.6s var(--ease);
+}
+
+.happensNum {
+  position: absolute;
+  top: 0.4rem;
+  right: 1rem;
+  z-index: 1;
+  font-size: clamp(3.6rem, 5.5vw, 5.2rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--plaster);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.happensCopy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: clamp(1.3rem, 2.2vw, 1.9rem);
+  color: var(--plaster);
+}
+
+.happensEyebrow {
+  color: var(--oak);
+}
+
+.happensTitle {
+  color: var(--plaster);
+}
+
+.happensAr {
+  color: var(--oak);
+}
+
+/* the body unfolds from zero rows — pure CSS, no JS */
+.happensBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin: 0;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.75s var(--ease),
+    opacity 0.6s var(--ease),
+    margin-top 0.75s var(--ease);
+}
+
+.happensBody > span {
+  min-height: 0;
+  overflow: hidden;
+  font-size: 0.98rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(241, 235, 223, 0.85);
+}
+
+.happensCard:hover .happensBody,
+.happensCard:focus-within .happensBody {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 0.85rem;
+}
+
+/* touch/small screens: nothing hides behind hover */
+@media (hover: none), (max-width: 1000px) {
+  .happensBody {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 0.85rem;
+  }
 }
 
 .modelNote {
@@ -421,6 +536,39 @@
   height: 21px;
   flex: none;
   color: var(--brass-text);
+}
+
+/* The ledger ticks itself: ring draws first, then the check strokes in,
+   cascading row by row via each li's --d reveal delay. */
+.receive li .receiveIcon circle,
+.receive li .receiveIcon path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.receive li:global(.in) .receiveIcon circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.8s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+
+.receive li:global(.in) .receiveIcon path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.5s var(--ease);
+  transition-delay: calc(var(--d, 0s) + 0.55s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .receive li .receiveIcon circle,
+  .receive li .receiveIcon path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
+.kitInner {
+  position: relative;
+  height: 100%;
 }
 
 .kitFig {

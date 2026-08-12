@@ -1,0 +1,252 @@
+/* ---- the scroll stage ---- */
+
+.stage {
+  position: relative;
+  height: 260vh;
+  background: var(--ink);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* ---- the two door halves ---- */
+
+.door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  z-index: 2;
+  will-change: transform;
+}
+
+.doorLeft {
+  left: 0;
+}
+
+.doorRight {
+  right: 0;
+}
+
+/* each half carries the full storefront at double width, so the two
+   halves together reassemble the photograph exactly */
+.doorImg {
+  width: 200%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.doorRight .doorImg {
+  margin-left: -100%;
+}
+
+/* brass seam on the meeting edges + a soft shadow for depth */
+.doorLeft::after,
+.doorRight::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(168, 135, 78, 0.65);
+  z-index: 1;
+}
+
+.doorLeft::after {
+  right: 0;
+  box-shadow: -18px 0 34px rgba(20, 19, 15, 0.5);
+}
+
+.doorRight::after {
+  left: 0;
+  box-shadow: 18px 0 34px rgba(20, 19, 15, 0.5);
+}
+
+/* ---- inside the house ---- */
+
+.inside {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  will-change: transform, opacity;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 50% 42%,
+      rgba(168, 135, 78, 0.2) 0%,
+      rgba(168, 135, 78, 0.05) 45%,
+      transparent 75%
+    );
+}
+
+.insideOwl {
+  position: absolute;
+  bottom: -12%;
+  right: -4%;
+  width: min(30vw, 380px);
+  color: var(--oak);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.insideCopy {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  color: var(--plaster);
+}
+
+.insideEyebrow {
+  color: var(--oak);
+}
+
+.insideTitle {
+  color: var(--plaster);
+  margin-top: 1.2rem;
+}
+
+.insideBody {
+  margin: 1.4rem auto 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(241, 235, 223, 0.78);
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+  max-width: 1060px;
+  margin: clamp(2.2rem, 5vh, 3.6rem) auto 0;
+  padding-top: clamp(1.4rem, 3vh, 2.2rem);
+  border-top: 1px solid rgba(168, 135, 78, 0.4);
+  text-align: left;
+}
+
+.specs dt {
+  color: var(--oak);
+  margin-bottom: 0.45rem;
+}
+
+.specs dd {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--plaster);
+}
+
+/* ---- scroll hint ---- */
+
+.hint {
+  position: absolute;
+  bottom: clamp(1.6rem, 4vh, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--plaster);
+  text-shadow: 0 1px 10px rgba(20, 19, 15, 0.6);
+  white-space: nowrap;
+}
+
+.hintLine {
+  width: 1px;
+  height: 44px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hintLine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, var(--oak), transparent);
+  animation: hint-run 2.4s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+}
+
+@keyframes hint-run {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media (max-width: 900px) {
+  .stage {
+    height: 220vh;
+  }
+
+  .specs {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .insideTitle {
+    font-size: 1.65rem;
+  }
+}
+
+/* ---- reduced-motion static composition ---- */
+
+.static {
+  background: var(--ink);
+  color: var(--plaster);
+  padding-bottom: var(--band);
+}
+
+.staticMedia {
+  margin: 0;
+  aspect-ratio: 16 / 6;
+  overflow: hidden;
+}
+
+.staticMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.staticCopy {
+  padding-top: var(--band);
+  text-align: left;
+}
+
+.staticCopy h2 {
+  color: var(--plaster);
+  margin-top: 1.2rem;
+}
+
+.staticCopy .body {
+  margin-top: 1.4rem;
+  color: rgba(241, 235, 223, 0.78);
+}

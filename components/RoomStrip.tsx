@@ -18,36 +18,42 @@ const DIMS: Record<string, [number, number]> = {
 };
 
 /**
- * A continuous filmstrip rather than a wall of tiles — the room passing by.
- * Pure CSS translation, duplicated once for a seamless wrap; pauses on hover
- * and stops entirely under prefers-reduced-motion.
+ * Two counter-scrolling filmstrips — the room passing by in both
+ * directions at once. Pure CSS translation, each row duplicated once
+ * for a seamless wrap; cards lift on hover, the rows pause, and
+ * everything stops under prefers-reduced-motion.
  */
 export default function RoomStrip({ lang }: { lang: Lang }) {
   const shots = copy(lang).room.shots;
+  const rows = [shots.slice(0, 6), shots.slice(6)];
 
   return (
-    <div className={styles.viewport}>
-      <div className={styles.track}>
-        {[0, 1].map((copyIdx) => (
-          <div className={styles.run} key={copyIdx} aria-hidden={copyIdx === 1}>
-            {shots.map((shot) => {
-              const [w, h] = DIMS[shot.img] ?? [860, 578];
-              return (
-                <figure className={styles.item} key={`${copyIdx}-${shot.img}`}>
-                  <Image
-                    src={`/img/${shot.img}.webp`}
-                    alt={copyIdx === 0 ? `${shot.cap} at COBA.` : ""}
-                    width={w}
-                    height={h}
-                    sizes="(max-width: 700px) 78vw, 34vw"
-                  />
-                  <figcaption>{shot.cap}</figcaption>
-                </figure>
-              );
-            })}
+    <div className={styles.stack}>
+      {rows.map((row, r) => (
+        <div className={styles.viewport} key={r}>
+          <div className={`${styles.track} ${r === 1 ? styles.trackReverse : ""}`}>
+            {[0, 1].map((copyIdx) => (
+              <div className={styles.run} key={copyIdx} aria-hidden={copyIdx === 1}>
+                {row.map((shot) => {
+                  const [w, h] = DIMS[shot.img] ?? [860, 578];
+                  return (
+                    <figure className={styles.item} key={`${copyIdx}-${shot.img}`}>
+                      <Image
+                        src={`/img/${shot.img}.webp`}
+                        alt={copyIdx === 0 ? `${shot.cap} at COBA.` : ""}
+                        width={w}
+                        height={h}
+                        sizes="(max-width: 700px) 62vw, 26vw"
+                      />
+                      <figcaption>{shot.cap}</figcaption>
+                    </figure>
+                  );
+                })}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -1,13 +1,15 @@
 export function CheckMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 28 28" fill="none" className={className} aria-hidden="true">
-      <circle cx="14" cy="14" r="13" stroke="currentColor" strokeWidth="1" />
+      {/* pathLength normalised so CSS can draw the strokes with dashoffset */}
+      <circle cx="14" cy="14" r="13" stroke="currentColor" strokeWidth="1" pathLength={1} />
       <path
         d="M8.5 14.3L12 17.8L19.5 10"
         stroke="currentColor"
         strokeWidth="1.4"
         strokeLinecap="round"
         strokeLinejoin="round"
+        pathLength={1}
       />
     </svg>
   );

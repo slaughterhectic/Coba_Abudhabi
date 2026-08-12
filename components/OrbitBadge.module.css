@@ -1,0 +1,42 @@
+.badge {
+  position: relative;
+  width: clamp(96px, 12vw, 148px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--plaster);
+  box-shadow: 0 14px 30px -14px rgba(28, 27, 23, 0.35);
+}
+
+.ring {
+  position: absolute;
+  inset: 6%;
+  animation: orbit 26s linear infinite;
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation: none;
+  }
+}
+
+.ringText {
+  font-family: var(--sans);
+  font-size: 10.2px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  fill: var(--brass-text);
+}
+
+.owl {
+  width: 34%;
+  color: var(--olive);
+}

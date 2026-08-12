@@ -1,5 +1,6 @@
 import Owl from "./Owl";
 import BgVideo from "./BgVideo";
+import { WordsReveal, Rise, CountUp } from "./motion/Primitives";
 import { copy, type Lang } from "@/lib/i18n";
 import styles from "./Hero.module.css";
 
@@ -15,31 +16,34 @@ export default function Hero({ lang }: { lang: Lang }) {
 
       <div className={styles.inner}>
         <div className={styles.copy}>
-          <p className={`${styles.arabic} ar-display rise`} lang="ar" style={{ "--d": ".05s" } as React.CSSProperties}>
-            أبدع. استكشف. تواصل.
-          </p>
+          <Rise delay={0.05}>
+            <p className={`${styles.arabic} ar-display`} lang="ar">
+              أبدع. استكشف. تواصل.
+            </p>
+          </Rise>
 
-          <h1 className={`display ${styles.title} rise`} style={{ "--d": ".15s" } as React.CSSProperties}>
-            {c.title[0]}
-            <br />
-            {c.title[1]}
-          </h1>
+          <WordsReveal
+            as="h1"
+            lines={[c.title[0], c.title[1]]}
+            delay={0.18}
+            className={`display ${styles.title}`}
+          />
 
-          <p className={`${styles.lede} rise`} style={{ "--d": ".28s" } as React.CSSProperties}>
-            {c.lede}
-          </p>
+          <Rise delay={0.55}>
+            <p className={styles.lede}>{c.lede}</p>
+          </Rise>
 
-          <div className={`${styles.actions} rise`} style={{ "--d": ".4s" } as React.CSSProperties}>
+          <Rise delay={0.7} className={styles.actions}>
             <a href="#visit" className="btn btn--solid">
               {c.ctaPrimary}
             </a>
             <a href="#happens" className="btn btn--ghost">
               {c.ctaSecondary}
             </a>
-          </div>
+          </Rise>
         </div>
 
-        <div className={`${styles.foot} rise`} style={{ "--d": ".55s" } as React.CSSProperties}>
+        <Rise delay={0.9} className={styles.foot}>
           <div className={styles.footMark}>
             <Owl className={styles.footOwl} title="COBA" />
             <span className={styles.footWord} aria-hidden="true">
@@ -47,14 +51,27 @@ export default function Hero({ lang }: { lang: Lang }) {
             </span>
           </div>
           <dl className={styles.facts}>
-            {c.facts.map((f) => (
+            {c.facts.map((f, i) => (
               <div key={f.label}>
                 <dt className="caps">{f.label}</dt>
-                <dd>{f.value}</dd>
+                <dd>
+                  {/* the capacity line gets a live count-up */}
+                  {i === 2 ? (
+                    <>
+                      <CountUp to={70} suffix="+" /> {f.value.replace(/^70\+\s*/, "")}
+                    </>
+                  ) : (
+                    f.value
+                  )}
+                </dd>
               </div>
             ))}
           </dl>
-        </div>
+        </Rise>
+      </div>
+
+      <div className={styles.scrollCue} aria-hidden="true">
+        <span className={styles.scrollLine} />
       </div>
     </section>
   );

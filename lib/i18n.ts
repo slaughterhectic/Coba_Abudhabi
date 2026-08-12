@@ -31,7 +31,7 @@ const en = {
     facts: [
       { label: "Address", value: "Nation Towers Mall, 1st Floor" },
       { label: "Open", value: "Seven days a week" },
-      { label: "The room", value: "10 – 35 guests" },
+      { label: "The room", value: "70+ guests" },
     ],
   },
   voice: { create: "Create", explore: "Explore", connect: "Connect" },
@@ -58,11 +58,17 @@ const en = {
     rule: "Every hero image contains people. It is a rule, not a preference.",
     shots: [
       { img: "room-laughing", cap: "People laughing" },
+      { img: "act-science", cap: "Teen science sessions" },
       { img: "room-artists", cap: "Artists creating" },
+      { img: "act-chess", cap: "Chess evenings" },
       { img: "room-children", cap: "Children building" },
+      { img: "act-lego", cap: "LEGO builders" },
       { img: "room-coffee", cap: "Coffee conversations" },
+      { img: "act-etiquette", cap: "Etiquette classes" },
       { img: "room-parents", cap: "Parents talking" },
+      { img: "act-mumtoddler", cap: "Mum & toddler mornings" },
       { img: "room-networking", cap: "Business networking" },
+      { img: "act-boardgames", cap: "Board game nights" },
     ],
   },
   happens: {
@@ -246,7 +252,7 @@ const en = {
     h2: ["A room your members", "photograph unasked."],
     body: "Lime plaster, light oak, brushed brass. Open seven days.",
     specs: [
-      ["Capacity", "10 – 35 guests"],
+      ["Capacity", "70+ guests"],
       ["Configurations", "Coffee circle, workshop or lounge"],
       ["On arrival", "Reception & concierge"],
       ["Between sessions", "Materials kept on site"],
@@ -326,7 +332,7 @@ const ru: typeof en = {
     facts: [
       { label: "Адрес", value: "Nation Towers Mall, 1-й этаж" },
       { label: "Открыто", value: "Семь дней в неделю" },
-      { label: "Зал", value: "10 – 35 гостей" },
+      { label: "Зал", value: "70+ гостей" },
     ],
   },
   voice: { create: "Твори", explore: "Исследуй", connect: "Общайся" },
@@ -353,11 +359,17 @@ const ru: typeof en = {
     rule: "На каждом ключевом изображении есть люди. Это правило, а не предпочтение.",
     shots: [
       { img: "room-laughing", cap: "Люди смеются" },
+      { img: "act-science", cap: "Научные занятия для подростков" },
       { img: "room-artists", cap: "Художники творят" },
+      { img: "act-chess", cap: "Шахматные вечера" },
       { img: "room-children", cap: "Дети мастерят" },
+      { img: "act-lego", cap: "Строители LEGO" },
       { img: "room-coffee", cap: "Разговоры за кофе" },
+      { img: "act-etiquette", cap: "Уроки этикета" },
       { img: "room-parents", cap: "Родители общаются" },
+      { img: "act-mumtoddler", cap: "Утро для мам и малышей" },
       { img: "room-networking", cap: "Деловые знакомства" },
+      { img: "act-boardgames", cap: "Вечера настольных игр" },
     ],
   },
   happens: {
@@ -541,7 +553,7 @@ const ru: typeof en = {
     h2: ["Зал, который ваши участники", "фотографируют без подсказки."],
     body: "Известковая штукатурка, светлый дуб, матовая латунь. Открыто семь дней в неделю.",
     specs: [
-      ["Вместимость", "10 – 35 гостей"],
+      ["Вместимость", "70+ гостей"],
       ["Форматы", "Кофейный круг, мастер-класс или лаунж"],
       ["По прибытии", "Ресепшен и консьерж"],
       ["Между занятиями", "Материалы хранятся на месте"],

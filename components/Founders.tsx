@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Owl from "./Owl";
 import { copy, type Lang } from "@/lib/i18n";
+import {
+  CountUp,
+  CurtainReveal,
+  WordsReveal,
+} from "./motion/Primitives";
 import s from "./Founders.module.css";
 
 export default function Founders({ lang }: { lang: Lang }) {
@@ -27,13 +32,15 @@ export default function Founders({ lang }: { lang: Lang }) {
           <div className={s.portraitCol} data-reveal>
             <figure className={s.portrait}>
               <span className={s.frame} aria-hidden="true" />
-              <Image
-                src="/img/founders.webp"
-                alt={c.portraitAlt}
-                width={900}
-                height={1342}
-                sizes="(max-width: 1000px) 100vw, 38vw"
-              />
+              <CurtainReveal className={s.portraitMedia}>
+                <Image
+                  src="/img/founders.webp"
+                  alt={c.portraitAlt}
+                  width={900}
+                  height={1342}
+                  sizes="(max-width: 1000px) 100vw, 38vw"
+                />
+              </CurtainReveal>
             </figure>
             <figcaption className={s.plate}>
               <span className="caps">{c.plateCaption}</span>
@@ -44,12 +51,17 @@ export default function Founders({ lang }: { lang: Lang }) {
           </div>
 
           <div className={s.copyCol}>
+            {/* fifteen years, made visible — counts up as it enters */}
+            <div className={s.bigYears} aria-hidden="true">
+              <CountUp to={15} />
+            </div>
+
             <h2 className={`h2 ${s.title}`} data-reveal>
               {c.h2}
             </h2>
 
-            <blockquote className={s.quote} data-reveal>
-              <p>“{c.quote}”</p>
+            <blockquote className={s.quote}>
+              <WordsReveal as="p" lines={[`“${c.quote}”`]} onScroll />
             </blockquote>
 
             <div data-reveal>
@@ -59,6 +71,7 @@ export default function Founders({ lang }: { lang: Lang }) {
               </p>
             </div>
 
+            {/* the journey draws itself when it scrolls into view */}
             <ol className={s.rail} data-reveal aria-label={c.railLabel}>
               {c.rail.map((r, i) => (
                 <li key={r.place}>

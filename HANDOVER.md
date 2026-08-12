@@ -21,8 +21,10 @@ npm run build && npm run start -- -p 3477
 - **The owl mark** is vector-traced from the supplied raster, symmetrised about
   the vertical axis, and inlined as SVG (`components/owlPath.ts`). It drives the
   header, section rules, footer lockup, watermark and favicons.
-- **Instagram** `@cobaabudhabi` is from deck p.12. Address, opening days and
-  capacity (10–35 guests) are from Residency p.07.
+- **Instagram** `@cobaabudhabi` is from deck p.12. Address and opening days
+  are from Residency p.07. Capacity is shown as **70+ guests** per the
+  founders' correction in August 2026 — the Residency deck itself states
+  10–35; the deck should be corrected to match if it's reused elsewhere.
 - **The two pinned residencies** in the week grid — Art Club (Mondays, deck p.12)
   and Children's Art Club (Saturdays, deck p.06) — are the only named sessions.
 

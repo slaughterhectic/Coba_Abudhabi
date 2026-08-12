@@ -49,10 +49,12 @@ export default function Header({ lang }: { lang: Lang }) {
         <div className={styles.actions}>
           <nav className={styles.langSwitch} aria-label={c.header.langSwitchLabel}>
             <a href="/" aria-current={lang === "en" ? "page" : undefined}>
+              <span className={styles.flag} aria-hidden="true">🇬🇧</span>
               EN
             </a>
-            <span aria-hidden="true">/</span>
+            <span aria-hidden="true" className={styles.langDivider} />
             <a href="/ru" aria-current={lang === "ru" ? "page" : undefined}>
+              <span className={styles.flag} aria-hidden="true">🇷🇺</span>
               RU
             </a>
           </nav>
@@ -89,10 +91,12 @@ export default function Header({ lang }: { lang: Lang }) {
         </a>
         <nav className={styles.sheetLangSwitch} aria-label={c.header.langSwitchLabel}>
           <a href="/" aria-current={lang === "en" ? "page" : undefined}>
+            <span className={styles.flag} aria-hidden="true">🇬🇧</span>
             EN
           </a>
-          <span aria-hidden="true">/</span>
+          <span aria-hidden="true" className={styles.langDivider} />
           <a href="/ru" aria-current={lang === "ru" ? "page" : undefined}>
+            <span className={styles.flag} aria-hidden="true">🇷🇺</span>
             RU
           </a>
         </nav>

@@ -56,8 +56,36 @@
   border-left: 1px solid var(--brass);
 }
 
+.ideaFigureWrap {
+  position: relative;
+}
+
+/* Arched window mask — the mall's own arch motif. */
 .ideaFigure {
-  aspect-ratio: 3 / 2.02;
+  aspect-ratio: 3 / 2.35;
+  border-radius: clamp(90px, 11vw, 170px) clamp(90px, 11vw, 170px) 2px 2px;
+}
+
+.ideaFigure img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* an offset hairline arch behind, like print registration */
+.ideaArchGhost {
+  position: absolute;
+  inset: 0;
+  transform: translate(clamp(10px, 1.6vw, 20px), clamp(-20px, -1.6vw, -10px));
+  border: 1px solid var(--brass);
+  border-radius: clamp(90px, 11vw, 170px) clamp(90px, 11vw, 170px) 2px 2px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.ideaBadge {
+  position: absolute;
+  left: clamp(-30px, -2.4vw, -18px);
+  bottom: clamp(26px, 4vw, 48px);
 }
 
 /* ---------- in the room ---------- */
@@ -170,16 +198,15 @@
 
 /* ---------- why ---------- */
 
-.whyGrid {
+.whyLead2 {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(2.5rem, 6vw, 6rem);
   align-items: start;
 }
 
-.whyLead {
-  position: sticky;
-  top: 7rem;
+.whyLeadRight {
+  padding-top: 0.3rem;
 }
 
 .em {
@@ -209,27 +236,39 @@
   color: var(--brass-text);
 }
 
-.reasons {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.8rem, 3.4vw, 3rem) clamp(1.5rem, 3vw, 2.8rem);
+.reasonsHolder {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+/* full-bleed carousel: let it run past the shell's right gutter so the
+   next card peeks in, without the shell itself losing its max-width */
+.reasonsHolder :global(.wrap) {
+  margin-right: calc(-1 * var(--gutter));
+}
+
+.reasonsHolder :global(.viewport) {
+  padding-right: var(--gutter);
 }
 
 .difference {
-  border-top: 1px solid var(--rule);
-  padding-top: 1.6rem;
-  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.6rem, 2.8vw, 2.2rem) clamp(1.4rem, 2.4vw, 1.9rem);
+  background: var(--olive);
+  border-radius: 2px;
+}
+
+.difference .eyebrow {
+  color: rgba(241, 235, 223, 0.62);
 }
 
 .differenceBody {
   margin: 0.7rem 0 0;
-  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  font-size: clamp(1.15rem, 1.7vw, 1.42rem);
   font-weight: 300;
-  line-height: 1.45;
-  color: var(--olive);
+  line-height: 1.4;
+  color: var(--plaster);
 }
 
 /* ---------- the model ---------- */
@@ -271,10 +310,33 @@
 }
 
 .compare {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 6vw, 5.5rem);
+  grid-template-columns: 1fr auto 1fr;
+  gap: clamp(1.6rem, 4vw, 3.5rem);
   margin-top: clamp(2.8rem, 6vw, 4.5rem);
+}
+
+.compareCol {
+  padding: clamp(1.6rem, 2.6vw, 2.2rem);
+  border-radius: 2px;
+  transition: background-color 0.6s var(--ease);
+}
+
+.compareColOn {
+  background: rgba(241, 235, 223, 0.05);
+  border: 1px solid rgba(168, 135, 78, 0.3);
+}
+
+.compareDivider {
+  width: 1px;
+  align-self: stretch;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(168, 135, 78, 0.5),
+    transparent
+  );
 }
 
 .list {
@@ -286,6 +348,9 @@
 }
 
 .list li {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   font-size: clamp(1.02rem, 1.4vw, 1.22rem);
   font-weight: 300;
   line-height: 1.5;
@@ -293,11 +358,19 @@
   border-bottom: 1px solid rgba(241, 235, 223, 0.14);
 }
 
+.listIcon {
+  width: 19px;
+  height: 19px;
+  flex: none;
+  color: var(--oak);
+}
+
 .listMuted li {
-  color: rgba(241, 235, 223, 0.55);
-  text-decoration: line-through;
-  text-decoration-color: rgba(241, 235, 223, 0.28);
-  text-decoration-thickness: 1px;
+  color: rgba(241, 235, 223, 0.5);
+}
+
+.listMuted .listIcon {
+  color: rgba(241, 235, 223, 0.4);
 }
 
 .modelKicker {
@@ -327,12 +400,27 @@
 }
 
 .receive li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   font-size: clamp(1.02rem, 1.4vw, 1.22rem);
   font-weight: 300;
   line-height: 1.5;
   padding-block: 0.95rem;
   border-bottom: 1px solid var(--rule);
   color: var(--ink);
+  transition: padding-left 0.4s var(--ease);
+}
+
+.receive li:hover {
+  padding-left: 0.4rem;
+}
+
+.receiveIcon {
+  width: 21px;
+  height: 21px;
+  flex: none;
+  color: var(--brass-text);
 }
 
 .kitFig {
@@ -442,10 +530,6 @@
     position: static;
   }
 
-  .reasons {
-    gap: 1.8rem 2rem;
-  }
-
   .cards,
   .partnerGrid {
     grid-template-columns: 1fr;
@@ -459,6 +543,10 @@
   .compare {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .compareDivider {
+    display: none;
   }
 
   .shopfront {

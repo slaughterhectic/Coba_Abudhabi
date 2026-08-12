@@ -147,6 +147,45 @@
   line-height: 1.4;
 }
 
+/* ---- scroll cue ---- */
+
+.scrollCue {
+  position: absolute;
+  right: calc(var(--gutter) / 2);
+  bottom: 0;
+  height: 92px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.scrollLine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(241, 235, 223, 0.75),
+    transparent
+  );
+  animation: cue 2.6s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+}
+
+@keyframes cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollLine {
+    animation: none;
+  }
+}
+
 @media (max-width: 700px) {
   .hero {
     min-height: 96svh;

@@ -1,0 +1,138 @@
+.wrap {
+  position: relative;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: min(74vw, 340px);
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  padding: clamp(1.6rem, 2.6vw, 2.1rem) clamp(1.4rem, 2.4vw, 1.9rem) clamp(1.5rem, 2.2vw, 1.8rem);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  transition:
+    transform 0.55s var(--ease),
+    border-color 0.55s var(--ease),
+    background-color 0.55s var(--ease),
+    box-shadow 0.55s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--brass);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 22px 34px -22px rgba(28, 27, 23, 0.28);
+}
+
+.num {
+  position: absolute;
+  top: -0.3em;
+  right: 0.3rem;
+  font-size: clamp(3.4rem, 6vw, 5rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--olive);
+  opacity: 0.07;
+  pointer-events: none;
+  transition: opacity 0.55s var(--ease);
+}
+
+.card:hover .num {
+  opacity: 0.14;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 1px solid var(--brass);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.4s var(--ease),
+    transform 0.4s var(--ease),
+    width 0.4s var(--ease);
+}
+
+.dotOn {
+  background: var(--olive);
+  border-color: var(--olive);
+  width: 22px;
+  border-radius: 4px;
+}
+
+.arrows {
+  display: flex;
+  gap: 0.6rem;
+  flex: none;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--olive);
+  cursor: pointer;
+  transition:
+    border-color 0.4s var(--ease),
+    background-color 0.4s var(--ease),
+    opacity 0.4s var(--ease);
+}
+
+.arrow:hover:not(:disabled) {
+  border-color: var(--olive);
+  background: var(--olive);
+  color: var(--plaster);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+@media (max-width: 700px) {
+  .slide {
+    width: min(82vw, 320px);
+  }
+}

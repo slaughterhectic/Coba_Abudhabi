@@ -9,6 +9,12 @@ const DIMS: Record<string, [number, number]> = {
   "room-coffee": [860, 576],
   "room-parents": [860, 578],
   "room-networking": [860, 578],
+  "act-science": [860, 578],
+  "act-chess": [860, 578],
+  "act-lego": [860, 578],
+  "act-etiquette": [860, 578],
+  "act-mumtoddler": [860, 578],
+  "act-boardgames": [860, 578],
 };
 
 /**
@@ -25,7 +31,7 @@ export default function RoomStrip({ lang }: { lang: Lang }) {
         {[0, 1].map((copyIdx) => (
           <div className={styles.run} key={copyIdx} aria-hidden={copyIdx === 1}>
             {shots.map((shot) => {
-              const [w, h] = DIMS[shot.img];
+              const [w, h] = DIMS[shot.img] ?? [860, 578];
               return (
                 <figure className={styles.item} key={`${copyIdx}-${shot.img}`}>
                   <Image

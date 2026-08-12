@@ -10,6 +10,16 @@ import WelcomeList from "@/components/WelcomeList";
 import TheWeek from "@/components/TheWeek";
 import Founders from "@/components/Founders";
 import BgVideo from "@/components/BgVideo";
+import WhyCarousel from "@/components/WhyCarousel";
+import { CheckMark, CrossMark } from "@/components/Icons";
+import OrbitBadge from "@/components/OrbitBadge";
+import {
+  CurtainReveal,
+  ParallaxDrift,
+  StaggerIn,
+  StaggerItem,
+  WordsReveal,
+} from "@/components/motion/Primitives";
 import { copy, type Lang } from "@/lib/i18n";
 import s from "@/app/page.module.css";
 
@@ -106,13 +116,19 @@ export default function Site({ lang }: { lang: Lang }) {
         {/* ---------- voice strip ---------- */}
         <section className={s.voice} aria-label={`${c.voice.create}. ${c.voice.explore}. ${c.voice.connect}.`}>
           <div className="shell">
-            <div className={s.voiceRow}>
-              <span className={s.voiceWord}>{c.voice.create}</span>
+            <StaggerIn className={s.voiceRow} step={0.14}>
+              <StaggerItem>
+                <span className={s.voiceWord}>{c.voice.create}</span>
+              </StaggerItem>
               <span className={s.voiceDot} aria-hidden="true" />
-              <span className={s.voiceWord}>{c.voice.explore}</span>
+              <StaggerItem>
+                <span className={s.voiceWord}>{c.voice.explore}</span>
+              </StaggerItem>
               <span className={s.voiceDot} aria-hidden="true" />
-              <span className={s.voiceWord}>{c.voice.connect}</span>
-            </div>
+              <StaggerItem>
+                <span className={s.voiceWord}>{c.voice.connect}</span>
+              </StaggerItem>
+            </StaggerIn>
             <p className={`${s.voiceAr} ar-display`} lang="ar">
               أبدع. استكشف. تواصل.
             </p>
@@ -124,13 +140,14 @@ export default function Site({ lang }: { lang: Lang }) {
           <div className="shell">
             <SectionHead num={c.idea.num} title={c.idea.title} />
             <div className={s.ideaGrid}>
-              <div data-reveal>
-                <h2 className="h2">
-                  {c.idea.h2[0]}
-                  <br />
-                  {c.idea.h2[1]}
-                </h2>
-                <div className={s.ideaNote}>
+              <div>
+                <WordsReveal
+                  as="h2"
+                  lines={c.idea.h2}
+                  onScroll
+                  className="h2"
+                />
+                <div className={s.ideaNote} data-reveal>
                   <p className="eyebrow eyebrow--olive">{c.idea.place}</p>
                   <p className="body" style={{ marginTop: "1.1rem" }}>
                     {c.idea.p1}
@@ -146,9 +163,16 @@ export default function Site({ lang }: { lang: Lang }) {
                   </p>
                 </div>
               </div>
-              <figure className={`figure ${s.ideaFigure}`} data-reveal style={d(0.1)}>
-                <Shot name="idea" alt={c.idea.imgAlt} sizes="(max-width: 900px) 100vw, 46vw" />
-              </figure>
+              <div className={s.ideaFigureWrap}>
+                <span className={s.ideaArchGhost} aria-hidden="true" />
+                <CurtainReveal className={`figure ${s.ideaFigure}`} delay={0.1}>
+                  <Shot name="idea" alt={c.idea.imgAlt} sizes="(max-width: 900px) 100vw, 46vw" />
+                </CurtainReveal>
+                <OrbitBadge
+                  text={`${c.voice.create} · ${c.voice.explore} · ${c.voice.connect}`}
+                  className={s.ideaBadge}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -219,9 +243,9 @@ export default function Site({ lang }: { lang: Lang }) {
 
         {/* ---------- children band ---------- */}
         <section className={s.children}>
-          <div className={s.childrenMedia}>
+          <ParallaxDrift className={s.childrenMedia} strength={8}>
             <Shot name="artclub" alt={c.children.imgAlt} sizes="100vw" />
-          </div>
+          </ParallaxDrift>
           <div className="shell">
             <div className={s.childrenCopy} data-reveal>
               <div>
@@ -254,13 +278,14 @@ export default function Site({ lang }: { lang: Lang }) {
         <section className="band band--linen">
           <div className="shell">
             <SectionHead num={c.why.num} title={c.why.title} />
-            <div className={s.whyGrid}>
-              <div className={s.whyLead} data-reveal>
-                <h2 className="h2">
-                  {c.why.h2Lead}
-                  <em className={s.em}>{c.why.h2Em}</em>
-                </h2>
-                <p className="body" style={{ marginTop: "2rem" }}>
+
+            <div className={s.whyLead2} data-reveal>
+              <h2 className="h2">
+                {c.why.h2Lead}
+                <em className={s.em}>{c.why.h2Em}</em>
+              </h2>
+              <div className={s.whyLeadRight}>
+                <p className="body">
                   {c.why.body}
                   <strong>{c.why.bodyStrong}</strong>
                 </p>
@@ -269,28 +294,19 @@ export default function Site({ lang }: { lang: Lang }) {
                   <cite className="caps">{c.why.cite}</cite>
                 </blockquote>
               </div>
+            </div>
 
-              <ul className={s.reasons}>
-                {c.why.reasons.map(([n, title, body], i) => (
-                  <li key={title} data-reveal style={d(0.04 * i)}>
-                    <p className="eyebrow">{n}</p>
-                    <h3 className="h3" style={{ marginTop: "0.5rem" }}>
-                      {title}
-                    </h3>
-                    <p className="body" style={{ marginTop: "0.4rem" }}>
-                      {body}
-                    </p>
-                  </li>
-                ))}
-                <li className={s.difference} data-reveal>
-                  <p className="eyebrow">{c.why.differenceLabel}</p>
-                  <p className={s.differenceBody}>
-                    {c.why.differenceLine1}
-                    <br />
-                    {c.why.differenceLine2}
-                  </p>
-                </li>
-              </ul>
+            <div className={s.reasonsHolder} data-reveal style={d(0.08)}>
+              <WhyCarousel reasons={c.why.reasons} />
+            </div>
+
+            <div className={s.difference} data-reveal>
+              <p className="eyebrow">{c.why.differenceLabel}</p>
+              <p className={s.differenceBody}>
+                {c.why.differenceLine1}
+                <br />
+                {c.why.differenceLine2}
+              </p>
             </div>
           </div>
         </section>
@@ -309,21 +325,28 @@ export default function Site({ lang }: { lang: Lang }) {
             </h2>
 
             <div className={s.compare}>
-              <div data-reveal>
+              <div className={s.compareCol} data-reveal>
                 <p className="eyebrow" style={{ color: "rgba(241,235,223,.45)" }}>
                   {c.model.rentLabel}
                 </p>
                 <ul className={`${s.list} ${s.listMuted}`}>
                   {c.model.rent.map((x) => (
-                    <li key={x}>{x}</li>
+                    <li key={x}>
+                      <CrossMark className={s.listIcon} />
+                      <span>{x}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
-              <div data-reveal style={d(0.1)}>
+              <span className={s.compareDivider} aria-hidden="true" />
+              <div className={`${s.compareCol} ${s.compareColOn}`} data-reveal style={d(0.1)}>
                 <p className="eyebrow">{c.model.residencyLabel}</p>
                 <ul className={s.list}>
                   {c.model.residency.map((x) => (
-                    <li key={x}>{x}</li>
+                    <li key={x}>
+                      <CheckMark className={s.listIcon} />
+                      <span>{x}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -366,13 +389,16 @@ export default function Site({ lang }: { lang: Lang }) {
                 </p>
                 <ul className={s.receive}>
                   {c.receive.items.map((x) => (
-                    <li key={x}>{x}</li>
+                    <li key={x}>
+                      <CheckMark className={s.receiveIcon} />
+                      <span>{x}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
-              <figure className={`figure ${s.kitFig}`} data-reveal style={d(0.1)}>
+              <CurtainReveal className={`figure ${s.kitFig}`} delay={0.1}>
                 <Shot name="kit" alt={c.receive.kitAlt} sizes="(max-width: 900px) 100vw, 40vw" />
-              </figure>
+              </CurtainReveal>
             </div>
 
             <div className={s.partnership}>
@@ -414,9 +440,9 @@ export default function Site({ lang }: { lang: Lang }) {
 
         {/* ---------- the house ---------- */}
         <section id="house">
-          <figure className={s.shopfront} data-reveal>
+          <ParallaxDrift className={s.shopfront} strength={6}>
             <Shot name="shopfront" alt={c.house.shopfrontAlt} sizes="100vw" />
-          </figure>
+          </ParallaxDrift>
           <div className="band">
             <div className="shell">
               <div className={s.houseGrid}>

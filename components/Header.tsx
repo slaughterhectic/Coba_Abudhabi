@@ -2,16 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Owl from "./Owl";
+import { copy, type Lang } from "@/lib/i18n";
 import styles from "./Header.module.css";
 
-const NAV = [
-  { href: "#idea", label: "The Idea" },
-  { href: "#house", label: "The House" },
-  { href: "#residency", label: "Residency" },
-  { href: "#founders", label: "Founders" },
-];
-
-export default function Header() {
+export default function Header({ lang }: { lang: Lang }) {
+  const c = copy(lang);
   const [settled, setSettled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -36,7 +31,7 @@ export default function Header() {
       }`}
     >
       <div className={styles.inner}>
-        <a href="#top" className={styles.lockup} aria-label="COBA — home">
+        <a href="#top" className={styles.lockup} aria-label={c.header.homeLabel}>
           <Owl className={styles.owl} />
           <span className={styles.word} aria-hidden="true">
             COBΛ
@@ -44,7 +39,7 @@ export default function Header() {
         </a>
 
         <nav className={styles.nav} aria-label="Primary">
-          {NAV.map((item) => (
+          {c.header.nav.map((item) => (
             <a key={item.href} href={item.href} className={styles.link}>
               {item.label}
             </a>
@@ -52,15 +47,24 @@ export default function Header() {
         </nav>
 
         <div className={styles.actions}>
+          <nav className={styles.langSwitch} aria-label={c.header.langSwitchLabel}>
+            <a href="/" aria-current={lang === "en" ? "page" : undefined}>
+              EN
+            </a>
+            <span aria-hidden="true">/</span>
+            <a href="/ru" aria-current={lang === "ru" ? "page" : undefined}>
+              RU
+            </a>
+          </nav>
           <a href="#visit" className={styles.cta}>
-            Become a resident
+            {c.header.cta}
           </a>
           <button
             type="button"
             className={styles.burger}
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? c.header.closeMenu : c.header.openMenu}
             onClick={() => setOpen((v) => !v)}
           >
             <span />
@@ -75,14 +79,23 @@ export default function Header() {
         hidden={!open}
         onClick={() => setOpen(false)}
       >
-        {NAV.map((item) => (
+        {c.header.nav.map((item) => (
           <a key={item.href} href={item.href} className={styles.sheetLink}>
             {item.label}
           </a>
         ))}
         <a href="#visit" className={styles.sheetCta}>
-          Become a resident
+          {c.header.cta}
         </a>
+        <nav className={styles.sheetLangSwitch} aria-label={c.header.langSwitchLabel}>
+          <a href="/" aria-current={lang === "en" ? "page" : undefined}>
+            EN
+          </a>
+          <span aria-hidden="true">/</span>
+          <a href="/ru" aria-current={lang === "ru" ? "page" : undefined}>
+            RU
+          </a>
+        </nav>
         <p className={styles.sheetAr} lang="ar">
           <span className="ar-display">أبدع. استكشف. تواصل.</span>
         </p>

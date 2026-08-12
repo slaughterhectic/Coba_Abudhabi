@@ -2,22 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { copy, type Lang } from "@/lib/i18n";
 import styles from "./WelcomeList.module.css";
-
-const ITEMS = [
-  { img: "who-women", label: "Women's groups", ar: "مجموعات نسائية" },
-  { img: "who-parenting", label: "Parenting communities", ar: "مجتمعات الأمومة" },
-  { img: "who-books", label: "Book clubs", ar: "أندية الكتاب" },
-  { img: "who-cultural", label: "Cultural associations", ar: "جمعيات ثقافية" },
-  { img: "who-creative", label: "Creative collectives", ar: "تجمعات إبداعية" },
-  { img: "who-wellness", label: "Wellness communities", ar: "مجتمعات العافية" },
-];
 
 /**
  * One image at a time instead of a wall of six. The list is the interface;
  * the photograph follows the cursor down it.
  */
-export default function WelcomeList() {
+export default function WelcomeList({ lang }: { lang: Lang }) {
+  const items = copy(lang).welcome.items;
   const [active, setActive] = useState(0);
 
   return (
@@ -26,7 +19,7 @@ export default function WelcomeList() {
         className={styles.list}
         onMouseLeave={() => setActive(0)}
       >
-        {ITEMS.map((item, i) => (
+        {items.map((item, i) => (
           <li key={item.img}>
             <button
               type="button"
@@ -59,7 +52,7 @@ export default function WelcomeList() {
       </ol>
 
       <div className={styles.preview} id="welcome-preview" aria-live="polite">
-        {ITEMS.map((item, i) => (
+        {items.map((item, i) => (
           <figure
             key={item.img}
             className={`${styles.shot} ${i === active ? styles.shotOn : ""}`}

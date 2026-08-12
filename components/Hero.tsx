@@ -1,8 +1,11 @@
 import Owl from "./Owl";
 import BgVideo from "./BgVideo";
+import { copy, type Lang } from "@/lib/i18n";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+export default function Hero({ lang }: { lang: Lang }) {
+  const c = copy(lang).hero;
+
   return (
     <section className={styles.hero} id="top">
       <div className={styles.media}>
@@ -17,23 +20,21 @@ export default function Hero() {
           </p>
 
           <h1 className={`display ${styles.title} rise`} style={{ "--d": ".15s" } as React.CSSProperties}>
-            Somewhere
+            {c.title[0]}
             <br />
-            you belong.
+            {c.title[1]}
           </h1>
 
           <p className={`${styles.lede} rise`} style={{ "--d": ".28s" } as React.CSSProperties}>
-            A community house in Nation Towers Mall, Abu Dhabi — a permanent
-            address for the classes, clubs and meet-ups that bring people
-            together.
+            {c.lede}
           </p>
 
           <div className={`${styles.actions} rise`} style={{ "--d": ".4s" } as React.CSSProperties}>
             <a href="#visit" className="btn btn--solid">
-              Become a resident
+              {c.ctaPrimary}
             </a>
             <a href="#happens" className="btn btn--ghost">
-              What happens here
+              {c.ctaSecondary}
             </a>
           </div>
         </div>
@@ -46,18 +47,12 @@ export default function Hero() {
             </span>
           </div>
           <dl className={styles.facts}>
-            <div>
-              <dt className="caps">Address</dt>
-              <dd>Nation Towers Mall, 1st Floor</dd>
-            </div>
-            <div>
-              <dt className="caps">Open</dt>
-              <dd>Seven days a week</dd>
-            </div>
-            <div>
-              <dt className="caps">The room</dt>
-              <dd>10 – 35 guests</dd>
-            </div>
+            {c.facts.map((f) => (
+              <div key={f.label}>
+                <dt className="caps">{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
           </dl>
         </div>
       </div>

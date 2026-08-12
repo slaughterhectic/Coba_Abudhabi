@@ -43,10 +43,36 @@ hands off to the visitor's own mail client. Nothing is stored, transmitted or
 logged by the site. If COBA want a real inbox flow, wire it to a form service
 and remove the "This site stores nothing" note.
 
+## Russian translation
+
+The site is bilingual: `/` is English, `/ru` is Russian, added because ~40% of
+the target audience is Russian-speaking. Each has its own root layout
+(`app/(en)/layout.tsx`, `app/ru/layout.tsx`, sharing font loaders from
+`app/fonts.ts`) so `<html lang>` is correct server-side with no client-side
+flash. All copy lives in `lib/i18n.ts` as a single `en` object plus a `ru`
+object typed as `typeof en` — TypeScript won't compile if a Russian key is
+missing. `components/Site.tsx` holds the page structure and reads `copy(lang)`;
+every leaf component takes a `lang` prop and does the same. The header's
+EN/RU switcher is a plain link between the two routes (no client state). The
+Arabic accent lines (`ar-display` spans) are left untranslated on both
+routes — they're a fixed bilingual UAE brand device, not visitor-facing
+translation. To add a third language, extend the `Lang` type and `DICT` in
+`lib/i18n.ts`, add an `app/<locale>/layout.tsx` + `page.tsx` pair, and add a
+link in `Header.tsx`'s switcher.
+
 ## Generated media
 
 Four background clips were generated with Higgsfield (`kling3_0_turbo`), since
-the decks contain stills only:
+the decks contain stills only. `hero`, `loop-majlis` and `loop-calm` were
+regenerated in August 2026 after client feedback that the original casting
+(Emirati dress throughout, gender-segregated) didn't reflect a client base
+that is ~40% Russian — the casting rule below no longer applies to these
+three; the cast is now majority European/international. `loop-calm`'s first
+version showed a period-style window with an exterior building visible
+through it, wrong for a first-floor mall unit — it was regenerated a second
+time with no windows at all. `loop-craft` is hands-only and untouched. The
+deck-sourced photography elsewhere on the page (room strip, "Clubs &
+community" card, etc.) is real and unchanged.
 
 | File | Used for |
 |---|---|

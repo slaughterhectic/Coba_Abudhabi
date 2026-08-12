@@ -10,7 +10,8 @@ import WelcomeList from "@/components/WelcomeList";
 import TheWeek from "@/components/TheWeek";
 import Founders from "@/components/Founders";
 import BgVideo from "@/components/BgVideo";
-import s from "./page.module.css";
+import { copy, type Lang } from "@/lib/i18n";
+import s from "@/app/page.module.css";
 
 /* Intrinsic sizes of the processed brand photography. */
 const DIMS: Record<string, [number, number]> = {
@@ -22,12 +23,6 @@ const DIMS: Record<string, [number, number]> = {
   idea: [1200, 806],
   invitation: [1500, 844],
   kit: [1000, 1242],
-  "room-artists": [860, 576],
-  "room-children": [860, 578],
-  "room-coffee": [860, 576],
-  "room-laughing": [860, 578],
-  "room-networking": [860, 578],
-  "room-parents": [860, 578],
   shopfront: [1800, 506],
   "tier-afternoon": [900, 686],
   "tier-evening": [900, 686],
@@ -99,95 +94,24 @@ function SectionHead({
 
 const d = (delay: number) => ({ "--d": `${delay}s` }) as CSSProperties;
 
-/* ---------------- content, taken from the two COBA decks ---------------- */
+export default function Site({ lang }: { lang: Lang }) {
+  const c = copy(lang);
 
-const HAPPENS = [
-  {
-    idx: "One",
-    title: "Classes & workshops",
-    ar: "دورات وورش عمل",
-    body: "Art, craft and skills classes for adults and children, taught on a recurring weekly slot by resident practitioners.",
-    media: { type: "video" as const, src: "loop-craft" },
-  },
-  {
-    idx: "Two",
-    title: "Clubs & community",
-    ar: "أندية ومجتمع",
-    body: "Book clubs, women's circles and cultural groups — each with a permanent address and a standing place in the week.",
-    media: { type: "image" as const, src: "house-explore" },
-  },
-  {
-    idx: "Three",
-    title: "Professional meet-ups",
-    ar: "لقاءات مهنية",
-    body: "Evening meet-ups, skill shares and talks hosted by residents — peers in a circle, not a lecture.",
-    media: { type: "video" as const, src: "loop-majlis" },
-  },
-];
-
-const REASONS = [
-  ["One", "A permanent community", "An address, not a booking."],
-  ["Two", "Recurring residency", "The same room, the same hour, every week."],
-  ["Three", "A shared audience", "The room is full before you arrive."],
-  ["Four", "Cross-promotion", "Our following becomes yours."],
-  ["Five", "Collaboration by design", "Residents find residents."],
-  ["Six", "Design worth arriving for", "A room your members photograph unasked."],
-  ["Seven", "A premium experience", "You bring the talent. We hold the rest."],
-];
-
-const MODEL = {
-  rent: [
-    "A new space each season",
-    "Paid by the hour, empty or full",
-    "The audience is yours to find",
-    "Materials packed away",
-    "Members told the address each time",
-  ],
-  residency: [
-    "One permanent address",
-    "A standing slot in the week",
-    "A room full before you arrive",
-    "Materials stored on site",
-    "Members who always know where to find you",
-  ],
-};
-
-const RECEIVE = [
-  "A permanent address, listed and findable",
-  "Marketing, social and your own listing",
-  "Concierge, reception and refreshments",
-  "The room dressed before your first guest",
-  "Introductions, referrals and member perks",
-];
-
-const PARTNERSHIP = [
-  [
-    "Flexible basis",
-    "Per event, per session, or a revenue share — chosen to suit the activity.",
-  ],
-  ["No lock-in", "No fixed employment commitment and no long tenancy to sign."],
-  [
-    "Built to last",
-    "Long-term partnerships that help you reach more clients and grow.",
-  ],
-];
-
-export default function Page() {
   return (
     <>
-      <Header />
+      <Header lang={lang} />
       <main>
-        <Hero />
+        <Hero lang={lang} />
 
         {/* ---------- voice strip ---------- */}
-        <section className={s.voice} aria-label="Create. Explore. Connect.">
+        <section className={s.voice} aria-label={`${c.voice.create}. ${c.voice.explore}. ${c.voice.connect}.`}>
           <div className="shell">
             <div className={s.voiceRow}>
-              <span className={s.voiceWord}>Create</span>
+              <span className={s.voiceWord}>{c.voice.create}</span>
               <span className={s.voiceDot} aria-hidden="true" />
-              <span className={s.voiceWord}>Explore</span>
+              <span className={s.voiceWord}>{c.voice.explore}</span>
               <span className={s.voiceDot} aria-hidden="true" />
-              <span className={s.voiceWord}>Connect</span>
+              <span className={s.voiceWord}>{c.voice.connect}</span>
             </div>
             <p className={`${s.voiceAr} ar-display`} lang="ar">
               أبدع. استكشف. تواصل.
@@ -198,41 +122,32 @@ export default function Page() {
         {/* ---------- 01 the idea ---------- */}
         <section className="band" id="idea">
           <div className="shell">
-            <SectionHead num="01" title="The Idea" />
+            <SectionHead num={c.idea.num} title={c.idea.title} />
             <div className={s.ideaGrid}>
               <div data-reveal>
                 <h2 className="h2">
-                  More than a venue.
+                  {c.idea.h2[0]}
                   <br />
-                  A home for creativity, connection and collaboration.
+                  {c.idea.h2[1]}
                 </h2>
                 <div className={s.ideaNote}>
-                  <p className="eyebrow eyebrow--olive">
-                    Nation Towers Mall, Abu Dhabi
+                  <p className="eyebrow eyebrow--olive">{c.idea.place}</p>
+                  <p className="body" style={{ marginTop: "1.1rem" }}>
+                    {c.idea.p1}
                   </p>
                   <p className="body" style={{ marginTop: "1.1rem" }}>
-                    A place where people from different cultures, backgrounds
-                    and professions come together to inspire one another and
-                    build something meaningful.
-                  </p>
-                  <p className="body" style={{ marginTop: "1.1rem" }}>
-                    Our mission is an environment where{" "}
-                    <strong>everyone feels welcome</strong>,{" "}
-                    <strong>every talent is valued</strong>, and{" "}
-                    <strong>
-                      every connection has the potential to become an
-                      opportunity
-                    </strong>
-                    .
+                    {c.idea.p2a}
+                    <strong>{c.idea.p2Strong1}</strong>
+                    {c.idea.p2b}
+                    <strong>{c.idea.p2Strong2}</strong>
+                    {c.idea.p2c}
+                    <strong>{c.idea.p2Strong3}</strong>
+                    {c.idea.p2d}
                   </p>
                 </div>
               </div>
               <figure className={`figure ${s.ideaFigure}`} data-reveal style={d(0.1)}>
-                <Shot
-                  name="idea"
-                  alt="A resident leads a session at COBA, sketching on an easel while a group listens around an oak table."
-                  sizes="(max-width: 900px) 100vw, 46vw"
-                />
+                <Shot name="idea" alt={c.idea.imgAlt} sizes="(max-width: 900px) 100vw, 46vw" />
               </figure>
             </div>
           </div>
@@ -241,26 +156,22 @@ export default function Page() {
         {/* ---------- 02 in the room ---------- */}
         <section className="band band--linen">
           <div className="shell">
-            <SectionHead num="02" title="In the Room" />
+            <SectionHead num={c.room.num} title={c.room.title} />
             <div className={s.roomIntro} data-reveal>
               <h2 className="h2">
-                COBA is about people,
+                {c.room.h2[0]}
                 <br />
-                not interiors.
+                {c.room.h2[1]}
               </h2>
-              <p className="body">
-                A room only becomes a hub when someone fills it. These are the
-                people COBA is built for — and the reason every image here has
-                someone in it.
-              </p>
+              <p className="body">{c.room.body}</p>
             </div>
 
             <div data-reveal>
-              <RoomStrip />
+              <RoomStrip lang={lang} />
             </div>
 
             <p className={s.rule2} data-reveal>
-              Every hero image contains people. It is a rule, not a preference.
+              {c.room.rule}
             </p>
           </div>
         </section>
@@ -268,9 +179,9 @@ export default function Page() {
         {/* ---------- 03 what happens here ---------- */}
         <section className="band" id="happens">
           <div className="shell">
-            <SectionHead num="03" title="What Happens Here" />
+            <SectionHead num={c.happens.num} title={c.happens.title} />
             <ul className={s.cards}>
-              {HAPPENS.map((card, i) => (
+              {c.happens.cards.map((card, i) => (
                 <li key={card.title} data-reveal style={d(0.08 * i)}>
                   <figure className={`figure ${s.cardFig}`}>
                     {card.media.type === "video" ? (
@@ -278,7 +189,7 @@ export default function Page() {
                     ) : (
                       <Shot
                         name={card.media.src}
-                        alt={`${card.title} at COBA.`}
+                        alt={`${card.title}.`}
                         sizes="(max-width: 800px) 100vw, 31vw"
                       />
                     )}
@@ -300,14 +211,8 @@ export default function Page() {
             </ul>
 
             <div className={s.modelNote} data-reveal>
-              <p className="eyebrow eyebrow--olive">The residency model</p>
-              <p className="body">
-                Residents block a recurring slot, store their materials on site,
-                and are promoted through COBA&apos;s channels alongside their own
-                brand. Monday&apos;s art class hears about Tuesday&apos;s
-                masterclass. We are not renting out a space — we are building a
-                relationship.
-              </p>
+              <p className="eyebrow eyebrow--olive">{c.happens.modelNoteEyebrow}</p>
+              <p className="body">{c.happens.modelNoteBody}</p>
             </div>
           </div>
         </section>
@@ -315,25 +220,20 @@ export default function Page() {
         {/* ---------- children band ---------- */}
         <section className={s.children}>
           <div className={s.childrenMedia}>
-            <Shot
-              name="artclub"
-              alt="Children painting and shaping clay at the COBA children's art club, with two teachers helping."
-              sizes="100vw"
-            />
+            <Shot name="artclub" alt={c.children.imgAlt} sizes="100vw" />
           </div>
           <div className="shell">
             <div className={s.childrenCopy} data-reveal>
               <div>
                 <span className={s.hair} aria-hidden="true" />
                 <p className="eyebrow eyebrow--olive">
-                  Our community{" "}
+                  {c.children.eyebrow}{" "}
                   <span className="ar" lang="ar">
                     — مجتمعنا
                   </span>
                 </p>
                 <h2 className="h2" style={{ marginTop: "1.2rem" }}>
-                  A place where children discover their talents — and parents
-                  find friendships.
+                  {c.children.h2}
                 </h2>
               </div>
               <div className={s.childrenMeta}>
@@ -341,9 +241,9 @@ export default function Page() {
                   مكان يكتشف فيه الأطفال مواهبهم
                 </p>
                 <p className="caps" style={{ color: "var(--brass-text)" }}>
-                  Children&apos;s art club · Every Saturday
+                  {c.children.tierLine1}
                   <br />
-                  Nation Towers Mall, Abu Dhabi
+                  {c.children.tierLine2}
                 </p>
               </div>
             </div>
@@ -353,28 +253,25 @@ export default function Page() {
         {/* ---------- 04 why coba ---------- */}
         <section className="band band--linen">
           <div className="shell">
-            <SectionHead num="04" title="Why COBA" />
+            <SectionHead num={c.why.num} title={c.why.title} />
             <div className={s.whyGrid}>
               <div className={s.whyLead} data-reveal>
                 <h2 className="h2">
-                  A function room is somewhere you leave.{" "}
-                  <em className={s.em}>COBA is somewhere you belong.</em>
+                  {c.why.h2Lead}
+                  <em className={s.em}>{c.why.h2Em}</em>
                 </h2>
                 <p className="body" style={{ marginTop: "2rem" }}>
-                  Everywhere else you rent the room and bring the audience.
-                  Here, <strong>the audience is already in the building.</strong>
+                  {c.why.body}
+                  <strong>{c.why.bodyStrong}</strong>
                 </p>
                 <blockquote className={s.quote}>
-                  <p>
-                    “We are not renting out a space — we are building a
-                    relationship.”
-                  </p>
-                  <cite className="caps">COBA — Founders</cite>
+                  <p>“{c.why.quote}”</p>
+                  <cite className="caps">{c.why.cite}</cite>
                 </blockquote>
               </div>
 
               <ul className={s.reasons}>
-                {REASONS.map(([n, title, body], i) => (
+                {c.why.reasons.map(([n, title, body], i) => (
                   <li key={title} data-reveal style={d(0.04 * i)}>
                     <p className="eyebrow">{n}</p>
                     <h3 className="h3" style={{ marginTop: "0.5rem" }}>
@@ -386,11 +283,11 @@ export default function Page() {
                   </li>
                 ))}
                 <li className={s.difference} data-reveal>
-                  <p className="eyebrow">The difference</p>
+                  <p className="eyebrow">{c.why.differenceLabel}</p>
                   <p className={s.differenceBody}>
-                    A hotel charges for the room.
+                    {c.why.differenceLine1}
                     <br />
-                    COBA invests in the return.
+                    {c.why.differenceLine2}
                   </p>
                 </li>
               </ul>
@@ -404,28 +301,28 @@ export default function Page() {
             <BgVideo name="loop-calm" />
           </div>
           <div className={`shell ${s.modelInner}`}>
-            <SectionHead num="05" title="The Model" arabic="النموذج" />
+            <SectionHead num={c.model.num} title={c.model.title} arabic={c.model.arabic} />
             <h2 className="h2" data-reveal>
-              A booking ends.
+              {c.model.h2[0]}
               <br />
-              An address does not.
+              {c.model.h2[1]}
             </h2>
 
             <div className={s.compare}>
               <div data-reveal>
                 <p className="eyebrow" style={{ color: "rgba(241,235,223,.45)" }}>
-                  Renting a room
+                  {c.model.rentLabel}
                 </p>
                 <ul className={`${s.list} ${s.listMuted}`}>
-                  {MODEL.rent.map((x) => (
+                  {c.model.rent.map((x) => (
                     <li key={x}>{x}</li>
                   ))}
                 </ul>
               </div>
               <div data-reveal style={d(0.1)}>
-                <p className="eyebrow">A COBA residency</p>
+                <p className="eyebrow">{c.model.residencyLabel}</p>
                 <ul className={s.list}>
-                  {MODEL.residency.map((x) => (
+                  {c.model.residency.map((x) => (
                     <li key={x}>{x}</li>
                   ))}
                 </ul>
@@ -433,7 +330,7 @@ export default function Page() {
             </div>
 
             <p className={s.modelKicker} data-reveal>
-              A venue charges for the room. COBA invests in the return.
+              {c.model.kicker}
             </p>
           </div>
         </section>
@@ -441,17 +338,14 @@ export default function Page() {
         {/* ---------- tiers ---------- */}
         <section className="band">
           <div className="shell">
-            <SectionHead num="06" title="Residency Formats" />
+            <SectionHead num={c.tiers.num} title={c.tiers.title} />
             <div className={s.weekIntro} data-reveal>
-              <h2 className="h2">Choose your hour of the day.</h2>
-              <p className="body">
-                Three hours of the day, seven days of the week. A resident takes
-                one and keeps it — the same room, the same hour, every week.
-              </p>
+              <h2 className="h2">{c.tiers.h2}</h2>
+              <p className="body">{c.tiers.body}</p>
             </div>
 
             <div className={s.weekHolder} data-reveal>
-              <TheWeek />
+              <TheWeek lang={lang} />
             </div>
           </div>
         </section>
@@ -459,42 +353,37 @@ export default function Page() {
         {/* ---------- what you receive ---------- */}
         <section className="band band--linen">
           <div className="shell">
-            <SectionHead num="07" title="What You Receive" />
+            <SectionHead num={c.receive.num} title={c.receive.title} />
             <div className={s.receiveGrid}>
               <div data-reveal>
                 <h2 className="h2">
-                  Everything except
+                  {c.receive.h2[0]}
                   <br />
-                  the talent.
+                  {c.receive.h2[1]}
                 </h2>
                 <p className="eyebrow" style={{ marginTop: "2.6rem" }}>
-                  Included in every residency
+                  {c.receive.includedEyebrow}
                 </p>
                 <ul className={s.receive}>
-                  {RECEIVE.map((x) => (
+                  {c.receive.items.map((x) => (
                     <li key={x}>{x}</li>
                   ))}
                 </ul>
               </div>
               <figure className={`figure ${s.kitFig}`} data-reveal style={d(0.1)}>
-                <Shot
-                  name="kit"
-                  alt="The COBA membership kit — brass-foil keycard, olive notebook, black card wallet and a sage mug on lime plaster."
-                  sizes="(max-width: 900px) 100vw, 40vw"
-                />
+                <Shot name="kit" alt={c.receive.kitAlt} sizes="(max-width: 900px) 100vw, 40vw" />
               </figure>
             </div>
 
             <div className={s.partnership}>
               <h3 className={`h2 ${s.partnershipTitle}`} data-reveal>
-                A partnership, not a tenancy.
+                {c.receive.partnershipTitle}
               </h3>
               <p className="lede" data-reveal style={d(0.06)}>
-                You bring your activity, your facilitators and your voice. We
-                provide the space, the marketing, the community and the clients.
+                {c.receive.partnershipLede}
               </p>
               <ul className={s.partnerGrid}>
-                {PARTNERSHIP.map(([t, b], i) => (
+                {c.receive.partnership.map(([t, b], i) => (
                   <li key={t} data-reveal style={d(0.05 * i)}>
                     <p className="eyebrow">{t}</p>
                     <p className="body" style={{ marginTop: "0.6rem" }}>
@@ -510,57 +399,40 @@ export default function Page() {
         {/* ---------- who we welcome ---------- */}
         <section className="band">
           <div className="shell">
-            <SectionHead num="08" title="Who We Welcome" />
+            <SectionHead num={c.welcome.num} title={c.welcome.title} />
             <div className={s.roomIntro} data-reveal>
-              <h2 className="h2">
-                Every community that brings people together.
-              </h2>
-              <p className="body">
-                Community groups · Business and networking · Hobby clubs ·
-                Language exchange — and any initiative that brings people
-                together.
-              </p>
+              <h2 className="h2">{c.welcome.h2}</h2>
+              <p className="body">{c.welcome.body}</p>
             </div>
             <div data-reveal>
-              <WelcomeList />
+              <WelcomeList lang={lang} />
             </div>
           </div>
         </section>
 
-        <Founders />
+        <Founders lang={lang} />
 
         {/* ---------- the house ---------- */}
         <section id="house">
           <figure className={s.shopfront} data-reveal>
-            <Shot
-              name="shopfront"
-              alt="The COBA shopfront at Nation Towers Mall — black metal lettering and the owl mark on beige brick."
-              sizes="100vw"
-            />
+            <Shot name="shopfront" alt={c.house.shopfrontAlt} sizes="100vw" />
           </figure>
           <div className="band">
             <div className="shell">
               <div className={s.houseGrid}>
                 <div data-reveal>
-                  <p className="eyebrow">
-                    Nation Towers Mall, 1st Floor · Abu Dhabi
-                  </p>
+                  <p className="eyebrow">{c.house.eyebrow}</p>
                   <h2 className="h2" style={{ marginTop: "1.4rem" }}>
-                    A room your members
+                    {c.house.h2[0]}
                     <br />
-                    photograph unasked.
+                    {c.house.h2[1]}
                   </h2>
                   <p className="body" style={{ marginTop: "1.8rem" }}>
-                    Lime plaster, light oak, brushed brass. Open seven days.
+                    {c.house.body}
                   </p>
                 </div>
                 <div className={s.houseSpecs} data-reveal style={d(0.08)}>
-                  {[
-                    ["Capacity", "10 – 35 guests"],
-                    ["Configurations", "Coffee circle, workshop or lounge"],
-                    ["On arrival", "Reception & concierge"],
-                    ["Between sessions", "Materials kept on site"],
-                  ].map(([k, v]) => (
+                  {c.house.specs.map(([k, v]) => (
                     <div key={k}>
                       <span className="caps">{k}</span>
                       <span>{v}</span>
@@ -573,9 +445,9 @@ export default function Page() {
         </section>
 
         {/* ---------- visit ---------- */}
-        <Enquiry />
+        <Enquiry lang={lang} />
       </main>
-      <Footer />
+      <Footer lang={lang} />
     </>
   );
 }

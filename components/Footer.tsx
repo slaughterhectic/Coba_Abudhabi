@@ -1,7 +1,10 @@
 import Owl from "./Owl";
+import { copy, type Lang } from "@/lib/i18n";
 import styles from "./Footer.module.css";
 
-export default function Footer() {
+export default function Footer({ lang }: { lang: Lang }) {
+  const c = copy(lang).footer;
+
   return (
     <footer className={styles.footer}>
       <div className="shell">
@@ -14,41 +17,34 @@ export default function Footer() {
           <p className={`${styles.arabic} ar-display`} lang="ar">
             كُوبا
           </p>
-          <p className={styles.tagline}>Create · Explore · Connect</p>
+          <p className={styles.tagline}>{c.tagline}</p>
         </div>
 
         <div className={styles.grid}>
           <div>
-            <p className="eyebrow">The house</p>
+            <p className="eyebrow">{c.houseEyebrow}</p>
             <p className={styles.body}>
-              Nation Towers Mall, 1st Floor
+              {c.houseBody[0]}
               <br />
-              Abu Dhabi, United Arab Emirates
+              {c.houseBody[1]}
               <br />
-              Open seven days a week
+              {c.houseBody[2]}
             </p>
           </div>
 
           <div>
-            <p className="eyebrow">Visit</p>
+            <p className="eyebrow">{c.visitEyebrow}</p>
             <ul className={styles.links}>
-              <li>
-                <a href="#idea">The Idea</a>
-              </li>
-              <li>
-                <a href="#happens">What happens here</a>
-              </li>
-              <li>
-                <a href="#residency">The residency model</a>
-              </li>
-              <li>
-                <a href="#founders">The founders</a>
-              </li>
+              {c.visitLinks.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <p className="eyebrow">Follow</p>
+            <p className="eyebrow">{c.followEyebrow}</p>
             <ul className={styles.links}>
               <li>
                 <a
@@ -56,18 +52,20 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Instagram — @cobaabudhabi
+                  {c.instagram}
                 </a>
               </li>
               <li>
-                <a href="#visit">Become a resident</a>
+                <a href="#visit">{c.becomeResident}</a>
               </li>
             </ul>
           </div>
         </div>
 
         <div className={styles.base}>
-          <p>© {new Date().getFullYear()} COBA. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} COBA. {c.rights}
+          </p>
           <p className={styles.baseAr} lang="ar">
             <span className="ar">أبدع. استكشف. تواصل.</span>
           </p>

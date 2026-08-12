@@ -2,19 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { copy, type Lang } from "@/lib/i18n";
 import styles from "./Enquiry.module.css";
 
 /* Placeholder until COBA supply the live address — see handover notes. */
 const INBOX = "hello@coba.ae";
 
-const TIERS = [
-  "Tier A · 09:00 — 13:00 · Morning sanctuary",
-  "Tier B · 14:00 — 17:30 · Afternoon salon",
-  "Tier C · 18:30 — 22:00 · Evening gathering",
-  "Not sure yet",
-];
-
-export default function Enquiry() {
+export default function Enquiry({ lang }: { lang: Lang }) {
+  const c = copy(lang).enquiry;
   const [sent, setSent] = useState(false);
 
   /* No backend and no data collection: the browser's own mail client
@@ -25,15 +20,15 @@ export default function Enquiry() {
     const get = (k: string) => String(form.get(k) ?? "").trim();
 
     const body = [
-      `Name: ${get("name")}`,
-      `Community or practice: ${get("org")}`,
-      `Preferred hour: ${get("tier")}`,
+      `${c.mailFields.name}: ${get("name")}`,
+      `${c.mailFields.org}: ${get("org")}`,
+      `${c.mailFields.tier}: ${get("tier")}`,
       "",
       get("message"),
     ].join("\n");
 
     window.location.href = `mailto:${INBOX}?subject=${encodeURIComponent(
-      `Residency enquiry — ${get("org") || get("name")}`,
+      `${c.mailSubjectPrefix}${get("org") || get("name")}`,
     )}&body=${encodeURIComponent(body)}`;
 
     setSent(true);
@@ -54,26 +49,21 @@ export default function Enquiry() {
 
       <div className={`shell ${styles.inner}`}>
         <div className={styles.copy} data-reveal>
-          <p className="eyebrow">The invitation</p>
-          <h2 className={`h2 ${styles.title}`}>
-            An invitation to make COBA your permanent address.
-          </h2>
-          <p className={styles.lede}>
-            You bring the community. We hold everything else — a standing place
-            in the week, and a room already full.
-          </p>
+          <p className="eyebrow">{c.eyebrow}</p>
+          <h2 className={`h2 ${styles.title}`}>{c.h2}</h2>
+          <p className={styles.lede}>{c.lede}</p>
 
           <dl className={styles.details}>
             <div>
-              <dt className="caps">Find us</dt>
+              <dt className="caps">{c.findUs}</dt>
               <dd>
-                Nation Towers Mall, 1st Floor
+                {c.address[0]}
                 <br />
-                Abu Dhabi, United Arab Emirates
+                {c.address[1]}
               </dd>
             </div>
             <div>
-              <dt className="caps">Social</dt>
+              <dt className="caps">{c.social}</dt>
               <dd>
                 <a
                   href="https://instagram.com/cobaabudhabi"
@@ -86,48 +76,44 @@ export default function Enquiry() {
               </dd>
             </div>
             <div>
-              <dt className="caps">Open</dt>
-              <dd>Seven days a week</dd>
+              <dt className="caps">{c.open}</dt>
+              <dd>{c.openValue}</dd>
             </div>
           </dl>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit} data-reveal>
-          <p className="eyebrow">Become a resident</p>
+          <p className="eyebrow">{c.formEyebrow}</p>
 
           <label className={styles.field}>
-            <span className={styles.label}>Your name</span>
+            <span className={styles.label}>{c.nameLabel}</span>
             <input name="name" type="text" required autoComplete="name" />
           </label>
 
           <label className={styles.field}>
-            <span className={styles.label}>Your community or practice</span>
+            <span className={styles.label}>{c.orgLabel}</span>
             <input name="org" type="text" autoComplete="organization" />
           </label>
 
           <label className={styles.field}>
-            <span className={styles.label}>Preferred hour</span>
-            <select name="tier" defaultValue={TIERS[3]}>
-              {TIERS.map((t) => (
+            <span className={styles.label}>{c.tierLabel}</span>
+            <select name="tier" defaultValue={c.tiers[3]}>
+              {c.tiers.map((t) => (
                 <option key={t}>{t}</option>
               ))}
             </select>
           </label>
 
           <label className={styles.field}>
-            <span className={styles.label}>What would you host?</span>
+            <span className={styles.label}>{c.messageLabel}</span>
             <textarea name="message" rows={4} />
           </label>
 
           <button type="submit" className="btn btn--solid">
-            Send enquiry
+            {c.submit}
           </button>
 
-          <p className={styles.note}>
-            {sent
-              ? "Your mail app should now be open with the enquiry ready to send."
-              : "Opens in your own mail app. This site stores nothing."}
-          </p>
+          <p className={styles.note}>{sent ? c.sentNote : c.unsentNote}</p>
         </form>
       </div>
     </section>

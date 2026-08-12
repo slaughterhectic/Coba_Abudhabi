@@ -1,30 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic, Reem_Kufi } from "next/font/google";
+import { plex, plexArabic, reemKufi } from "../fonts";
 import ScrollReveal from "@/components/ScrollReveal";
-import "./globals.css";
-
-/* IBM Plex Sans + IBM Plex Sans Arabic — SIL Open Font Licence.
-   Reem Kufi for the Arabic display lockup. Weight floor is 400 for body. */
-const plex = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
-  variable: "--font-plex",
-  display: "swap",
-});
-
-const plexArabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["200", "300", "400", "500"],
-  variable: "--font-plex-ar",
-  display: "swap",
-});
-
-const reemKufi = Reem_Kufi({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600"],
-  variable: "--font-reem",
-  display: "swap",
-});
+import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://coba.ae"),
@@ -34,6 +11,10 @@ export const metadata: Metadata = {
   },
   description:
     "COBA is a community house in Nation Towers Mall, Abu Dhabi — a permanent address for classes, clubs and meet-ups. A function room is somewhere you leave. COBA is somewhere you belong.",
+  alternates: {
+    canonical: "/",
+    languages: { en: "/", ru: "/ru" },
+  },
   keywords: [
     "COBA Abu Dhabi",
     "community hub Abu Dhabi",
@@ -66,7 +47,7 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"

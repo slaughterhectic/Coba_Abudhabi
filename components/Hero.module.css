@@ -1,0 +1,174 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--plaster);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+  animation: drift 34s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    animation: none;
+  }
+}
+
+/* The deck's own treatment for type over photography (Residency, p.03):
+   a warm ink scrim, never a cool or blue one. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(20, 19, 15, 0.9) 0%,
+      rgba(20, 19, 15, 0.62) 34%,
+      rgba(20, 19, 15, 0.24) 62%,
+      rgba(20, 19, 15, 0.42) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(20, 19, 15, 0.72) 0%,
+      rgba(20, 19, 15, 0.28) 46%,
+      rgba(20, 19, 15, 0) 78%
+    );
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  margin-inline: auto;
+  padding: 8rem var(--gutter) clamp(1.6rem, 3vw, 2.6rem);
+}
+
+.copy {
+  max-width: 41rem;
+  padding-bottom: clamp(2.6rem, 6vw, 5rem);
+}
+
+.arabic {
+  margin: 0 0 1.4rem;
+  font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+  color: var(--oak);
+  direction: rtl;
+  text-align: left;
+}
+
+.title {
+  color: var(--plaster);
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 1.7rem 0 0;
+  max-width: 34rem;
+  font-size: clamp(1.03rem, 1.25vw, 1.22rem);
+  line-height: 1.7;
+  color: rgba(241, 235, 223, 0.8);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: clamp(2rem, 3.4vw, 2.9rem);
+}
+
+/* ---- foot strip ---- */
+
+.foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(241, 235, 223, 0.22);
+}
+
+.footMark {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--plaster);
+}
+
+.footOwl {
+  width: 30px;
+  flex: none;
+}
+
+.footWord {
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  margin: 0;
+}
+
+.facts dt {
+  color: var(--oak);
+  margin-bottom: 0.3rem;
+}
+
+.facts dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(241, 235, 223, 0.9);
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: 96svh;
+  }
+
+  .inner {
+    padding-top: 6.5rem;
+  }
+
+  .copy {
+    padding-bottom: 2.4rem;
+  }
+
+  .facts {
+    gap: 1.1rem 2rem;
+  }
+
+  .facts dd {
+    font-size: 0.88rem;
+  }
+
+  .footMark {
+    display: none;
+  }
+}

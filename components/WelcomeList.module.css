@@ -1,0 +1,176 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: none;
+  border-top: 1px solid var(--rule);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 2.4vw, 2.2rem);
+  width: 100%;
+  padding: clamp(1.05rem, 2vw, 1.6rem) 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--ink-70);
+  transition: color 0.5s var(--ease);
+  position: relative;
+}
+
+.row::before {
+  content: "";
+  position: absolute;
+  left: -1.2rem;
+  right: -1.2rem;
+  top: 0;
+  bottom: 0;
+  background: rgba(74, 88, 54, 0.05);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  pointer-events: none;
+}
+
+.on {
+  color: var(--olive);
+}
+
+.on::before {
+  opacity: 1;
+}
+
+.num {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--brass-text);
+  flex: none;
+  width: 2.2rem;
+}
+
+.label {
+  flex: 1;
+  font-size: clamp(1.3rem, 2.6vw, 2.1rem);
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  transition: transform 0.6s var(--ease);
+}
+
+.on .label {
+  transform: translateX(6px);
+}
+
+.ar {
+  flex: none;
+  font-size: 0.98rem;
+  color: var(--brass-text);
+  opacity: 0.62;
+  transition: opacity 0.5s var(--ease);
+}
+
+.on .ar {
+  opacity: 1;
+}
+
+/* ---- preview ---- */
+
+.preview {
+  position: sticky;
+  top: 7.5rem;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--sand);
+  border-radius: 2px;
+}
+
+.shot {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transform: scale(1.06);
+  transition:
+    opacity 0.85s var(--ease),
+    transform 1.4s var(--ease);
+}
+
+.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shotOn {
+  opacity: 1;
+  transform: none;
+}
+
+.inlineShot {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .preview {
+    display: none;
+  }
+
+  .list {
+    border-top: 0;
+  }
+
+  /* image first, then its label — a card, not an ambiguous stack */
+  .list li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2.4rem;
+  }
+
+  .row {
+    cursor: default;
+    padding: 0.9rem 0 0;
+    border-bottom: 0;
+  }
+
+  .row::before {
+    display: none;
+  }
+
+  .ar {
+    display: none;
+  }
+
+  .inlineShot {
+    display: block;
+    order: -1;
+    overflow: hidden;
+    border-radius: 2px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .inlineShot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .label {
+    font-size: 1.35rem;
+  }
+}

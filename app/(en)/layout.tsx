@@ -1,16 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { plex, plexArabic, reemKufi } from "../fonts";
 import ScrollReveal from "@/components/ScrollReveal";
+import { copy } from "@/lib/i18n";
 import "../globals.css";
+
+const c = copy("en");
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://coba.ae"),
   title: {
-    default: "COBA — Create. Explore. Connect. | Nation Towers Mall, Abu Dhabi",
+    default: c.meta.title,
     template: "%s · COBA",
   },
-  description:
-    "COBA is a community house in Nation Towers Mall, Abu Dhabi — a permanent address for classes, clubs and meet-ups. A function room is somewhere you leave. COBA is somewhere you belong.",
+  description: c.meta.description,
   alternates: {
     canonical: "/",
     languages: { en: "/", ru: "/ru" },
@@ -21,17 +23,17 @@ export const metadata: Metadata = {
     "Nation Towers Mall",
     "workshops Abu Dhabi",
     "book club Abu Dhabi",
-    "residency programme",
+    "family activities Abu Dhabi",
+    "networking Abu Dhabi",
   ],
   openGraph: {
-    title: "COBA — Create. Explore. Connect.",
-    description:
-      "A home for creativity, connection and collaboration in Nation Towers Mall, Abu Dhabi.",
+    title: c.meta.ogTitle,
+    description: c.meta.ogDescription,
     url: "https://coba.ae",
     siteName: "COBA",
-    locale: "en_AE",
+    locale: c.meta.ogLocale,
     type: "website",
-    images: [{ url: "/media/hero-poster.webp", width: 1280, height: 720 }],
+    images: [{ url: "/media/hero-poster.webp", width: 1920, height: 1080 }],
   },
   icons: {
     icon: [

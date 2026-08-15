@@ -111,11 +111,61 @@
   transform: scaleX(1);
 }
 
+/* Scroll-spy. The rule that hover draws is the same rule that marks the
+   section you're inside — one visual language for "here" and "going here". */
+.link[aria-current="true"] {
+  opacity: 1;
+}
+
+.link[aria-current="true"]::after {
+  transform: scaleX(1);
+}
+
 .actions {
   display: flex;
   align-items: center;
   gap: 1rem;
   flex: none;
+}
+
+/* ---- the one route-changing link ----
+   Lower-case against the anchors' uppercase, and carrying an arrow, so the
+   eye reads "this leaves the page" before it reads the words. */
+.cross {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
+  white-space: nowrap;
+  transition: opacity 0.4s var(--ease);
+}
+
+.cross:hover {
+  opacity: 1;
+}
+
+.crossArrow {
+  display: inline-block;
+  transition: transform 0.45s var(--ease);
+}
+
+.cross:hover .crossArrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crossArrow {
+    transition: none;
+  }
+}
+
+/* Below the desktop bar the cross link lives in the sheet instead. */
+@media (max-width: 900px) {
+  .cross {
+    display: none;
+  }
 }
 
 .cta {
@@ -159,6 +209,7 @@
 }
 
 .langSwitch a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -170,15 +221,36 @@
   opacity: 0.62;
 }
 
+/* Marked with the same hairline the nav uses, not a filled chip. A tinted box
+   floating over the hero video read as a rendering artefact rather than a
+   choice — it was the one boxy element in an otherwise ruled layout. */
+.langSwitch a::after {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  right: 0.4rem;
+  bottom: 0.06rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+
 .langSwitch a:hover,
 .langSwitch a[aria-current="page"] {
   opacity: 1;
-  background: rgba(241, 235, 223, 0.14);
 }
 
-.settled .langSwitch a:hover,
-.settled .langSwitch a[aria-current="page"] {
-  background: rgba(28, 27, 23, 0.06);
+.langSwitch a:hover::after,
+.langSwitch a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .langSwitch a::after {
+    transition: none;
+  }
 }
 
 .langDivider {

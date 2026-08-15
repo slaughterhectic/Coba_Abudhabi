@@ -8,8 +8,17 @@ import styles from "./Enquiry.module.css";
 /* Placeholder until COBA supply the live address — see handover notes. */
 const INBOX = "hello@coba.ae";
 
-export default function Enquiry({ lang }: { lang: Lang }) {
-  const c = copy(lang).enquiry;
+/** Two audiences, one form. `visit` is the visitor asking to come;
+ *  `partner` is the club, sponsor or freelancer asking to work with COBA. */
+export default function Enquiry({
+  lang,
+  variant = "visit",
+}: {
+  lang: Lang;
+  variant?: "visit" | "partner";
+}) {
+  const all = copy(lang);
+  const c = variant === "partner" ? all.enquiry : all.visit;
   const [sent, setSent] = useState(false);
 
   /* No backend and no data collection: the browser's own mail client
@@ -35,7 +44,7 @@ export default function Enquiry({ lang }: { lang: Lang }) {
   }
 
   return (
-    <section className={styles.visit} id="visit">
+    <section className={styles.visit} id={variant === "partner" ? "apply" : "visit"}>
       <div className={styles.media} aria-hidden="true">
         <Image
           src="/img/invitation.webp"
@@ -92,12 +101,17 @@ export default function Enquiry({ lang }: { lang: Lang }) {
 
           <label className={styles.field}>
             <span className={styles.label}>{c.orgLabel}</span>
-            <input name="org" type="text" autoComplete="organization" />
+            <input
+              name="org"
+              type="text"
+              required={variant === "visit"}
+              autoComplete={variant === "partner" ? "organization" : "email"}
+            />
           </label>
 
           <label className={styles.field}>
             <span className={styles.label}>{c.tierLabel}</span>
-            <select name="tier" defaultValue={c.tiers[3]}>
+            <select name="tier" defaultValue={c.tiers[c.tiers.length - 1]}>
               {c.tiers.map((t) => (
                 <option key={t}>{t}</option>
               ))}

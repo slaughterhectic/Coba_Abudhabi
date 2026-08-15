@@ -21,12 +21,15 @@
   animation: drift 34s ease-in-out infinite alternate;
 }
 
+/* The source footage is 720p upscaled to a 2560px master, so every extra
+   percent of zoom is magnifying pixels that were never shot. Kept shallow:
+   enough drift to feel alive, not enough to soften the frame. */
 @keyframes drift {
   from {
-    transform: scale(1.04);
+    transform: scale(1.02);
   }
   to {
-    transform: scale(1.12);
+    transform: scale(1.08);
   }
 }
 

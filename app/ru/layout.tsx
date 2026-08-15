@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "COBA",
     locale: c.meta.ogLocale,
     type: "website",
-    images: [{ url: "/media/hero-poster.webp", width: 1280, height: 720 }],
+    images: [{ url: "/media/hero-poster.webp", width: 1920, height: 1080 }],
   },
   icons: {
     icon: [

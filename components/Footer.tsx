@@ -1,9 +1,22 @@
 import Owl from "./Owl";
-import { copy, type Lang } from "@/lib/i18n";
+import { copy, homeHref, partnersHref, type Lang, type Page } from "@/lib/i18n";
 import styles from "./Footer.module.css";
 
-export default function Footer({ lang }: { lang: Lang }) {
+export default function Footer({
+  lang,
+  page = "home",
+}: {
+  lang: Lang;
+  page?: Page;
+}) {
   const c = copy(lang).footer;
+  const links = page === "partners" ? c.visitLinksPartners : c.visitLinksHome;
+
+  /* The cross-link always points at the audience you are not currently reading as. */
+  const cross =
+    page === "partners"
+      ? { href: homeHref(lang), label: c.backHome }
+      : { href: partnersHref(lang), label: c.workWithUs };
 
   return (
     <footer className={styles.footer}>
@@ -35,7 +48,7 @@ export default function Footer({ lang }: { lang: Lang }) {
           <div>
             <p className="eyebrow">{c.visitEyebrow}</p>
             <ul className={styles.links}>
-              {c.visitLinks.map((l) => (
+              {links.map((l) => (
                 <li key={l.href}>
                   <a href={l.href}>{l.label}</a>
                 </li>
@@ -56,7 +69,7 @@ export default function Footer({ lang }: { lang: Lang }) {
                 </a>
               </li>
               <li>
-                <a href="#visit">{c.becomeResident}</a>
+                <a href={cross.href}>{cross.label}</a>
               </li>
             </ul>
           </div>

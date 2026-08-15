@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import {
   motion,
   useInView,
@@ -12,6 +12,11 @@ import {
 
 /* The house easing — same curve as the CSS var(--ease). */
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+/* useLayoutEffect warns when React renders on the server, but the effect it
+   guards genuinely has to run before paint. Fall back to a no-op on the
+   server, where there is nothing to lay out. */
+const useIsoLayoutEffect = typeof window === "undefined" ? () => {} : useLayoutEffect;
 
 /**
  * Words rise out of a clipped line, one after another — the classic
@@ -201,8 +206,20 @@ export function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
 
-  const spring = useSpring(0, { stiffness: 42, damping: 18 });
+  /* Seeded with the final value so the server-rendered HTML carries the real
+     number. "15 years of community" is the claim the whole hero rests on —
+     it must survive a crawler, a failed hydration or a reader with JS off,
+     none of which should ever be told COBA is 0 years old. */
+  const spring = useSpring(to, { stiffness: 42, damping: 18 });
   const text = useTransform(spring, (v) => `${Math.round(v)}${suffix}`);
+
+  /* Rewind to zero before the first client paint, so the count-up has room to
+     travel without the final value flashing on screen first. */
+  useIsoLayoutEffect(() => {
+    if (!reduced) spring.jump(0);
+    // Runs once, on mount, before anything is painted.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (inView && !reduced) spring.set(to);

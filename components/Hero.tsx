@@ -1,16 +1,25 @@
 import Owl from "./Owl";
 import BgVideo from "./BgVideo";
 import { WordsReveal, Rise, CountUp } from "./motion/Primitives";
-import { copy, type Lang } from "@/lib/i18n";
+import { copy, type Lang, type Page } from "@/lib/i18n";
 import styles from "./Hero.module.css";
 
-export default function Hero({ lang }: { lang: Lang }) {
-  const c = copy(lang).hero;
+export default function Hero({
+  lang,
+  page = "home",
+  video = "hero",
+}: {
+  lang: Lang;
+  page?: Page;
+  video?: string;
+}) {
+  const all = copy(lang);
+  const c = page === "partners" ? all.partners.hero : all.hero;
 
   return (
     <section className={styles.hero} id="top">
       <div className={styles.media}>
-        <BgVideo name="hero" className={styles.video} preload="auto" />
+        <BgVideo name={video} className={styles.video} preload="auto" />
         <div className={styles.scrim} />
       </div>
 
@@ -34,10 +43,10 @@ export default function Hero({ lang }: { lang: Lang }) {
           </Rise>
 
           <Rise delay={0.7} className={styles.actions}>
-            <a href="#visit" className="btn btn--solid">
+            <a href={c.ctaPrimaryHref} className="btn btn--solid">
               {c.ctaPrimary}
             </a>
-            <a href="#happens" className="btn btn--ghost">
+            <a href={c.ctaSecondaryHref} className="btn btn--ghost">
               {c.ctaSecondary}
             </a>
           </Rise>
@@ -51,14 +60,14 @@ export default function Hero({ lang }: { lang: Lang }) {
             </span>
           </div>
           <dl className={styles.facts}>
-            {c.facts.map((f, i) => (
+            {c.facts.map((f) => (
               <div key={f.label}>
                 <dt className="caps">{f.label}</dt>
+                {/* A fact carrying `count` gets a live count-up on its number. */}
                 <dd>
-                  {/* the capacity line gets a live count-up */}
-                  {i === 2 ? (
+                  {f.count !== undefined ? (
                     <>
-                      <CountUp to={70} suffix="+" /> {f.value.replace(/^70\+\s*/, "")}
+                      <CountUp to={f.count} /> {f.value}
                     </>
                   ) : (
                     f.value

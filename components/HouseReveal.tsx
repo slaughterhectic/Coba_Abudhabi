@@ -50,7 +50,7 @@ export default function HouseReveal({
     return (
       <div className={styles.static}>
         <figure className={styles.staticMedia}>
-          <Image src="/img/shopfront.webp" alt={alt} width={1800} height={506} sizes="100vw" />
+          <Image src="/img/shopfront.webp" alt={alt} width={1900} height={535} sizes="100vw" />
         </figure>
         <div className={`shell ${styles.staticCopy}`}>
           <p className="eyebrow">{eyebrow}</p>
@@ -107,8 +107,8 @@ export default function HouseReveal({
           <Image
             src="/img/shopfront.webp"
             alt=""
-            width={1800}
-            height={506}
+            width={1900}
+            height={535}
             sizes="100vw"
             className={styles.doorImg}
           />
@@ -121,8 +121,8 @@ export default function HouseReveal({
           <Image
             src="/img/shopfront.webp"
             alt={alt}
-            width={1800}
-            height={506}
+            width={1900}
+            height={535}
             sizes="100vw"
             className={styles.doorImg}
           />

@@ -12,7 +12,7 @@ export default function Founders({ lang }: { lang: Lang }) {
   const c = copy(lang).founders;
 
   return (
-    <section className={`band band--linen ${s.section}`} id="founders">
+    <section className={`band band--linen ${s.section}`} id="fifteen">
       <Owl className={s.watermark} />
 
       <div className="shell">
@@ -36,8 +36,8 @@ export default function Founders({ lang }: { lang: Lang }) {
                 <Image
                   src="/img/founders.webp"
                   alt={c.portraitAlt}
-                  width={900}
-                  height={1342}
+                  width={1140}
+                  height={1700}
                   sizes="(max-width: 1000px) 100vw, 38vw"
                 />
               </CurtainReveal>

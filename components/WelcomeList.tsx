@@ -42,8 +42,8 @@ export default function WelcomeList({ lang }: { lang: Lang }) {
               <Image
                 src={`/img/${item.img}.webp`}
                 alt={`${item.label} meeting at COBA.`}
-                width={760}
-                height={568}
+                width={1200}
+                height={896}
                 sizes="100vw"
               />
             </div>
@@ -61,8 +61,8 @@ export default function WelcomeList({ lang }: { lang: Lang }) {
             <Image
               src={`/img/${item.img}.webp`}
               alt={`${item.label} meeting at COBA.`}
-              width={760}
-              height={568}
+              width={1200}
+              height={896}
               sizes="42vw"
             />
           </figure>

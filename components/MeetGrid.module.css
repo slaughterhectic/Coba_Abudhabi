@@ -1,0 +1,193 @@
+/* ---------------------------------------------------------------------------
+   Who You'll Meet — the roster.
+
+   Eight full-width rows of display type. At rest they read as one set. Point
+   at any row and it fills in while the others drop to outline, so the section
+   behaves like an index you are reading down rather than a grid you are
+   scanning across.
+
+   Layout is a four-column grid so the number, name, Arabic and note all sit on
+   shared vertical lines down the whole list — the alignment is what makes it
+   read as an index instead of eight cards.
+--------------------------------------------------------------------------- */
+
+.roster {
+  list-style: none;
+  margin: clamp(3rem, 6vw, 5rem) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+/* Four columns on one line, baselines shared. The note sitting on the same
+   baseline as the name is what stops the row becoming a wide empty gutter
+   with a word at each end. */
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 0.82fr) auto;
+  grid-template-areas: "num label note ar";
+  align-items: baseline;
+  column-gap: clamp(1.1rem, 3vw, 2.6rem);
+  padding: clamp(1.15rem, 2.4vw, 1.9rem) 0;
+  border-bottom: 1px solid var(--rule);
+  transition: opacity 0.5s var(--ease);
+}
+
+.num {
+  grid-area: num;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  color: var(--brass-text);
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.45s var(--ease);
+}
+
+.label {
+  grid-area: label;
+  margin: 0;
+  font-size: clamp(1.45rem, 3.6vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* The fill/outline swap lives on an inner span so the outline never disturbs
+   the row's metrics — text-stroke is drawn inside the glyph, not around it. */
+.labelInk {
+  transition:
+    color 0.45s var(--ease),
+    -webkit-text-stroke-color 0.45s var(--ease);
+}
+
+.ar {
+  grid-area: ar;
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  color: var(--ink);
+  opacity: 0.42;
+  white-space: nowrap;
+  transition: opacity 0.45s var(--ease);
+}
+
+.note {
+  grid-area: note;
+  margin: 0;
+  max-width: 44ch;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0.6;
+  transition: opacity 0.45s var(--ease);
+}
+
+/* A hairline that draws itself across the row being read. Sits on the row's
+   own bottom border, so it reads as that rule thickening rather than as a
+   new element arriving. */
+.sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--olive);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease);
+}
+
+/* ---- the interplay ----
+   Guarded behind :has() so browsers without it simply get the legible rest
+   state, which is a complete design on its own. */
+@supports selector(:has(*)) {
+  .roster:has(.row:hover) .row:not(:hover) .labelInk {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(28, 27, 23, 0.3);
+  }
+
+  .roster:has(.row:hover) .row:not(:hover) {
+    opacity: 0.72;
+  }
+
+  .roster:has(.row:hover) .row:not(:hover) .note,
+  .roster:has(.row:hover) .row:not(:hover) .ar {
+    opacity: 0.28;
+  }
+}
+
+.row:hover .num {
+  opacity: 1;
+}
+
+.row:hover .note {
+  opacity: 0.86;
+}
+
+.row:hover .ar {
+  opacity: 0.7;
+}
+
+.row:hover .sweep {
+  transform: scaleX(1);
+}
+
+/* Touch devices get the rest state permanently — no hover means no way out of
+   a ghosted row, and a roster you cannot un-ghost is just broken. */
+@media (hover: none) {
+  .roster:has(.row:hover) .row:not(:hover) .labelInk {
+    color: var(--ink);
+    -webkit-text-stroke: 0;
+  }
+
+  .roster:has(.row:hover) .row:not(:hover),
+  .roster:has(.row:hover) .row:not(:hover) .note,
+  .roster:has(.row:hover) .row:not(:hover) .ar {
+    opacity: unset;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .labelInk,
+  .num,
+  .ar,
+  .note,
+  .sweep {
+    transition: none;
+  }
+}
+
+/* At narrow widths the Arabic drops under the name rather than fighting it
+   for the same line. */
+/* Below this the four-across index cannot hold: the note column starves and
+   the Arabic starts colliding with the name. Stack instead. */
+@media (max-width: 1040px) {
+  .row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "num label ar"
+      "num note  ar";
+    align-items: baseline;
+  }
+
+  .note {
+    margin-top: 0.5rem;
+    max-width: 52ch;
+  }
+}
+
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "num label"
+      "num ar"
+      "num note";
+  }
+
+  .ar {
+    padding-top: 0.35rem;
+    white-space: normal;
+  }
+}

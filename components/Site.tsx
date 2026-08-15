@@ -6,14 +6,10 @@ import Footer from "@/components/Footer";
 import Enquiry from "@/components/Enquiry";
 import Owl from "@/components/Owl";
 import RoomStrip from "@/components/RoomStrip";
-import WelcomeList from "@/components/WelcomeList";
-import TheWeek from "@/components/TheWeek";
+import MeetGrid from "@/components/MeetGrid";
 import Founders from "@/components/Founders";
 import BgVideo from "@/components/BgVideo";
-import WhyCarousel from "@/components/WhyCarousel";
-import { CheckMark, CrossMark } from "@/components/Icons";
 import OrbitBadge from "@/components/OrbitBadge";
-import KitSpots from "@/components/KitSpots";
 import HouseReveal from "@/components/HouseReveal";
 import {
   CurtainReveal,
@@ -22,33 +18,27 @@ import {
   StaggerItem,
   WordsReveal,
 } from "@/components/motion/Primitives";
-import { copy, type Lang } from "@/lib/i18n";
+import { copy, partnersHref, type Lang } from "@/lib/i18n";
 import s from "@/app/page.module.css";
 
 /* Intrinsic sizes of the processed brand photography. */
 const DIMS: Record<string, [number, number]> = {
-  artclub: [1800, 1004],
-  founders: [900, 1342],
-  "house-connect": [1000, 702],
-  "house-create": [1000, 702],
-  "house-explore": [1000, 702],
+  artclub: [1900, 1060],
+  founders: [1140, 1700],
   "club-community": [1050, 1406],
-  idea: [1200, 806],
-  invitation: [1500, 844],
-  kit: [1000, 1242],
-  shopfront: [1800, 506],
-  "tier-afternoon": [900, 686],
-  "tier-evening": [900, 686],
-  "tier-morning": [900, 686],
-  "who-books": [760, 568],
-  "who-creative": [760, 568],
-  "who-cultural": [760, 568],
-  "who-parenting": [760, 568],
-  "who-wellness": [760, 568],
-  "who-women": [760, 568],
+  idea: [1750, 1174],
+  invitation: [1750, 985],
+  kit: [1410, 1750],
+  shopfront: [1900, 535],
+  "who-books": [1200, 896],
+  "who-creative": [1200, 896],
+  "who-cultural": [1200, 896],
+  "who-parenting": [1200, 896],
+  "who-wellness": [1200, 896],
+  "who-women": [1200, 896],
 };
 
-function Shot({
+export function Shot({
   name,
   alt,
   sizes,
@@ -75,7 +65,7 @@ function Shot({
   );
 }
 
-function SectionHead({
+export function SectionHead({
   num,
   title,
   arabic,
@@ -105,19 +95,29 @@ function SectionHead({
   );
 }
 
-const d = (delay: number) => ({ "--d": `${delay}s` }) as CSSProperties;
+export const d = (delay: number) => ({ "--d": `${delay}s` }) as CSSProperties;
 
+/**
+ * The visitor page.
+ *
+ * Everything here answers "why would I come to COBA?". The residency and
+ * partnership material — why a club owner would work with COBA — lives on
+ * /partners, reached from the nav, the strip below the house, and the footer.
+ */
 export default function Site({ lang }: { lang: Lang }) {
   const c = copy(lang);
 
   return (
     <>
-      <Header lang={lang} />
+      <Header lang={lang} page="home" />
       <main>
-        <Hero lang={lang} />
+        <Hero lang={lang} page="home" />
 
         {/* ---------- voice strip ---------- */}
-        <section className={s.voice} aria-label={`${c.voice.create}. ${c.voice.explore}. ${c.voice.connect}.`}>
+        <section
+          className={s.voice}
+          aria-label={`${c.voice.create}. ${c.voice.explore}. ${c.voice.connect}.`}
+        >
           <div className="shell">
             <StaggerIn className={s.voiceRow} step={0.14}>
               <StaggerItem>
@@ -144,32 +144,25 @@ export default function Site({ lang }: { lang: Lang }) {
             <SectionHead num={c.idea.num} title={c.idea.title} />
             <div className={s.ideaGrid}>
               <div>
-                <WordsReveal
-                  as="h2"
-                  lines={c.idea.h2}
-                  onScroll
-                  className="h2"
-                />
+                <WordsReveal as="h2" lines={c.idea.h2} onScroll className="h2" />
                 <div className={s.ideaNote} data-reveal>
                   <p className="eyebrow eyebrow--olive">{c.idea.place}</p>
                   <p className="body" style={{ marginTop: "1.1rem" }}>
                     {c.idea.p1}
                   </p>
                   <p className="body" style={{ marginTop: "1.1rem" }}>
-                    {c.idea.p2a}
-                    <strong>{c.idea.p2Strong1}</strong>
-                    {c.idea.p2b}
-                    <strong>{c.idea.p2Strong2}</strong>
-                    {c.idea.p2c}
-                    <strong>{c.idea.p2Strong3}</strong>
-                    {c.idea.p2d}
+                    {c.idea.p2}
                   </p>
                 </div>
               </div>
               <div className={s.ideaFigureWrap}>
                 <span className={s.ideaArchGhost} aria-hidden="true" />
                 <CurtainReveal className={`figure ${s.ideaFigure}`} delay={0.1}>
-                  <Shot name="idea" alt={c.idea.imgAlt} sizes="(max-width: 900px) 100vw, 46vw" />
+                  <Shot
+                    name="idea"
+                    alt={c.idea.imgAlt}
+                    sizes="(max-width: 900px) 100vw, 46vw"
+                  />
                 </CurtainReveal>
                 <OrbitBadge
                   text={`${c.voice.create} · ${c.voice.explore} · ${c.voice.connect}`}
@@ -180,7 +173,49 @@ export default function Site({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        {/* ---------- 02 in the room ---------- */}
+        {/* ---------- the mission ----------
+            The founders' strongest line. It was buried inside a paragraph;
+            it is now the quietest and largest thing on the page. */}
+        <section className={`band band--ink ${s.mission}`}>
+          <div className="shell">
+            <p className={`eyebrow ${s.missionEyebrow}`} data-reveal>
+              {c.mission.eyebrow}
+            </p>
+            <WordsReveal
+              as="h2"
+              lines={c.mission.lines}
+              onScroll
+              className={s.missionLines}
+            />
+            <p className={`${s.missionAr} ar-display`} lang="ar" data-reveal>
+              {c.mission.ar}
+            </p>
+          </div>
+        </section>
+
+        {/* ---------- 02 who you'll meet ---------- */}
+        <section className="band" id="meet">
+          <div className="shell">
+            <SectionHead num={c.meet.num} title={c.meet.title} />
+            <div className={s.roomIntro} data-reveal>
+              <h2 className="h2">{c.meet.h2}</h2>
+              <p className="body">{c.meet.body}</p>
+            </div>
+
+            <MeetGrid lang={lang} />
+
+            <div className={s.strand} data-reveal>
+              <p className="eyebrow">{c.meet.strandEyebrow}</p>
+              <ul className={s.strandRow}>
+                {c.meet.strand.map((word) => (
+                  <li key={word}>{word}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- 03 in the room ---------- */}
         <section className="band band--linen">
           <div className="shell">
             <SectionHead num={c.room.num} title={c.room.title} />
@@ -203,13 +238,18 @@ export default function Site({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        {/* ---------- 03 what happens here ---------- */}
+        {/* ---------- 04 what's on ---------- */}
         <section className="band" id="happens">
           <div className="shell">
             <SectionHead num={c.happens.num} title={c.happens.title} />
             <ul className={s.cards}>
               {c.happens.cards.map((card, i) => (
-                <li key={card.title} className={s.happensCard} data-reveal style={d(0.08 * i)}>
+                <li
+                  key={card.title}
+                  className={s.happensCard}
+                  data-reveal
+                  style={d(0.08 * i)}
+                >
                   <div className={s.happensMedia} aria-hidden="true">
                     {card.media.type === "video" ? (
                       <BgVideo name={card.media.src} />
@@ -242,8 +282,8 @@ export default function Site({ lang }: { lang: Lang }) {
             </ul>
 
             <div className={s.modelNote} data-reveal>
-              <p className="eyebrow eyebrow--olive">{c.happens.modelNoteEyebrow}</p>
-              <p className="body">{c.happens.modelNoteBody}</p>
+              <p className="eyebrow eyebrow--olive">{c.happens.noteEyebrow}</p>
+              <p className="body">{c.happens.noteBody}</p>
             </div>
           </div>
         </section>
@@ -281,171 +321,7 @@ export default function Site({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        {/* ---------- 04 why coba ---------- */}
-        <section className="band band--linen">
-          <div className="shell">
-            <SectionHead num={c.why.num} title={c.why.title} />
-
-            <div className={s.whyLead2} data-reveal>
-              <h2 className="h2">
-                {c.why.h2Lead}
-                <em className={s.em}>{c.why.h2Em}</em>
-              </h2>
-              <div className={s.whyLeadRight}>
-                <p className="body">
-                  {c.why.body}
-                  <strong>{c.why.bodyStrong}</strong>
-                </p>
-                <blockquote className={s.quote}>
-                  <p>“{c.why.quote}”</p>
-                  <cite className="caps">{c.why.cite}</cite>
-                </blockquote>
-              </div>
-            </div>
-
-            <div className={s.reasonsHolder} data-reveal style={d(0.08)}>
-              <WhyCarousel reasons={c.why.reasons} />
-            </div>
-
-            <div className={s.difference} data-reveal>
-              <p className="eyebrow">{c.why.differenceLabel}</p>
-              <p className={s.differenceBody}>
-                {c.why.differenceLine1}
-                <br />
-                {c.why.differenceLine2}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- 05 the model ---------- */}
-        <section className={`band band--ink ${s.model}`} id="residency">
-          <div className={s.modelMedia} aria-hidden="true">
-            <BgVideo name="loop-calm" />
-          </div>
-          <div className={`shell ${s.modelInner}`}>
-            <SectionHead num={c.model.num} title={c.model.title} arabic={c.model.arabic} />
-            <h2 className="h2" data-reveal>
-              {c.model.h2[0]}
-              <br />
-              {c.model.h2[1]}
-            </h2>
-
-            <div className={s.compare}>
-              <div className={s.compareCol} data-reveal>
-                <p className="eyebrow" style={{ color: "rgba(241,235,223,.45)" }}>
-                  {c.model.rentLabel}
-                </p>
-                <ul className={`${s.list} ${s.listMuted}`}>
-                  {c.model.rent.map((x) => (
-                    <li key={x}>
-                      <CrossMark className={s.listIcon} />
-                      <span>{x}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <span className={s.compareDivider} aria-hidden="true" />
-              <div className={`${s.compareCol} ${s.compareColOn}`} data-reveal style={d(0.1)}>
-                <p className="eyebrow">{c.model.residencyLabel}</p>
-                <ul className={s.list}>
-                  {c.model.residency.map((x) => (
-                    <li key={x}>
-                      <CheckMark className={s.listIcon} />
-                      <span>{x}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <p className={s.modelKicker} data-reveal>
-              {c.model.kicker}
-            </p>
-          </div>
-        </section>
-
-        {/* ---------- tiers ---------- */}
-        <section className="band">
-          <div className="shell">
-            <SectionHead num={c.tiers.num} title={c.tiers.title} />
-            <div className={s.weekIntro} data-reveal>
-              <h2 className="h2">{c.tiers.h2}</h2>
-              <p className="body">{c.tiers.body}</p>
-            </div>
-
-            <div className={s.weekHolder} data-reveal>
-              <TheWeek lang={lang} />
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- what you receive ---------- */}
-        <section className="band band--linen">
-          <div className="shell">
-            <SectionHead num={c.receive.num} title={c.receive.title} />
-            <div className={s.receiveGrid}>
-              <div data-reveal>
-                <h2 className="h2">
-                  {c.receive.h2[0]}
-                  <br />
-                  {c.receive.h2[1]}
-                </h2>
-                <p className="eyebrow" style={{ marginTop: "2.6rem" }}>
-                  {c.receive.includedEyebrow}
-                </p>
-                <ul className={s.receive}>
-                  {c.receive.items.map((x, i) => (
-                    <li key={x} data-reveal style={d(0.12 * i)}>
-                      <CheckMark className={s.receiveIcon} />
-                      <span>{x}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <CurtainReveal className={`figure ${s.kitFig}`} delay={0.1}>
-                <div className={s.kitInner}>
-                  <Shot name="kit" alt={c.receive.kitAlt} sizes="(max-width: 900px) 100vw, 40vw" />
-                  <KitSpots spots={c.receive.kitSpots} />
-                </div>
-              </CurtainReveal>
-            </div>
-
-            <div className={s.partnership}>
-              <h3 className={`h2 ${s.partnershipTitle}`} data-reveal>
-                {c.receive.partnershipTitle}
-              </h3>
-              <p className="lede" data-reveal style={d(0.06)}>
-                {c.receive.partnershipLede}
-              </p>
-              <ul className={s.partnerGrid}>
-                {c.receive.partnership.map(([t, b], i) => (
-                  <li key={t} data-reveal style={d(0.05 * i)}>
-                    <p className="eyebrow">{t}</p>
-                    <p className="body" style={{ marginTop: "0.6rem" }}>
-                      {b}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- who we welcome ---------- */}
-        <section className="band">
-          <div className="shell">
-            <SectionHead num={c.welcome.num} title={c.welcome.title} />
-            <div className={s.roomIntro} data-reveal>
-              <h2 className="h2">{c.welcome.h2}</h2>
-              <p className="body">{c.welcome.body}</p>
-            </div>
-            <div data-reveal>
-              <WelcomeList lang={lang} />
-            </div>
-          </div>
-        </section>
-
+        {/* ---------- 05 fifteen years ---------- */}
         <Founders lang={lang} />
 
         {/* ---------- the house ---------- */}
@@ -460,10 +336,26 @@ export default function Site({ lang }: { lang: Lang }) {
           />
         </section>
 
+        {/* ---------- the one door to the partner page ---------- */}
+        <section className={`band ${s.partnerStrip}`}>
+          <div className={`shell ${s.partnerStripInner}`} data-reveal>
+            <div>
+              <p className="eyebrow">{c.partnerStrip.eyebrow}</p>
+              <h2 className={`h2 ${s.partnerStripTitle}`}>{c.partnerStrip.h2}</h2>
+            </div>
+            <div className={s.partnerStripAside}>
+              <p className="body">{c.partnerStrip.body}</p>
+              <a href={partnersHref(lang)} className="btn btn--ghost">
+                {c.partnerStrip.cta}
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* ---------- visit ---------- */}
-        <Enquiry lang={lang} />
+        <Enquiry lang={lang} variant="visit" />
       </main>
-      <Footer lang={lang} />
+      <Footer lang={lang} page="home" />
     </>
   );
 }

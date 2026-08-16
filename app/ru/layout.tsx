@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { plex, plexArabic, reemKufi } from "../fonts";
 import ScrollReveal from "@/components/ScrollReveal";
+import WhatsAppFab from "@/components/WhatsAppFab";
 import { copy } from "@/lib/i18n";
 import "../globals.css";
 
@@ -56,6 +57,7 @@ export default function RuRootLayout({ children }: { children: React.ReactNode }
     >
       <body>
         {children}
+        <WhatsAppFab lang="ru" />
         <div className="grain" aria-hidden="true" />
         <ScrollReveal />
       </body>

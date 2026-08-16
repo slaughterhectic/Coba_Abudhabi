@@ -1,4 +1,5 @@
 import Owl from "./Owl";
+import { waLink } from "@/lib/contact";
 import { copy, homeHref, partnersHref, type Lang, type Page } from "@/lib/i18n";
 import styles from "./Footer.module.css";
 
@@ -10,7 +11,14 @@ export default function Footer({
   page?: Page;
 }) {
   const c = copy(lang).footer;
-  const links = page === "partners" ? c.visitLinksPartners : c.visitLinksHome;
+  const links =
+    page === "partners"
+      ? c.visitLinksPartners
+      : page === "collaborate"
+        ? c.visitLinksCollab
+        : page === "home"
+          ? c.visitLinksHome
+          : c.visitLinksWhatsOn;
 
   /* The cross-link always points at the audience you are not currently reading as. */
   const cross =
@@ -66,6 +74,11 @@ export default function Footer({
                   rel="noreferrer"
                 >
                   {c.instagram}
+                </a>
+              </li>
+              <li>
+                <a href={waLink()} target="_blank" rel="noreferrer">
+                  {c.whatsapp}
                 </a>
               </li>
               <li>

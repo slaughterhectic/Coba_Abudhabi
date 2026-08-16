@@ -2,7 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Owl from "./Owl";
-import { copy, homeHref, partnersHref, type Lang, type Page } from "@/lib/i18n";
+import {
+  adultsHref,
+  childrenHref,
+  collaborateHref,
+  copy,
+  homeHref,
+  partnersHref,
+  type Lang,
+  type Page,
+} from "@/lib/i18n";
 import styles from "./Header.module.css";
 
 export default function Header({
@@ -31,14 +40,25 @@ export default function Header({
     };
   }, [open]);
 
-  const nav = page === "partners" ? c.header.navPartners : c.header.navHome;
-  const cta = page === "partners" ? c.header.ctaPartners : c.header.ctaHome;
-  const ctaHref = page === "partners" ? "#apply" : "#visit";
+  const nav =
+    page === "partners"
+      ? c.header.navPartners
+      : page === "collaborate"
+        ? c.header.navCollab
+        : page === "children"
+          ? c.header.navChildren
+          : page === "adults"
+            ? c.header.navAdults
+            : c.header.navHome;
+  const partnerSide = page === "partners" || page === "collaborate";
+  const cta = partnerSide ? c.header.ctaPartners : c.header.ctaHome;
+  const ctaHref = partnerSide ? "#apply" : "#visit";
 
   /* The single route-changing link. It sits outside the anchor list because a
-     link that leaves the page should never look like one that scrolls it. */
+     link that leaves the page should never look like one that scrolls it.
+     Both partner-side pages point it back at the hub. */
   const cross =
-    page === "partners"
+    page === "partners" || page === "collaborate"
       ? { href: homeHref(lang), label: c.header.crossPartners }
       : { href: partnersHref(lang), label: c.header.crossHome };
 
@@ -65,7 +85,16 @@ export default function Header({
   }, [nav]);
 
   /* The switcher must stay on the page you are reading, not bounce you home. */
-  const href = (l: Lang) => (page === "partners" ? partnersHref(l) : homeHref(l));
+  const href = (l: Lang) =>
+    page === "partners"
+      ? partnersHref(l)
+      : page === "collaborate"
+        ? collaborateHref(l)
+        : page === "children"
+          ? childrenHref(l)
+          : page === "adults"
+            ? adultsHref(l)
+            : homeHref(l);
 
   const langSwitch = (className: string) => (
     <nav className={className} aria-label={c.header.langSwitchLabel}>
@@ -89,7 +118,7 @@ export default function Header({
     >
       <div className={styles.inner}>
         <a
-          href={page === "partners" ? homeHref(lang) : "#top"}
+          href={page === "home" ? "#top" : homeHref(lang)}
           className={styles.lockup}
           aria-label={c.header.homeLabel}
         >

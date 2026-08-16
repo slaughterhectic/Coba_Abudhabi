@@ -2,20 +2,11 @@ import Image from "next/image";
 import { copy, type Lang } from "@/lib/i18n";
 import styles from "./RoomStrip.module.css";
 
-const DIMS: Record<string, [number, number]> = {
-  "room-laughing": [1700, 1141],
-  "room-artists": [1750, 1174],
-  "room-children": [1700, 1141],
-  "room-coffee": [1750, 1174],
-  "room-parents": [1700, 1141],
-  "room-networking": [1700, 1141],
-  "act-science": [1080, 726],
-  "act-chess": [1080, 726],
-  "act-lego": [1080, 726],
-  "act-etiquette": [1080, 726],
-  "act-mumtoddler": [1080, 726],
-  "act-boardgames": [1080, 726],
-};
+/* Every shot in the strip is now a 1080×726 act-* still — the deck room-*
+   photos were retired on 2026-08-16 (they showed exterior windows; COBA is
+   a windowless first-floor mall unit). The map stays for any future
+   odd-sized addition. */
+const DIMS: Record<string, [number, number]> = {};
 
 /**
  * Two counter-scrolling filmstrips — the room passing by in both

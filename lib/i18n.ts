@@ -1,23 +1,52 @@
 export type Lang = "en" | "ru";
 
-/** The site has two audiences and one route per audience.
- *  "home"     — the visitor. What COBA is, who you'll meet, why you'd come.
- *  "partners" — the collaborator. Residency, sponsorship, freelance practice.
+/** The site has two audiences. The customer gets three routes —
+ *  "home"     — the world of COBA: what's happening, what you can do.
+ *  "children" — What's On for children, incl. birthday parties.
+ *  "adults"   — What's On for adults, incl. private events.
+ *  The collaborator side stays deliberately minor —
+ *  "partners"    — residency, sponsorship, freelance practice (B2B).
+ *  "collaborate" — the individual practitioner: a painter, a singer,
+ *                  a coach introducing themselves and what they'd host.
  *  Header, footer and the enquiry form all read this to pick their copy. */
-export type Page = "home" | "partners";
+export type Page = "home" | "children" | "adults" | "partners" | "collaborate";
 
 /** A hero footer fact. `count` opts the number into the scroll count-up. */
 type Fact = { label: string; value: string; count?: number };
 
 const en = {
   meta: {
-    title: "COBA — A Premium Community Hub in Abu Dhabi",
+    title: "COBA — A Creative Community Hub in Abu Dhabi",
     description:
-      "COBA is a premium community hub in Nation Towers Mall, Abu Dhabi, where people, ideas and opportunities come together — for families, creators, professionals, clubs and communities.",
+      "A creative community hub for children, families and adults in Abu Dhabi. Discover activities, join workshops, meet your community and create meaningful experiences — all under one roof at Nation Towers Mall.",
     ogTitle: "COBA — Create. Explore. Connect.",
     ogDescription:
-      "A premium community hub in Abu Dhabi where people, ideas and opportunities come together.",
+      "A creative community hub for children, families and adults in Abu Dhabi — all under one roof.",
     ogLocale: "en_AE",
+  },
+  metaChildren: {
+    title: "What's On for Children — COBA Abu Dhabi",
+    description:
+      "Kids art club, LEGO, science, chess, etiquette, crafts, mother & toddler mornings and birthday parties for up to 70 guests — every week at COBA, Nation Towers Mall, Abu Dhabi.",
+    ogTitle: "What's On for Children at COBA",
+    ogDescription:
+      "Art, LEGO, science, chess, crafts and birthday parties — a week built for young talent in Abu Dhabi.",
+  },
+  metaAdults: {
+    title: "What's On for Adults — COBA Abu Dhabi",
+    description:
+      "Floristic workshops, art classes, book club, coffee mornings, image masterclasses, talks, networking and private events — every week at COBA, Nation Towers Mall, Abu Dhabi.",
+    ogTitle: "What's On for Adults at COBA",
+    ogDescription:
+      "Floristry, art, book club, coffee mornings, masterclasses and networking — mornings and evenings for you.",
+  },
+  metaCollab: {
+    title: "Collaborate with COBA — Bring Your Craft",
+    description:
+      "A painter, a singer, a coach, a maker? Introduce yourself and what you'd host — a masterclass, a weekly session, a performance or a show — at COBA, Nation Towers Mall, Abu Dhabi.",
+    ogTitle: "Collaborate with COBA",
+    ogDescription:
+      "Tell us who you are and what you'd host — the room, the audience and everything around it are already here.",
   },
   metaPartners: {
     title: "Work with COBA — Residents, Collaborators, Sponsors",
@@ -29,19 +58,37 @@ const en = {
   },
   header: {
     homeLabel: "COBA — home",
-    /* Two anchors, never more. Everything else on these pages is found by
-       scrolling or from the footer — a nav bar that lists every section is a
-       table of contents, not navigation. */
+    /* The customer menu the client asked for, in her own order:
+       children first, then adults, then about, then contact.
+       "Work with COBA" stays outside this list — a careers-style side door. */
     navHome: [
-      { href: "#meet", label: "Who You'll Meet" },
-      { href: "#happens", label: "What's On" },
+      { href: "/children", label: "For Children" },
+      { href: "/adults", label: "For Adults" },
+      { href: "#about", label: "About" },
+      { href: "#visit", label: "Contact" },
+    ],
+    navChildren: [
+      { href: "#parties", label: "Birthday Parties" },
+      { href: "/adults", label: "For Adults" },
+      { href: "#visit", label: "Contact" },
+    ],
+    navAdults: [
+      { href: "#private", label: "Private Events" },
+      { href: "/children", label: "For Children" },
+      { href: "#visit", label: "Contact" },
     ],
     navPartners: [
       { href: "#roles", label: "Who We Work With" },
       { href: "#residency", label: "The Model" },
+      { href: "/collaborate", label: "Collaborate" },
     ],
-    /* The one link that changes route, kept visually apart from the anchors. */
-    crossHome: "Work with us",
+    navCollab: [
+      { href: "#who", label: "Who Are You" },
+      { href: "#formats", label: "What You'd Host" },
+      { href: "/partners", label: "The Residency Model" },
+    ],
+    /* The one link that changes audience, kept visually apart from the menu. */
+    crossHome: "Work with COBA",
     crossPartners: "Visit the hub",
     ctaHome: "Plan your visit",
     ctaPartners: "Start a conversation",
@@ -50,12 +97,12 @@ const en = {
     langSwitchLabel: "Language",
   },
   hero: {
-    title: ["Where people, ideas", "and opportunities meet."],
-    lede: "A premium community hub in Nation Towers Mall, Abu Dhabi — for families, creators, professionals, clubs and communities.",
-    ctaPrimary: "Plan your visit",
-    ctaPrimaryHref: "#visit",
-    ctaSecondary: "What's on",
-    ctaSecondaryHref: "#happens",
+    title: ["A creative community hub for", "children, families and adults."],
+    lede: "Discover activities, join workshops, meet your community and create meaningful experiences — all under one roof in Nation Towers Mall, Abu Dhabi.",
+    ctaPrimary: "See what's happening",
+    ctaPrimaryHref: "#happening",
+    ctaSecondary: "Plan your visit",
+    ctaSecondaryHref: "#visit",
     facts: [
       { label: "Experience", value: "years of community", count: 15 },
       { label: "Address", value: "Nation Towers Mall, 1st Floor" },
@@ -63,9 +110,72 @@ const en = {
     ] as Fact[],
   },
   voice: { create: "Create", explore: "Explore", connect: "Connect" },
-  idea: {
+  /* The slideshow the client asked for, twice: "an image for each activity",
+     changing as soon as the site opens, so a customer can visualize the week
+     before reading a single paragraph of philosophy. */
+  happening: {
     num: "01",
-    title: "The Idea",
+    title: "What's Happening",
+    eyebrow: "What's happening at COBA",
+    h2: ["One roof.", "A week full of things to do."],
+    lede: "Kids birthday parties, floristic workshops, art for children and for adults, book club, mother & toddler mornings, image masterclasses, etiquette for kids and teens, art shows, movie nights, networking — this is what you can do at COBA. Join what's already running, or book the room and make one of these your own.",
+    prevLabel: "Previous activity",
+    nextLabel: "Next activity",
+    pauseLabel: "Pause slideshow",
+    playLabel: "Play slideshow",
+    goToLabel: "Go to slide",
+    ofLabel: "of",
+    items: [
+      { img: "act-birthday-w", cap: "Kids birthday parties", tag: "For children" },
+      { img: "act-floristry-w", cap: "Floristic workshops", tag: "For adults" },
+      { img: "act-kidsart", cap: "Kids art club", tag: "For children" },
+      { img: "act-makeup-w", cap: "Image masterclasses", tag: "For adults" },
+      { img: "act-lego-w", cap: "LEGO workshops", tag: "For children" },
+      { img: "act-bookclub-w", cap: "Book club", tag: "For adults" },
+      { img: "act-craft-w", cap: "Art & craft — bags and t-shirts", tag: "For kids & teens" },
+      { img: "act-coffee", cap: "Ladies' coffee mornings", tag: "For adults" },
+      { img: "act-science-w", cap: "Science sessions", tag: "For children" },
+      { img: "act-adultart-w", cap: "Adult art classes", tag: "For adults" },
+      { img: "act-mumtoddler-w", cap: "Mother & toddler mornings", tag: "For families" },
+      { img: "act-networking", cap: "Networking evenings", tag: "For adults" },
+      { img: "act-chess", cap: "Chess club", tag: "For children" },
+      { img: "act-artshow-w", cap: "Art shows", tag: "For everyone" },
+      { img: "act-etiquette", cap: "Kids & teens etiquette", tag: "For children" },
+      { img: "act-movienight", cap: "Movie nights", tag: "For families" },
+      { img: "act-boardgames-w", cap: "Board game nights", tag: "For families" },
+    ],
+  },
+  /* The two customer doors — a child's week or your own. */
+  audience: {
+    eyebrow: "Find your week",
+    childrenCard: {
+      title: "What's on for children",
+      ar: "للأطفال",
+      img: "act-craft-w",
+      note: "Art club, LEGO, science, chess, etiquette, crafts, movie nights — and birthday parties the whole house celebrates.",
+      cta: "Explore children's activities",
+    },
+    adultsCard: {
+      title: "What's on for adults",
+      ar: "للكبار",
+      img: "act-floristry-w",
+      note: "Floristry, art, book club, coffee mornings, image masterclasses, talks, clubs and networking — mornings and evenings for you.",
+      cta: "Explore adult activities",
+    },
+  },
+  /* The room is a bookable space — the site invites the customer to hire
+     it, not just to watch the week (client, 2026-08-16: "we are renting
+     out the space… we invite them to rent this place"). */
+  book: {
+    eyebrow: "Make it yours",
+    h2: "This room is yours to book.",
+    body: "Everything in the slideshow happens right here, in one bookable room. Celebrate a birthday, gather your people for a private evening, or host the workshop you have always wanted to run — up to 70 guests, dressed and ready before you arrive.",
+    ctaVisit: "Book it for an occasion",
+    ctaHost: "Host your own sessions",
+  },
+  idea: {
+    num: "03",
+    title: "About COBA",
     h2: ["More than a venue.", "A place to belong, connect and grow."],
     place: "Nation Towers Mall, Abu Dhabi",
     p1: "A premium community hub where people from different cultures, backgrounds and professions come together to inspire one another and build something meaningful.",
@@ -83,7 +193,7 @@ const en = {
     ar: "كل موهبة لها قيمة، وكل صلة فرصة",
   },
   meet: {
-    num: "02",
+    num: "04",
     title: "Who You'll Meet",
     h2: "Who you'll meet at COBA.",
     body: "COBA is an ecosystem, not an activity centre. On any given week the room holds all of these at once — and that is exactly the point.",
@@ -139,7 +249,7 @@ const en = {
     ],
   },
   room: {
-    num: "03",
+    num: "05",
     title: "In the Room",
     h2: [
       "COBA is more than a beautiful space.",
@@ -148,49 +258,58 @@ const en = {
     body: "A room only becomes a hub when someone fills it. These are the people COBA is built for — and the reason every image here has someone in it.",
     rule: "Every hero image contains people. It is a rule, not a preference.",
     shots: [
-      { img: "room-laughing", cap: "People laughing" },
-      { img: "act-science", cap: "Teen science sessions" },
-      { img: "room-artists", cap: "Artists creating" },
+      { img: "act-private", cap: "People laughing" },
+      { img: "act-science-w", cap: "Teen science sessions" },
+      { img: "act-artists", cap: "Artists creating" },
       { img: "act-chess", cap: "Chess evenings" },
-      { img: "room-children", cap: "Children building" },
-      { img: "act-lego", cap: "LEGO builders" },
-      { img: "room-coffee", cap: "Coffee conversations" },
+      { img: "act-blocks", cap: "Children building" },
+      { img: "act-lego-w", cap: "LEGO builders" },
+      { img: "act-coffee", cap: "Coffee conversations" },
       { img: "act-etiquette", cap: "Etiquette classes" },
-      { img: "room-parents", cap: "Parents talking" },
-      { img: "act-mumtoddler", cap: "Mum & toddler mornings" },
-      { img: "room-networking", cap: "Business networking" },
-      { img: "act-boardgames", cap: "Board game nights" },
+      { img: "act-parents", cap: "Parents talking" },
+      { img: "act-mumtoddler-w", cap: "Mum & toddler mornings" },
+      { img: "act-networking", cap: "Business networking" },
+      { img: "act-boardgames-w", cap: "Board game nights" },
     ],
   },
+  /* The four pillars, copy supplied verbatim by the client (2026-08-16). */
   happens: {
-    num: "04",
-    title: "What's On",
+    num: "02",
+    title: "What You Can Do",
+    h2: "What you can do at COBA.",
     cards: [
       {
         idx: "One",
-        title: "Classes & workshops",
-        ar: "دورات وورش عمل",
-        body: "Art, craft and skills sessions for adults and children — weekly, taught by practitioners who know their craft.",
+        title: "Learn",
+        ar: "تعلَّم",
+        body: "Workshops for children and adults.",
         media: { type: "video" as const, src: "loop-craft" },
       },
       {
         idx: "Two",
-        title: "Clubs & community",
-        ar: "أندية ومجتمع",
-        body: "Book clubs, women's circles and cultural groups, each with a permanent home and a standing place in the week.",
-        media: { type: "image" as const, src: "club-community" },
+        title: "Create",
+        ar: "أبدِع",
+        body: "Art, music, crafts, creative projects and special experiences.",
+        media: { type: "image" as const, src: "act-adultart-w" },
       },
       {
         idx: "Three",
-        title: "Meet-ups & talks",
-        ar: "لقاءات وحوارات",
-        body: "Evening gatherings, introductions and skill shares — peers in a circle, not a lecture.",
+        title: "Connect",
+        ar: "تواصَل",
+        body: "Clubs, communities, networking and social gatherings.",
         media: { type: "video" as const, src: "loop-majlis" },
+      },
+      {
+        idx: "Four",
+        title: "Celebrate",
+        ar: "احتفِل",
+        body: "Birthdays, private events and special occasions.",
+        media: { type: "image" as const, src: "act-birthday-w" },
       },
     ],
     noteEyebrow: "How the week works",
     noteBody:
-      "Every session keeps a fixed slot, so you always know where to find it. The week is announced on Instagram and posted at reception — walk in, or write ahead and we will tell you which hour suits you.",
+      "Every session keeps a fixed slot, so you always know where to find it. The week is announced on Instagram and posted at reception — walk in, or write ahead and we will tell you which hour suits you. And when you want an hour of your own — a birthday, a private evening, a class you teach — the room is yours to book.",
   },
   children: {
     imgAlt:
@@ -199,9 +318,10 @@ const en = {
     h2: "A place where children discover their talents — and adults discover connections, friendships and opportunities.",
     tierLine1: "Children's art club · Every Saturday",
     tierLine2: "Nation Towers Mall, Abu Dhabi",
+    cta: "What's on for children",
   },
   founders: {
-    num: "05",
+    num: "06",
     title: "Fifteen Years",
     portraitAlt:
       "Hana Kash and Natalia Scully, co-founders of COBA, beside the owl mark on a plaster wall.",
@@ -229,7 +349,7 @@ const en = {
     h2: ["A room you'll", "photograph unasked."],
     body: "Lime plaster, light oak, brushed brass. Open seven days.",
     specs: [
-      ["Capacity", "70+ guests"],
+      ["Capacity", "Up to 70 guests"],
       ["Configurations", "Coffee circle, workshop or lounge"],
       ["On arrival", "Reception & concierge"],
       ["Between sessions", "Materials kept on site"],
@@ -245,6 +365,8 @@ const en = {
       "Nation Towers Mall, 1st Floor",
       "Abu Dhabi, United Arab Emirates",
     ],
+    directionsLabel: "Get directions",
+    whatsappLabel: "WhatsApp",
     social: "Social",
     open: "Open",
     openValue: "Seven days a week",
@@ -256,14 +378,15 @@ const en = {
       "Classes & workshops",
       "Clubs & community",
       "Children & teens",
+      "A birthday party",
       "Meet-ups, talks & networking",
       "A private gathering",
       "Just looking around",
     ],
     messageLabel: "Anything you would like us to know?",
     submit: "Send",
-    sentNote: "Your mail app should now be open with the message ready to send.",
-    unsentNote: "Opens in your own mail app. This site stores nothing.",
+    sentNote: "WhatsApp should now be open with your message ready to send.",
+    unsentNote: "Opens in your own WhatsApp, straight to us. This site stores nothing.",
     mailSubjectPrefix: "Visit enquiry — ",
     mailFields: {
       name: "Name",
@@ -271,12 +394,254 @@ const en = {
       tier: "Interested in",
     },
   },
-  /* The one place the home page speaks to collaborators, and the door to /partners. */
+  /* ---- What's On for Children — /children ---- */
+  childrenPage: {
+    hero: {
+      eyebrow: "What's on · For children",
+      title: ["Where young talent", "finds its people."],
+      lede: "Art, LEGO, science, chess, etiquette and crafts — taught every week under one roof at Nation Towers Mall. And when the big day comes, the whole house celebrates with them.",
+      capsLine: "Weekly sessions · Babies to teens · Nation Towers Mall",
+    },
+    gridEyebrow: "The activities",
+    gridTitle: "A week built for children.",
+    items: [
+      {
+        img: "act-kidsart",
+        title: "Kids art club",
+        ar: "نادي الفن",
+        body: "Painting, drawing and clay every Saturday — the room where a talent gets discovered.",
+      },
+      {
+        img: "act-lego-w",
+        title: "LEGO workshops",
+        ar: "ليغو",
+        body: "Engineering disguised as play — towers, bridges and whole worlds, brick by brick.",
+      },
+      {
+        img: "act-science-w",
+        title: "Science sessions",
+        ar: "علوم",
+        body: "Hands-on experiments for curious minds — the kind of lesson nobody calls a lesson.",
+      },
+      {
+        img: "act-chess",
+        title: "Chess club",
+        ar: "شطرنج",
+        body: "Openings, endgames and deep quiet concentration — evenings around the board.",
+      },
+      {
+        img: "act-craft-w",
+        title: "Art & craft",
+        ar: "فنون وحرف",
+        body: "Painting tote bags and t-shirts, seasonal makes and projects that go home proudly.",
+      },
+      {
+        img: "act-etiquette",
+        title: "Kids & teens etiquette",
+        ar: "إتيكيت",
+        body: "Confidence, courtesy and presence — the small skills that carry a long way.",
+      },
+      {
+        img: "act-mumtoddler-w",
+        title: "Mother & toddler",
+        ar: "أم وطفل",
+        body: "Soft mornings for the smallest members — stories, songs and first friendships.",
+      },
+      {
+        img: "act-boardgames-w",
+        title: "Board game nights",
+        ar: "ألعاب لوحية",
+        body: "Strategy, laughter and a full table — family game evenings for every age.",
+      },
+      {
+        img: "act-movienight",
+        title: "Movie nights",
+        ar: "ليلة سينما",
+        body: "Cushions, popcorn and the big screen — family films in a room full of friends.",
+      },
+    ],
+    parties: {
+      eyebrow: "Kids birthday parties",
+      h2: ["Their day.", "The whole house celebrates."],
+      body: "Bring the birthday to COBA. The room is dressed before you arrive, the activity is led by people who do this every week — an art party, a LEGO party, a craft party, or an idea of your own — and the grown-ups get to be guests at their own child's party.",
+      facts: [
+        ["Capacity", "Up to 70 guests"],
+        ["Setup", "Decorated and ready before you arrive"],
+        ["Formats", "Art, LEGO, craft, science — or your idea"],
+      ],
+      cta: "Plan a party",
+    },
+    cross: {
+      note: "And while they create —",
+      label: "See what's on for adults",
+    },
+  },
+  /* ---- What's On for Adults — /adults ---- */
+  adultsPage: {
+    hero: {
+      eyebrow: "What's on · For adults",
+      title: ["Mornings and evenings", "that belong to you."],
+      lede: "Floristic workshops, art classes, book club, coffee mornings, image masterclasses, talks, clubs and networking — a standing place in your week, in a room worth arriving for.",
+      capsLine: "Weekly sessions · Mornings & evenings · Nation Towers Mall",
+    },
+    gridEyebrow: "The activities",
+    gridTitle: "A week that is yours.",
+    items: [
+      {
+        img: "act-floristry-w",
+        title: "Floristic workshops",
+        ar: "تنسيق الزهور",
+        body: "Fresh stems, secateurs and kraft paper — leave with a bouquet you built yourself.",
+      },
+      {
+        img: "act-adultart-w",
+        title: "Art classes",
+        ar: "فنون",
+        body: "Easels, palettes and patient teaching — painting and sketching for every level.",
+      },
+      {
+        img: "act-bookclub-w",
+        title: "Book club",
+        ar: "نادي الكتاب",
+        body: "One book, good coffee and better company — the standing hour readers protect.",
+      },
+      {
+        img: "act-makeup-w",
+        title: "Image masterclasses",
+        ar: "ماستركلاس",
+        body: "Makeup, styling and presence — small classes for ladies, taught hands-on at the mirror.",
+      },
+      {
+        img: "act-coffee",
+        title: "Coffee mornings",
+        ar: "قهوة الصباح",
+        body: "Ladies' mornings that start with coffee and end with plans — the week's soft opening.",
+      },
+      {
+        img: "act-networking",
+        title: "Networking evenings",
+        ar: "تواصل مهني",
+        body: "Introductions that become collaborations — peers in a circle, not a lecture.",
+      },
+      {
+        img: "act-artshow-w",
+        title: "Art shows",
+        ar: "معارض فنية",
+        body: "Openings on our own walls — the work made in this room, shown in this room.",
+      },
+      {
+        img: "club-community",
+        title: "Clubs & circles",
+        ar: "أندية",
+        body: "Women's circles, cultural groups and hobby clubs, each with a standing place in the week.",
+      },
+      {
+        img: "act-movienight",
+        title: "Movie nights",
+        ar: "ليلة سينما",
+        body: "A projector, a late film and a room of friends — evenings that run past bedtime.",
+      },
+    ],
+    parties: {
+      eyebrow: "Private events",
+      h2: ["An address", "for your occasion."],
+      body: "Celebrations, launches, gatherings and evenings of your own design. The room is dressed before your first guest arrives — coffee circle, workshop or lounge — with reception, concierge and everything in between taken care of.",
+      facts: [
+        ["Capacity", "Up to 70 guests"],
+        ["Configurations", "Coffee circle, workshop or lounge"],
+        ["On the night", "Reception, concierge and refreshments"],
+      ],
+      cta: "Plan an event",
+    },
+    cross: {
+      note: "And for the small ones —",
+      label: "See what's on for children",
+    },
+  },
+  /* The one place the home page speaks to collaborators — the doors to
+     /partners (organisations) and /collaborate (individual practitioners). */
   partnerStrip: {
     eyebrow: "Work with COBA",
     h2: "Run a club, class or community? Bring it to COBA.",
     body: "Residents, collaborators, sponsors and freelancers take a standing slot in the week — with the audience already in the building.",
     cta: "Work with us",
+    cta2: "A painter, a singer, a coach? Introduce yourself",
+  },
+  /* ---- Collaborate — /collaborate. The individual practitioner's door. ---- */
+  collab: {
+    hero: {
+      eyebrow: "Collaborate with COBA",
+      title: ["Bring your craft.", "The room is ready."],
+      lede: "A painter, a singer, a florist, a coach — if you have a craft people gather around, COBA is built for you. Tell us who you are and what you would host; we hold the address, the audience and everything around it.",
+      capsLine: "Individual practitioners · Sessions, classes & shows · Nation Towers Mall",
+    },
+    who: {
+      num: "01",
+      title: "Who Are You",
+      h2: "First — who are you?",
+      body: "Choose the craft that sounds most like you. It shapes the conversation we start.",
+      options: [
+        { key: "painter", label: "Painter & artist", ar: "رسّام" },
+        { key: "musician", label: "Singer & musician", ar: "موسيقي" },
+        { key: "maker", label: "Craft & DIY maker", ar: "حِرَفي" },
+        { key: "florist", label: "Florist", ar: "منسّق زهور" },
+        { key: "stylist", label: "Makeup & style artist", ar: "خبير إطلالة" },
+        { key: "photographer", label: "Photographer", ar: "مصوّر" },
+        { key: "chef", label: "Chef & baker", ar: "طاهٍ" },
+        { key: "wellness", label: "Wellness & movement coach", ar: "مدرب عافية" },
+        { key: "teacher", label: "Teacher & tutor", ar: "معلّم" },
+        { key: "author", label: "Author & storyteller", ar: "كاتب" },
+        { key: "dance", label: "Dance instructor", ar: "مدرب رقص" },
+        { key: "other", label: "Something else entirely", ar: "شيء آخر" },
+      ],
+    },
+    formats: {
+      num: "02",
+      title: "What You'd Host",
+      h2: "And what could it become?",
+      body: "Pick as many as you like — a session can start as one evening and grow into a standing hour.",
+      options: [
+        "A one-off masterclass",
+        "A weekly class",
+        "A club or circle",
+        "A performance or recital",
+        "An exhibition or show",
+        "A children's programme",
+        "A private session",
+      ],
+    },
+    how: {
+      eyebrow: "How it works",
+      steps: [
+        ["One", "Introduce yourself", "Who you are, what you make, where we can see it."],
+        ["Two", "We find your hour", "A slot in the week that suits your craft and your people."],
+        ["Three", "The room is ready", "Dressed before your first guest — audience, reception and materials handled."],
+      ],
+    },
+    form: {
+      eyebrow: "Introduce yourself",
+      h2: "You bring the craft. We hold the rest.",
+      lede: "A line or two is enough — who you are, what you make, and what you would host. We reply with the hour of the week that fits.",
+      nameLabel: "Your name",
+      contactLabel: "Your email or phone",
+      portfolioLabel: "Instagram or portfolio link (optional)",
+      messageLabel: "Tell us about what you'd host",
+      submit: "Send introduction",
+      sentNote: "WhatsApp should now be open with your introduction ready to send.",
+      unsentNote: "Opens in your own WhatsApp, straight to us. This site stores nothing.",
+      mailSubjectPrefix: "Collaboration — ",
+      mailFields: {
+        craft: "Craft",
+        formats: "Would host",
+        contact: "Email or phone",
+        portfolio: "Portfolio",
+      },
+      noCraft: "Not chosen yet",
+    },
+    strip: {
+      note: "Running an organisation, a brand or a club?",
+      label: "See the residency model",
+    },
   },
   partners: {
     hero: {
@@ -460,6 +825,8 @@ const en = {
       "Nation Towers Mall, 1st Floor",
       "Abu Dhabi, United Arab Emirates",
     ],
+    directionsLabel: "Get directions",
+    whatsappLabel: "WhatsApp",
     social: "Social",
     open: "Open",
     openValue: "Seven days a week",
@@ -476,8 +843,8 @@ const en = {
     ],
     messageLabel: "What would you host?",
     submit: "Send enquiry",
-    sentNote: "Your mail app should now be open with the enquiry ready to send.",
-    unsentNote: "Opens in your own mail app. This site stores nothing.",
+    sentNote: "WhatsApp should now be open with your enquiry ready to send.",
+    unsentNote: "Opens in your own WhatsApp, straight to us. This site stores nothing.",
     mailSubjectPrefix: "Partnership enquiry — ",
     mailFields: {
       name: "Name",
@@ -495,21 +862,37 @@ const en = {
     ],
     visitEyebrow: "Visit",
     visitLinksHome: [
-      { href: "#idea", label: "The idea" },
-      { href: "#meet", label: "Who you'll meet" },
-      { href: "#happens", label: "What's on" },
-      { href: "#fifteen", label: "Fifteen years" },
-      { href: "#house", label: "The house" },
+      { href: "#happening", label: "What's happening" },
+      { href: "/children", label: "For children" },
+      { href: "/adults", label: "For adults" },
+      { href: "#about", label: "About COBA" },
+      { href: "#visit", label: "Contact" },
+    ],
+    /* Shown on /children and /adults — route links, since those pages
+       don't carry the home anchors. */
+    visitLinksWhatsOn: [
+      { href: "/", label: "The hub" },
+      { href: "/children", label: "For children" },
+      { href: "/adults", label: "For adults" },
+      { href: "#visit", label: "Contact" },
     ],
     visitLinksPartners: [
       { href: "#roles", label: "Who we work with" },
       { href: "#why", label: "Why COBA" },
       { href: "#residency", label: "The model" },
       { href: "#formats", label: "Residency formats" },
-      { href: "#receive", label: "What you receive" },
+      { href: "/collaborate", label: "Collaborate — introduce yourself" },
+    ],
+    visitLinksCollab: [
+      { href: "#who", label: "Who are you" },
+      { href: "#formats", label: "What you'd host" },
+      { href: "#apply", label: "Introduce yourself" },
+      { href: "/partners", label: "The residency model" },
+      { href: "/", label: "Visit the hub" },
     ],
     followEyebrow: "Follow",
     instagram: "Instagram — @cobaabudhabi",
+    whatsapp: "WhatsApp — +971 52 505 4366",
     workWithUs: "Work with COBA",
     backHome: "Back to the hub",
     rights: "All rights reserved.",
@@ -518,13 +901,37 @@ const en = {
 
 const ru: typeof en = {
   meta: {
-    title: "COBA — премиальный центр сообщества в Абу-Даби",
+    title: "COBA — креативный центр сообщества в Абу-Даби",
     description:
-      "COBA — премиальный центр сообщества в Nation Towers Mall, Абу-Даби, где встречаются люди, идеи и возможности: для семей, творцов, специалистов, клубов и сообществ.",
+      "Креативный центр сообщества для детей, семей и взрослых в Абу-Даби. Открывайте занятия, приходите на мастер-классы, знакомьтесь с сообществом и создавайте значимые впечатления — всё под одной крышей в Nation Towers Mall.",
     ogTitle: "COBA — Твори. Исследуй. Общайся.",
     ogDescription:
-      "Премиальный центр сообщества в Абу-Даби, где встречаются люди, идеи и возможности.",
+      "Креативный центр сообщества для детей, семей и взрослых в Абу-Даби — всё под одной крышей.",
     ogLocale: "ru_AE",
+  },
+  metaChildren: {
+    title: "Что проходит для детей — COBA Абу-Даби",
+    description:
+      "Детский арт-клуб, LEGO, наука, шахматы, этикет, рукоделие, утро для мам и малышей и дни рождения до 70 гостей — каждую неделю в COBA, Nation Towers Mall, Абу-Даби.",
+    ogTitle: "Что проходит для детей в COBA",
+    ogDescription:
+      "Творчество, LEGO, наука, шахматы, рукоделие и дни рождения — неделя, построенная для юных талантов в Абу-Даби.",
+  },
+  metaAdults: {
+    title: "Что проходит для взрослых — COBA Абу-Даби",
+    description:
+      "Флористика, занятия живописью, книжный клуб, кофейные утра, мастер-классы по имиджу, беседы, нетворкинг и частные мероприятия — каждую неделю в COBA, Nation Towers Mall, Абу-Даби.",
+    ogTitle: "Что проходит для взрослых в COBA",
+    ogDescription:
+      "Флористика, живопись, книжный клуб, кофейные утра, мастер-классы и нетворкинг — утра и вечера для вас.",
+  },
+  metaCollab: {
+    title: "Сотрудничество с COBA — принесите своё ремесло",
+    description:
+      "Художник, певец, коуч, мастер? Расскажите, кто вы и что хотели бы проводить — мастер-класс, еженедельное занятие, выступление или выставку — в COBA, Nation Towers Mall, Абу-Даби.",
+    ogTitle: "Сотрудничество с COBA",
+    ogDescription:
+      "Расскажите, кто вы и что хотели бы проводить — зал, аудитория и всё остальное уже здесь.",
   },
   metaPartners: {
     title: "Сотрудничество с COBA — резиденты, партнёры, спонсоры",
@@ -537,14 +944,32 @@ const ru: typeof en = {
   header: {
     homeLabel: "COBA — на главную",
     navHome: [
-      { href: "#meet", label: "Кого вы встретите" },
-      { href: "#happens", label: "Что происходит" },
+      { href: "/ru/children", label: "Детям" },
+      { href: "/ru/adults", label: "Взрослым" },
+      { href: "#about", label: "О нас" },
+      { href: "#visit", label: "Контакты" },
+    ],
+    navChildren: [
+      { href: "#parties", label: "Дни рождения" },
+      { href: "/ru/adults", label: "Взрослым" },
+      { href: "#visit", label: "Контакты" },
+    ],
+    navAdults: [
+      { href: "#private", label: "Частные события" },
+      { href: "/ru/children", label: "Детям" },
+      { href: "#visit", label: "Контакты" },
     ],
     navPartners: [
       { href: "#roles", label: "С кем мы работаем" },
       { href: "#residency", label: "Модель" },
+      { href: "/ru/collaborate", label: "Сотрудничество" },
     ],
-    crossHome: "Сотрудничество",
+    navCollab: [
+      { href: "#who", label: "Кто вы" },
+      { href: "#formats", label: "Что бы вы проводили" },
+      { href: "/ru/partners", label: "Модель резидентства" },
+    ],
+    crossHome: "Сотрудничество с COBA",
     crossPartners: "О центре",
     ctaHome: "Запланировать визит",
     ctaPartners: "Начать разговор",
@@ -553,12 +978,12 @@ const ru: typeof en = {
     langSwitchLabel: "Язык",
   },
   hero: {
-    title: ["Где встречаются люди,", "идеи и возможности."],
-    lede: "Премиальный центр сообщества в Nation Towers Mall, Абу-Даби — для семей, творцов, специалистов, клубов и сообществ.",
-    ctaPrimary: "Запланировать визит",
-    ctaPrimaryHref: "#visit",
-    ctaSecondary: "Что происходит",
-    ctaSecondaryHref: "#happens",
+    title: ["Креативный центр сообщества", "для детей, семей и взрослых."],
+    lede: "Открывайте занятия, приходите на мастер-классы, знакомьтесь с сообществом и создавайте значимые впечатления — всё под одной крышей в Nation Towers Mall, Абу-Даби.",
+    ctaPrimary: "Что происходит",
+    ctaPrimaryHref: "#happening",
+    ctaSecondary: "Запланировать визит",
+    ctaSecondaryHref: "#visit",
     facts: [
       { label: "Опыт", value: "лет сообщества", count: 15 },
       { label: "Адрес", value: "Nation Towers Mall, 1-й этаж" },
@@ -566,9 +991,65 @@ const ru: typeof en = {
     ] as Fact[],
   },
   voice: { create: "Твори", explore: "Исследуй", connect: "Общайся" },
-  idea: {
+  happening: {
     num: "01",
-    title: "Идея",
+    title: "Что происходит",
+    eyebrow: "Что происходит в COBA",
+    h2: ["Одна крыша.", "Неделя, полная занятий."],
+    lede: "Детские дни рождения, флористика, творчество для детей и взрослых, книжный клуб, утро для мам и малышей, мастер-классы по имиджу, этикет для детей и подростков, выставки, киновечера, нетворкинг — всё это можно делать в COBA. Присоединяйтесь к тому, что уже идёт, или забронируйте зал и сделайте одно из этого своим.",
+    prevLabel: "Предыдущее занятие",
+    nextLabel: "Следующее занятие",
+    pauseLabel: "Остановить слайд-шоу",
+    playLabel: "Запустить слайд-шоу",
+    goToLabel: "Перейти к слайду",
+    ofLabel: "из",
+    items: [
+      { img: "act-birthday-w", cap: "Детские дни рождения", tag: "Детям" },
+      { img: "act-floristry-w", cap: "Флористические мастер-классы", tag: "Взрослым" },
+      { img: "act-kidsart", cap: "Детский арт-клуб", tag: "Детям" },
+      { img: "act-makeup-w", cap: "Мастер-классы по имиджу", tag: "Взрослым" },
+      { img: "act-lego-w", cap: "LEGO-мастерские", tag: "Детям" },
+      { img: "act-bookclub-w", cap: "Книжный клуб", tag: "Взрослым" },
+      { img: "act-craft-w", cap: "Роспись сумок и футболок", tag: "Детям и подросткам" },
+      { img: "act-coffee", cap: "Кофейные утра для леди", tag: "Взрослым" },
+      { img: "act-science-w", cap: "Научные занятия", tag: "Детям" },
+      { img: "act-adultart-w", cap: "Живопись для взрослых", tag: "Взрослым" },
+      { img: "act-mumtoddler-w", cap: "Утро для мам и малышей", tag: "Семьям" },
+      { img: "act-networking", cap: "Вечера нетворкинга", tag: "Взрослым" },
+      { img: "act-chess", cap: "Шахматный клуб", tag: "Детям" },
+      { img: "act-artshow-w", cap: "Художественные выставки", tag: "Для всех" },
+      { img: "act-etiquette", cap: "Этикет для детей и подростков", tag: "Детям" },
+      { img: "act-movienight", cap: "Киновечера", tag: "Семьям" },
+      { img: "act-boardgames-w", cap: "Вечера настольных игр", tag: "Семьям" },
+    ],
+  },
+  audience: {
+    eyebrow: "Найдите свою неделю",
+    childrenCard: {
+      title: "Что проходит для детей",
+      ar: "للأطفال",
+      img: "act-craft-w",
+      note: "Арт-клуб, LEGO, наука, шахматы, этикет, рукоделие, киновечера — и дни рождения, которые празднует весь дом.",
+      cta: "Смотреть детские занятия",
+    },
+    adultsCard: {
+      title: "Что проходит для взрослых",
+      ar: "للكبار",
+      img: "act-floristry-w",
+      note: "Флористика, живопись, книжный клуб, кофейные утра, мастер-классы по имиджу, беседы, клубы и нетворкинг — утра и вечера для вас.",
+      cta: "Смотреть занятия для взрослых",
+    },
+  },
+  book: {
+    eyebrow: "Сделайте его своим",
+    h2: "Этот зал можно забронировать.",
+    body: "Всё, что вы видите в слайд-шоу, происходит здесь — в одном зале, который можно забронировать. Отпразднуйте день рождения, соберите своих на частный вечер или проведите мастер-класс, о котором давно мечтали, — до 70 гостей, зал оформлен и готов до вашего прихода.",
+    ctaVisit: "Забронировать для события",
+    ctaHost: "Проводить свои занятия",
+  },
+  idea: {
+    num: "03",
+    title: "О COBA",
     h2: ["Больше, чем площадка.", "Место, где принадлежишь, общаешься и растёшь."],
     place: "Nation Towers Mall, Абу-Даби",
     p1: "Премиальный центр сообщества, где люди разных культур, происхождения и профессий собираются, чтобы вдохновлять друг друга и создавать что-то значимое.",
@@ -586,7 +1067,7 @@ const ru: typeof en = {
     ar: "كل موهبة لها قيمة، وكل صلة فرصة",
   },
   meet: {
-    num: "02",
+    num: "04",
     title: "Кого вы встретите",
     h2: "Кого вы встретите в COBA.",
     body: "COBA — это экосистема, а не кружок. В любую неделю все они оказываются в одном зале одновременно — и в этом весь смысл.",
@@ -642,7 +1123,7 @@ const ru: typeof en = {
     ],
   },
   room: {
-    num: "03",
+    num: "05",
     title: "В зале",
     h2: [
       "COBA — это больше, чем красивое пространство.",
@@ -651,49 +1132,57 @@ const ru: typeof en = {
     body: "Зал становится центром притяжения только тогда, когда его наполняют люди. Именно для них создан COBA — и поэтому на каждом фото здесь кто-то есть.",
     rule: "На каждом ключевом изображении есть люди. Это правило, а не предпочтение.",
     shots: [
-      { img: "room-laughing", cap: "Люди смеются" },
-      { img: "act-science", cap: "Научные занятия для подростков" },
-      { img: "room-artists", cap: "Художники творят" },
+      { img: "act-private", cap: "Люди смеются" },
+      { img: "act-science-w", cap: "Научные занятия для подростков" },
+      { img: "act-artists", cap: "Художники творят" },
       { img: "act-chess", cap: "Шахматные вечера" },
-      { img: "room-children", cap: "Дети мастерят" },
-      { img: "act-lego", cap: "Строители LEGO" },
-      { img: "room-coffee", cap: "Разговоры за кофе" },
+      { img: "act-blocks", cap: "Дети мастерят" },
+      { img: "act-lego-w", cap: "Строители LEGO" },
+      { img: "act-coffee", cap: "Разговоры за кофе" },
       { img: "act-etiquette", cap: "Уроки этикета" },
-      { img: "room-parents", cap: "Родители общаются" },
-      { img: "act-mumtoddler", cap: "Утро для мам и малышей" },
-      { img: "room-networking", cap: "Деловые знакомства" },
-      { img: "act-boardgames", cap: "Вечера настольных игр" },
+      { img: "act-parents", cap: "Родители общаются" },
+      { img: "act-mumtoddler-w", cap: "Утро для мам и малышей" },
+      { img: "act-networking", cap: "Деловые знакомства" },
+      { img: "act-boardgames-w", cap: "Вечера настольных игр" },
     ],
   },
   happens: {
-    num: "04",
-    title: "Что происходит",
+    num: "02",
+    title: "Что вас ждёт",
+    h2: "Что вас ждёт в COBA.",
     cards: [
       {
         idx: "Один",
-        title: "Занятия и мастер-классы",
-        ar: "دورات وورش عمل",
-        body: "Занятия творчеством, рукоделием и навыками для взрослых и детей — еженедельно, с практиками, знающими своё дело.",
+        title: "Учитесь",
+        ar: "تعلَّم",
+        body: "Мастер-классы для детей и взрослых.",
         media: { type: "video" as const, src: "loop-craft" },
       },
       {
         idx: "Два",
-        title: "Клубы и сообщества",
-        ar: "أندية ومجتمع",
-        body: "Книжные клубы, женские круги и культурные объединения — у каждого свой постоянный дом и постоянное место в неделе.",
-        media: { type: "image" as const, src: "club-community" },
+        title: "Творите",
+        ar: "أبدِع",
+        body: "Живопись, музыка, рукоделие, творческие проекты и особенные впечатления.",
+        media: { type: "image" as const, src: "act-adultart-w" },
       },
       {
         idx: "Три",
-        title: "Встречи и беседы",
-        ar: "لقاءات وحوارات",
-        body: "Вечерние встречи, знакомства и обмен опытом — на равных, в кругу, а не с трибуны.",
+        title: "Общайтесь",
+        ar: "تواصَل",
+        body: "Клубы, сообщества, нетворкинг и дружеские встречи.",
         media: { type: "video" as const, src: "loop-majlis" },
+      },
+      {
+        idx: "Четыре",
+        title: "Празднуйте",
+        ar: "احتفِل",
+        body: "Дни рождения, частные события и особые случаи.",
+        media: { type: "image" as const, src: "act-birthday-w" },
       },
     ],
     noteEyebrow: "Как устроена неделя",
     noteBody:
-      "У каждого занятия свой постоянный слот, поэтому вы всегда знаете, где его найти. Расписание недели публикуется в Instagram и на ресепшене — заходите просто так или напишите заранее, и мы подскажем подходящий час.",
+      "У каждого занятия свой постоянный слот, поэтому вы всегда знаете, где его найти. Расписание недели публикуется в Instagram и на ресепшене — заходите просто так или напишите заранее, и мы подскажем подходящий час. А когда захочется собственного часа — день рождения, частный вечер или занятие, которое ведёте вы, — зал можно забронировать.",
   },
   children: {
     imgAlt:
@@ -702,9 +1191,10 @@ const ru: typeof en = {
     h2: "Место, где дети раскрывают свои таланты, а взрослые находят связи, дружбу и возможности.",
     tierLine1: "Детский арт-клуб · Каждую субботу",
     tierLine2: "Nation Towers Mall, Абу-Даби",
+    cta: "Что проходит для детей",
   },
   founders: {
-    num: "05",
+    num: "06",
     title: "Пятнадцать лет",
     portraitAlt:
       "Хана Каш и Наталия Скалли, соучредители COBA, у знака совы на оштукатуренной стене.",
@@ -732,7 +1222,7 @@ const ru: typeof en = {
     h2: ["Зал, который хочется", "сфотографировать без подсказки."],
     body: "Известковая штукатурка, светлый дуб, матовая латунь. Открыто семь дней в неделю.",
     specs: [
-      ["Вместимость", "70+ гостей"],
+      ["Вместимость", "До 70 гостей"],
       ["Форматы", "Кофейный круг, мастер-класс или лаунж"],
       ["По прибытии", "Ресепшен и консьерж"],
       ["Между занятиями", "Материалы хранятся на месте"],
@@ -747,6 +1237,8 @@ const ru: typeof en = {
       "Nation Towers Mall, 1-й этаж",
       "Абу-Даби, Объединённые Арабские Эмираты",
     ],
+    directionsLabel: "Построить маршрут",
+    whatsappLabel: "WhatsApp",
     social: "Соцсети",
     open: "Часы работы",
     openValue: "Семь дней в неделю",
@@ -758,14 +1250,15 @@ const ru: typeof en = {
       "Занятия и мастер-классы",
       "Клубы и сообщества",
       "Дети и подростки",
+      "День рождения",
       "Встречи, беседы и нетворкинг",
       "Частное мероприятие",
       "Просто осмотреться",
     ],
     messageLabel: "Что нам стоит знать?",
     submit: "Отправить",
-    sentNote: "Ваше почтовое приложение должно открыться с готовым сообщением.",
-    unsentNote: "Откроется в вашем почтовом приложении. Этот сайт ничего не сохраняет.",
+    sentNote: "WhatsApp должен открыться с готовым сообщением.",
+    unsentNote: "Откроется в вашем WhatsApp и попадёт прямо к нам. Этот сайт ничего не сохраняет.",
     mailSubjectPrefix: "Запрос на визит — ",
     mailFields: {
       name: "Имя",
@@ -773,11 +1266,249 @@ const ru: typeof en = {
       tier: "Интересует",
     },
   },
+  childrenPage: {
+    hero: {
+      eyebrow: "Что проходит · Детям",
+      title: ["Здесь юный талант", "находит своих."],
+      lede: "Творчество, LEGO, наука, шахматы, этикет и рукоделие — каждую неделю под одной крышей в Nation Towers Mall. А когда наступает большой день — весь дом празднует вместе с ними.",
+      capsLine: "Еженедельные занятия · От малышей до подростков · Nation Towers Mall",
+    },
+    gridEyebrow: "Занятия",
+    gridTitle: "Неделя, построенная для детей.",
+    items: [
+      {
+        img: "act-kidsart",
+        title: "Детский арт-клуб",
+        ar: "نادي الفن",
+        body: "Живопись, рисунок и лепка каждую субботу — зал, где раскрывается талант.",
+      },
+      {
+        img: "act-lego-w",
+        title: "LEGO-мастерские",
+        ar: "ليغو",
+        body: "Инженерия под видом игры — башни, мосты и целые миры, кирпичик за кирпичиком.",
+      },
+      {
+        img: "act-science-w",
+        title: "Научные занятия",
+        ar: "علوم",
+        body: "Эксперименты своими руками для любознательных — урок, который никто не называет уроком.",
+      },
+      {
+        img: "act-chess",
+        title: "Шахматный клуб",
+        ar: "شطرنج",
+        body: "Дебюты, эндшпили и глубокая тишина сосредоточенности — вечера за доской.",
+      },
+      {
+        img: "act-craft-w",
+        title: "Творчество и рукоделие",
+        ar: "فنون وحرف",
+        body: "Роспись сумок и футболок, сезонные поделки и проекты, которые с гордостью несут домой.",
+      },
+      {
+        img: "act-etiquette",
+        title: "Этикет для детей и подростков",
+        ar: "إتيكيت",
+        body: "Уверенность, вежливость и умение держаться — маленькие навыки на всю жизнь.",
+      },
+      {
+        img: "act-mumtoddler-w",
+        title: "Мама и малыш",
+        ar: "أم وطفل",
+        body: "Мягкие утра для самых маленьких — сказки, песни и первая дружба.",
+      },
+      {
+        img: "act-boardgames-w",
+        title: "Вечера настольных игр",
+        ar: "ألعاب لوحية",
+        body: "Стратегия, смех и полный стол — семейные игровые вечера для любого возраста.",
+      },
+      {
+        img: "act-movienight",
+        title: "Киновечера",
+        ar: "ليلة سينما",
+        body: "Подушки, попкорн и большой экран — семейное кино в зале, полном друзей.",
+      },
+    ],
+    parties: {
+      eyebrow: "Детские дни рождения",
+      h2: ["Их день.", "Празднует весь дом."],
+      body: "Принесите день рождения в COBA. Зал украшен до вашего прихода, программу ведут те, кто делает это каждую неделю — арт-праздник, LEGO-праздник, праздник рукоделия или ваша собственная идея, — а взрослые наконец могут побыть гостями на празднике своего ребёнка.",
+      facts: [
+        ["Вместимость", "До 70 гостей"],
+        ["Подготовка", "Украшено и готово до вашего прихода"],
+        ["Форматы", "Творчество, LEGO, рукоделие, наука — или ваша идея"],
+      ],
+      cta: "Спланировать праздник",
+    },
+    cross: {
+      note: "А пока они творят —",
+      label: "Что проходит для взрослых",
+    },
+  },
+  adultsPage: {
+    hero: {
+      eyebrow: "Что проходит · Взрослым",
+      title: ["Утра и вечера,", "которые принадлежат вам."],
+      lede: "Флористика, живопись, книжный клуб, кофейные утра, мастер-классы по имиджу, беседы, клубы и нетворкинг — постоянное место в вашей неделе, в зале, ради которого хочется приехать.",
+      capsLine: "Еженедельные занятия · Утром и вечером · Nation Towers Mall",
+    },
+    gridEyebrow: "Занятия",
+    gridTitle: "Неделя, которая принадлежит вам.",
+    items: [
+      {
+        img: "act-floristry-w",
+        title: "Флористические мастер-классы",
+        ar: "تنسيق الزهور",
+        body: "Свежие стебли, секатор и крафт-бумага — уходите с букетом, собранным своими руками.",
+      },
+      {
+        img: "act-adultart-w",
+        title: "Живопись",
+        ar: "فنون",
+        body: "Мольберты, палитры и терпеливые педагоги — живопись и рисунок для любого уровня.",
+      },
+      {
+        img: "act-bookclub-w",
+        title: "Книжный клуб",
+        ar: "نادي الكتاب",
+        body: "Одна книга, хороший кофе и ещё лучшая компания — час, который читатели берегут.",
+      },
+      {
+        img: "act-makeup-w",
+        title: "Мастер-классы по имиджу",
+        ar: "ماستركلاس",
+        body: "Макияж, стиль и умение подать себя — камерные занятия для леди, вживую у зеркала.",
+      },
+      {
+        img: "act-coffee",
+        title: "Кофейные утра",
+        ar: "قهوة الصباح",
+        body: "Утра для леди, которые начинаются с кофе и заканчиваются планами — мягкое открытие недели.",
+      },
+      {
+        img: "act-networking",
+        title: "Вечера нетворкинга",
+        ar: "تواصل مهني",
+        body: "Знакомства, которые становятся сотрудничеством — на равных, в кругу, а не с трибуны.",
+      },
+      {
+        img: "act-artshow-w",
+        title: "Художественные выставки",
+        ar: "معارض فنية",
+        body: "Вернисажи на наших собственных стенах — работы, созданные в этом зале, показаны в этом зале.",
+      },
+      {
+        img: "club-community",
+        title: "Клубы и круги",
+        ar: "أندية",
+        body: "Женские круги, культурные группы и хобби-клубы — у каждого постоянное место в неделе.",
+      },
+      {
+        img: "act-movienight",
+        title: "Киновечера",
+        ar: "ليلة سينما",
+        body: "Проектор, поздний фильм и зал друзей — вечера, которые длятся дольше запланированного.",
+      },
+    ],
+    parties: {
+      eyebrow: "Частные события",
+      h2: ["Адрес", "для вашего события."],
+      body: "Праздники, презентации, встречи и вечера по вашему замыслу. Зал оформлен до прихода первого гостя — кофейный круг, мастер-класс или лаунж, — а ресепшен, консьерж и всё остальное мы берём на себя.",
+      facts: [
+        ["Вместимость", "До 70 гостей"],
+        ["Форматы", "Кофейный круг, мастер-класс или лаунж"],
+        ["В этот вечер", "Ресепшен, консьерж и угощения"],
+      ],
+      cta: "Спланировать событие",
+    },
+    cross: {
+      note: "А для самых маленьких —",
+      label: "Что проходит для детей",
+    },
+  },
   partnerStrip: {
     eyebrow: "Сотрудничество с COBA",
     h2: "Ведёте клуб, занятия или сообщество? Приводите их в COBA.",
     body: "Резиденты, партнёры, спонсоры и фрилансеры занимают постоянный слот в неделе — с аудиторией, которая уже в здании.",
     cta: "Сотрудничать с нами",
+    cta2: "Художник, певец, коуч? Расскажите о себе",
+  },
+  collab: {
+    hero: {
+      eyebrow: "Сотрудничество с COBA",
+      title: ["Принесите своё ремесло.", "Зал уже готов."],
+      lede: "Художник, певец, флорист, коуч — если вокруг вашего дела собираются люди, COBA создан для вас. Расскажите, кто вы и что хотели бы проводить; адрес, аудитория и всё остальное — на нас.",
+      capsLine: "Частные практики · Занятия, сессии и выступления · Nation Towers Mall",
+    },
+    who: {
+      num: "01",
+      title: "Кто вы",
+      h2: "Для начала — кто вы?",
+      body: "Выберите ремесло, которое больше всего похоже на вас. С этого начнётся наш разговор.",
+      options: [
+        { key: "painter", label: "Художник", ar: "رسّام" },
+        { key: "musician", label: "Певец и музыкант", ar: "موسيقي" },
+        { key: "maker", label: "Мастер рукоделия", ar: "حِرَفي" },
+        { key: "florist", label: "Флорист", ar: "منسّق زهور" },
+        { key: "stylist", label: "Визажист и стилист", ar: "خبير إطلالة" },
+        { key: "photographer", label: "Фотограф", ar: "مصوّر" },
+        { key: "chef", label: "Шеф и кондитер", ar: "طاهٍ" },
+        { key: "wellness", label: "Коуч по велнесу и движению", ar: "مدرب عافية" },
+        { key: "teacher", label: "Преподаватель и репетитор", ar: "معلّم" },
+        { key: "author", label: "Автор и рассказчик", ar: "كاتب" },
+        { key: "dance", label: "Преподаватель танцев", ar: "مدرب رقص" },
+        { key: "other", label: "Что-то совсем другое", ar: "شيء آخر" },
+      ],
+    },
+    formats: {
+      num: "02",
+      title: "Что бы вы проводили",
+      h2: "И во что это может вырасти?",
+      body: "Выбирайте сколько угодно — сессия может начаться с одного вечера и вырасти в постоянный час.",
+      options: [
+        "Разовый мастер-класс",
+        "Еженедельное занятие",
+        "Клуб или круг",
+        "Выступление или концерт",
+        "Выставка или показ",
+        "Детская программа",
+        "Частная сессия",
+      ],
+    },
+    how: {
+      eyebrow: "Как это устроено",
+      steps: [
+        ["Один", "Расскажите о себе", "Кто вы, что создаёте и где это можно увидеть."],
+        ["Два", "Мы находим ваш час", "Слот в неделе, который подходит вашему делу и вашим людям."],
+        ["Три", "Зал уже готов", "Оформлен до прихода первого гостя — аудитория, ресепшен и материалы на нас."],
+      ],
+    },
+    form: {
+      eyebrow: "Расскажите о себе",
+      h2: "Вы приносите ремесло. Остальное — на нас.",
+      lede: "Достаточно пары строк — кто вы, что создаёте и что хотели бы проводить. Мы ответим и подскажем подходящий час недели.",
+      nameLabel: "Ваше имя",
+      contactLabel: "Ваш e-mail или телефон",
+      portfolioLabel: "Instagram или портфолио (необязательно)",
+      messageLabel: "Расскажите, что бы вы проводили",
+      submit: "Отправить рассказ о себе",
+      sentNote: "WhatsApp должен открыться с готовым рассказом о себе.",
+      unsentNote: "Откроется в вашем WhatsApp и попадёт прямо к нам. Этот сайт ничего не сохраняет.",
+      mailSubjectPrefix: "Сотрудничество — ",
+      mailFields: {
+        craft: "Ремесло",
+        formats: "Хотел(а) бы проводить",
+        contact: "E-mail или телефон",
+        portfolio: "Портфолио",
+      },
+      noCraft: "Пока не выбрано",
+    },
+    strip: {
+      note: "Представляете организацию, бренд или клуб?",
+      label: "Посмотреть модель резидентства",
+    },
   },
   partners: {
     hero: {
@@ -960,6 +1691,8 @@ const ru: typeof en = {
       "Nation Towers Mall, 1-й этаж",
       "Абу-Даби, Объединённые Арабские Эмираты",
     ],
+    directionsLabel: "Построить маршрут",
+    whatsappLabel: "WhatsApp",
     social: "Соцсети",
     open: "Часы работы",
     openValue: "Семь дней в неделю",
@@ -976,8 +1709,8 @@ const ru: typeof en = {
     ],
     messageLabel: "Что бы вы хотели проводить?",
     submit: "Отправить заявку",
-    sentNote: "Ваше почтовое приложение должно открыться с готовой заявкой.",
-    unsentNote: "Откроется в вашем почтовом приложении. Этот сайт ничего не сохраняет.",
+    sentNote: "WhatsApp должен открыться с готовой заявкой.",
+    unsentNote: "Откроется в вашем WhatsApp и попадёт прямо к нам. Этот сайт ничего не сохраняет.",
     mailSubjectPrefix: "Заявка на сотрудничество — ",
     mailFields: {
       name: "Имя",
@@ -995,21 +1728,35 @@ const ru: typeof en = {
     ],
     visitEyebrow: "Разделы",
     visitLinksHome: [
-      { href: "#idea", label: "Идея" },
-      { href: "#meet", label: "Кого вы встретите" },
-      { href: "#happens", label: "Что происходит" },
-      { href: "#fifteen", label: "Пятнадцать лет" },
-      { href: "#house", label: "Дом" },
+      { href: "#happening", label: "Что происходит" },
+      { href: "/ru/children", label: "Детям" },
+      { href: "/ru/adults", label: "Взрослым" },
+      { href: "#about", label: "О COBA" },
+      { href: "#visit", label: "Контакты" },
+    ],
+    visitLinksWhatsOn: [
+      { href: "/ru", label: "Главная" },
+      { href: "/ru/children", label: "Детям" },
+      { href: "/ru/adults", label: "Взрослым" },
+      { href: "#visit", label: "Контакты" },
     ],
     visitLinksPartners: [
       { href: "#roles", label: "С кем мы работаем" },
       { href: "#why", label: "Почему COBA" },
       { href: "#residency", label: "Модель" },
       { href: "#formats", label: "Форматы резидентства" },
-      { href: "#receive", label: "Что вы получаете" },
+      { href: "/ru/collaborate", label: "Сотрудничество — расскажите о себе" },
+    ],
+    visitLinksCollab: [
+      { href: "#who", label: "Кто вы" },
+      { href: "#formats", label: "Что бы вы проводили" },
+      { href: "#apply", label: "Рассказать о себе" },
+      { href: "/ru/partners", label: "Модель резидентства" },
+      { href: "/ru", label: "О центре" },
     ],
     followEyebrow: "Мы в сети",
     instagram: "Instagram — @cobaabudhabi",
+    whatsapp: "WhatsApp — +971 52 505 4366",
     workWithUs: "Сотрудничество с COBA",
     backHome: "Вернуться на главную",
     rights: "Все права защищены.",
@@ -1029,4 +1776,16 @@ export function homeHref(lang: Lang) {
 
 export function partnersHref(lang: Lang) {
   return lang === "ru" ? "/ru/partners" : "/partners";
+}
+
+export function childrenHref(lang: Lang) {
+  return lang === "ru" ? "/ru/children" : "/children";
+}
+
+export function adultsHref(lang: Lang) {
+  return lang === "ru" ? "/ru/adults" : "/adults";
+}
+
+export function collaborateHref(lang: Lang) {
+  return lang === "ru" ? "/ru/collaborate" : "/collaborate";
 }

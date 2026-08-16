@@ -1,0 +1,163 @@
+/* ============================================================
+   WhatsOn — /children and /adults
+   ============================================================ */
+
+.intro {
+  padding-top: clamp(8rem, 16vh, 12rem);
+  padding-bottom: clamp(2.6rem, 6vh, 4.6rem);
+}
+
+.title {
+  margin-top: 1.4rem;
+  color: var(--olive);
+}
+
+.lede {
+  margin-top: 1.6rem;
+}
+
+.capsLine {
+  margin: 1.6rem 0 0;
+  color: var(--brass-text);
+}
+
+.gridBand {
+  padding-top: 0;
+}
+
+.gridHead {
+  display: grid;
+  gap: 0.9rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  margin-bottom: clamp(2.2rem, 4vw, 3.6rem);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.6rem, 3vw, 2.6rem) clamp(1.2rem, 2.4vw, 2rem);
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardMedia {
+  aspect-ratio: 3 / 2;
+}
+
+.cardMedia img {
+  transition: transform 1.4s var(--ease);
+}
+
+.card:hover .cardMedia img {
+  transform: scale(1.05);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.1rem;
+}
+
+.cardAr {
+  font-size: 0.95rem;
+  color: var(--brass-text);
+  flex: none;
+}
+
+.cardBody {
+  margin: 0.45rem 0 0;
+  font-size: 0.97rem;
+  color: var(--ink-70);
+  max-width: 52ch;
+}
+
+/* ---------- feature band ---------- */
+
+.featureInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .featureInner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featureMedia {
+  aspect-ratio: 3 / 2.4;
+}
+
+.featureTitle {
+  margin: 1.1rem 0 1.3rem;
+}
+
+.facts {
+  margin: 1.8rem 0 2.2rem;
+  display: grid;
+  gap: 1.1rem;
+  padding: 0;
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.4fr) 1fr;
+  gap: 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(241, 235, 223, 0.16);
+}
+
+.facts dt {
+  color: var(--oak);
+  margin: 0;
+}
+
+.facts dd {
+  margin: 0;
+  color: rgba(241, 235, 223, 0.85);
+}
+
+/* ---------- cross strip ---------- */
+
+.cross {
+  padding-block: clamp(3rem, 7vh, 5rem);
+  background: var(--linen);
+}
+
+.crossInner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.crossLink {
+  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  font-weight: 200;
+  letter-spacing: -0.015em;
+  color: var(--olive);
+  transition: color 0.4s var(--ease);
+}
+
+.crossLink:hover {
+  color: var(--ink);
+}

@@ -893,3 +893,139 @@
     margin-top: 0.9rem;
   }
 }
+
+/* ---------- 01 what's happening — slideshow + audience doors ---------- */
+
+.cards4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1000px) {
+  .cards4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .cards4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.audienceBlock {
+  margin-top: clamp(2.6rem, 5vw, 4.2rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.audienceEyebrow {
+  margin-bottom: 1.4rem;
+}
+
+.childrenCta {
+  margin-top: 1.8rem;
+}
+
+/* second, quieter door in the partner strip — the individual practitioner */
+.partnerStripAlt {
+  display: inline-block;
+  margin-top: 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--oak);
+  border-bottom: 1px solid rgba(201, 169, 122, 0.4);
+  padding-bottom: 0.3rem;
+  transition:
+    color 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.partnerStripAlt:hover {
+  color: var(--plaster);
+  border-color: var(--plaster);
+}
+
+/* ---------- the booking strip — the room itself is for hire ---------- */
+
+.bookStrip {
+  margin-top: clamp(1.2rem, 2.4vw, 2rem);
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: clamp(1.6rem, 4vw, 4rem);
+  align-items: center;
+  padding: clamp(1.8rem, 3.2vw, 3rem);
+  background: var(--ink);
+  color: var(--plaster);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* the brass rule, same jewellery as the enquiry card */
+.bookStrip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--brass), rgba(168, 135, 78, 0.25));
+}
+
+@media (max-width: 900px) {
+  .bookStrip {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bookEyebrow {
+  color: var(--oak);
+}
+
+.bookTitle {
+  color: var(--plaster);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  margin-top: 0.9rem;
+}
+
+.bookBody {
+  margin: 1rem 0 0;
+  font-size: 0.99rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(241, 235, 223, 0.78);
+  max-width: 58ch;
+}
+
+.bookActions {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+}
+
+@media (min-width: 901px) {
+  .bookActions {
+    justify-items: end;
+    text-align: right;
+  }
+}
+
+.bookAlt {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--oak);
+  border-bottom: 1px solid rgba(201, 169, 122, 0.4);
+  padding-bottom: 0.3rem;
+  transition:
+    color 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.bookAlt:hover {
+  color: var(--plaster);
+  border-color: var(--plaster);
+}

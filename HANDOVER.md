@@ -8,25 +8,28 @@ npm run dev      # development
 npm run build && npm run start -- -p 3477
 ```
 
-## Two audiences, one route each
+## Two audiences — customer routes and one partner door
 
 | Route | Audience | Component |
 |---|---|---|
-| `/`, `/ru` | **The visitor.** What COBA is, who you'll meet, why you'd come. | `components/Site.tsx` |
-| `/partners`, `/ru/partners` | **The collaborator.** Residency, collaboration, sponsorship, freelance practice. | `components/Partners.tsx` |
+| `/`, `/ru` | **The customer.** What's happening, what you can do, about, contact. | `components/Site.tsx` |
+| `/children`, `/ru/children` | **The parent.** What's On for children + birthday parties (up to 70 guests). | `components/WhatsOn.tsx` (`page="children"`) |
+| `/adults`, `/ru/adults` | **The adult customer.** What's On for adults + private events. | `components/WhatsOn.tsx` (`page="adults"`) |
+| `/partners`, `/ru/partners` | **The organisation.** Residency, collaboration, sponsorship, freelance practice. Deliberately a side door, never a main-nav peer. | `components/Partners.tsx` |
+| `/collaborate`, `/ru/collaborate` | **The individual practitioner.** "Who are you — a painter, a singer?" An interactive craft picker (12 crafts) and format chips (7 formats) whose selections are played back in the page and carried into the mailto introduction. Reached from `/partners` nav+footer and the home partner strip's second link — never from the customer menu. | `components/Collaborate.tsx` (client; form styling reuses `Enquiry.module.css`) |
 
-This split was made in August 2026 on client feedback. The site had leaned
-"too heavily around residency and renting space" — five of nine numbered
-sections, plus the header CTA, the footer CTA and the enquiry form, all
-addressed club owners, which left an actual visitor with no path through the
-page. Residency material moved wholesale to `/partners`, which doubles as the
-"come work with us" page the client asked for.
+The August 2026 split moved residency material to `/partners`. The second
+round of 2026-08-16 feedback went further: the site is sold to the **end
+user**, not the team. The home page now leads with the week itself — a
+self-advancing activity slideshow (`components/ActivityReel.tsx`, 17 slides,
+one per activity) — followed by the client's four pillars (Learn · Create ·
+Connect · Celebrate, her copy verbatim), the two audience doors
+(`components/AudienceSplit.tsx`), and only then philosophy.
 
-The through-line the client named is now the spine of the home page:
-**COBA = People + Community + Connections + Opportunities.**
-
-Home sections: 01 The Idea · 02 Who You'll Meet · 03 In the Room ·
-04 What's On · 05 Fifteen Years.
+Home sections: 01 What's Happening (slideshow + audience doors) ·
+02 What You Can Do (four pillars) · children band · 03 About COBA ·
+04 Who You'll Meet · 05 In the Room · 06 Fifteen Years · the house ·
+partner strip · visit form.
 Partners sections: 01 Who We Work With · 02 Why COBA · 03 The Model ·
 04 Residency Formats · 05 What You Receive · 06 Who We Welcome.
 
@@ -61,9 +64,10 @@ old line are deleted, not commented out. Don't reinstate it.
   the vertical axis, and inlined as SVG (`components/owlPath.ts`). It drives the
   header, section rules, footer lockup, watermark and favicons.
 - **Instagram** `@cobaabudhabi` is from deck p.12. Address and opening days
-  are from Residency p.07. Capacity is shown as **70+ guests** per the
-  founders' correction in August 2026 — the Residency deck itself states
-  10–35; the deck should be corrected to match if it's reused elsewhere.
+  are from Residency p.07. Capacity is shown as **up to 70 guests** per the
+  client's 2026-08-16 message ("Capacity: up to 70 guests"), which supersedes
+  both the earlier "70+" correction and the Residency deck's 10–35; the deck
+  should be corrected to match if it's reused elsewhere.
 - **The two pinned residencies** in the week grid — Art Club (Mondays, deck p.12)
   and Children's Art Club (Saturdays, deck p.06) — are the only named sessions.
 
@@ -71,18 +75,29 @@ old line are deleted, not commented out. Don't reinstate it.
 
 | Item | Where | Note |
 |---|---|---|
-| `hello@coba.ae` | `components/Enquiry.tsx` (`INBOX`) | **Invented.** The decks give no email. Both variants send here; split it if visits and applications want separate inboxes. |
 | `https://coba.ae` | `app/(en)/layout.tsx`, `app/ru/layout.tsx` (`metadataBase`, OG url) | Set to the real domain. |
 | Children's Art Club tier | `components/TheWeek.tsx` | The deck says "every Saturday" but gives no time; it is placed in Tier B. |
 
-No phone number is shown anywhere, because the decks do not contain one.
+## Contact routes to WhatsApp (client-supplied, 2026-08-16)
 
-## The enquiry form collects nothing
+COBA's live line is **+971 52 505 4366** — the client's WhatsApp, given by
+Gourav on 2026-08-16 with the instruction that "for now" every form request
+should reach her there. `lib/contact.ts` is the single source of truth
+(`WHATSAPP_NUMBER`, `WHATSAPP_DISPLAY`, `waLink(text)`); never hardcode the
+number elsewhere. It surfaces four ways:
 
-`Enquiry.tsx` has **no backend**. On submit it composes a `mailto:` link and
-hands off to the visitor's own mail client. Nothing is stored, transmitted or
-logged by the site. If COBA want a real inbox flow, wire it to a form service
-and remove the "This site stores nothing" note.
+1. **A floating WhatsApp button** on every page (`components/WhatsAppFab.tsx`,
+   mounted in both root layouts), in the service's own green.
+2. **All three forms** (visit + partner in `Enquiry.tsx`, the practitioner
+   introduction in `Collaborate.tsx`) compose their message and open the
+   visitor's own WhatsApp via `wa.me` — no backend, nothing stored. The old
+   `mailto:`/`hello@coba.ae` handoff is gone; that address was invented and
+   is no longer referenced by code.
+3. A **WhatsApp row** in every enquiry-band details column.
+4. A **WhatsApp line** in the footer's Follow column.
+
+If COBA later want a real inbox or CRM, replace the `waLink` handoff in the
+two submit handlers — the composed message text is already structured.
 
 ## Russian translation
 
@@ -153,26 +168,25 @@ If you re-extract, the declared dimensions must move with the files:
 `height` props in `WelcomeList.tsx`, `HouseReveal.tsx` and `Founders.tsx`.
 `next/image` uses them for aspect ratio, so a stale number distorts the photo.
 
-## Navigation: two anchors, never a table of contents
+## Navigation: the client's own menu (2026-08-16)
 
-The header carried five links per page, of which "The Idea", "Who You'll Meet"
-and "15 Years" all pointed at the same idea, while "Work With Us" changed
-route but looked identical to the four in-page anchors. It has been cut to
-**two anchors plus one visually distinct route link**:
+An earlier round cut the bar to two anchors. On 2026-08-16 the client sent an
+explicit six-item sitemap (HOME · WHAT'S ON FOR CHILDREN · WHAT'S ON FOR
+ADULTS · WORK WITH COBA · ABOUT · CONTACT), which overrides that — the bar
+now carries her menu, with "Work with COBA" kept as the visually distinct
+careers-style route link, exactly as she described it ("like careers…
+one small part of the website"):
 
-| Page | Anchors | Route link | CTA |
+| Page | Nav | Route link | CTA |
 |---|---|---|---|
-| Home | Who You'll Meet · What's On | Work with us → | Plan your visit |
+| Home | For Children · For Adults · About (#about) · Contact (#visit) | Work with COBA → | Plan your visit |
+| /children | Birthday Parties (#parties) · For Adults · Contact | Work with COBA → | Plan your visit |
+| /adults | Private Events (#private) · For Children · Contact | Work with COBA → | Plan your visit |
 | Partners | Who We Work With · The Model | Visit the hub → | Start a conversation |
 
-The route link is lower-case and carries an arrow specifically so it does not
-read as an anchor. Sections dropped from the bar are still reachable by
-scrolling and from the footer. A scroll-spy (`IntersectionObserver` in
-`Header.tsx`) marks whichever anchor you are inside using the same hairline
-that hover draws — with only two links there is finally room to show it.
-
-Resist adding links back. The bar is the one place the client explicitly
-called "too complicated".
+The scroll-spy in `Header.tsx` only tracks `#` anchors and ignores route
+links. The language switcher stays on the page you are reading — `/children`
+maps to `/ru/children` via `childrenHref()`/`adultsHref()` in `lib/i18n.ts`.
 
 ## Who You'll Meet has no photography, on purpose
 
@@ -215,6 +229,44 @@ bespoke components; everything honours `prefers-reduced-motion`:
   interior, added alongside the deck photography.
 
 ## Generated media
+
+All fourteen `act-*` activity stills are Higgsfield generations (Nano
+Banana 2, 2026-08-16), 1080×726 WebP q82 — brand interior, casting rule
+respected, people in every frame, children visible where the activity
+includes them.
+
+**House rule (client, 2026-08-16): COBA has NO exterior windows.** It is a
+first-floor mall unit; every window is inside the mall. Eleven images that
+showed daylight windows, trees or skylines were regenerated as windowless
+interiors lit by warm artificial light (brass lamps, recessed wash, LED
+coves) — some deliberately show the mall atrium or corridor beyond the unit
+instead. Only `act-chess`, `act-etiquette` and `act-movienight` survive from
+earlier rounds (already windowless). Any future generation for this venue
+must say "no windows, no daylight, no exterior views". Additional retries in
+that pass: no national dress in mixed-gender groups (`adultart`,
+`boardgames`), no religious-looking artwork on gallery walls (`artshow`),
+and no real branded book covers (`mumtoddler`).
+
+The windowless regenerations carry a **`-w` filename suffix**
+(`act-craft-w.webp`, `act-lego-w.webp`, …). They initially reused the old
+filenames, which let browsers and the Next image-optimizer cache keep
+serving the retired windowed versions after the byte swap — the rename
+busts every cache level for good. If an image is ever replaced again,
+change its filename; never swap bytes under a reused name.
+
+The same rule then **retired the deck `room-*` photography and `artclub`
+from every customer surface** — all seven showed exterior daylight windows.
+Windowless Higgsfield replacements: `act-kidsart` (1900×1277, also the
+full-bleed children band), `act-coffee` (women-only, abayas allowed per the
+single-gender casting rule), `act-networking`, `act-private` ("People
+laughing" + the /adults private-events feature), `act-artists` (ceramics),
+`act-blocks` ("Children building"), `act-parents`. The `room-*.webp` and
+`artclub.webp` files stay in `public/img/` unused (still referenced by
+nothing; deck provenance kept for the record). `idea`, `invitation` and
+`club-community` were audited and kept — their glazing reads as interior
+mall corridor, not exterior. The `who-*` set on /partners was left as is
+(B2B page, small crops). The `hero` background video predates the rule and
+may show windows — regenerate it windowless if the client flags it.
 
 Four background clips were generated with Higgsfield (`kling3_0_turbo`), since
 the decks contain stills only. `hero`, `loop-majlis` and `loop-calm` were

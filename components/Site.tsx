@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import Enquiry from "@/components/Enquiry";
 import Owl from "@/components/Owl";
 import RoomStrip from "@/components/RoomStrip";
+import ActivityReel from "@/components/ActivityReel";
+import AudienceSplit from "@/components/AudienceSplit";
 import MeetGrid from "@/components/MeetGrid";
 import Founders from "@/components/Founders";
 import BgVideo from "@/components/BgVideo";
@@ -18,11 +20,20 @@ import {
   StaggerItem,
   WordsReveal,
 } from "@/components/motion/Primitives";
-import { copy, partnersHref, type Lang } from "@/lib/i18n";
+import {
+  childrenHref,
+  collaborateHref,
+  copy,
+  partnersHref,
+  type Lang,
+} from "@/lib/i18n";
 import s from "@/app/page.module.css";
 
 /* Intrinsic sizes of the processed brand photography. */
 const DIMS: Record<string, [number, number]> = {
+  "act-adultart-w": [1080, 726],
+  "act-birthday-w": [1080, 726],
+  "act-kidsart": [1900, 1277],
   artclub: [1900, 1060],
   founders: [1140, 1700],
   "club-community": [1050, 1406],
@@ -138,8 +149,147 @@ export default function Site({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        {/* ---------- 01 the idea ---------- */}
-        <section className="band" id="idea">
+        {/* ---------- 01 what's happening — the slideshow leads ----------
+            A customer landing here shouldn't need the philosophy first.
+            The week itself opens the page: one image per activity,
+            changing on its own. */}
+        <section className="band" id="happening">
+          <div className="shell">
+            <SectionHead num={c.happening.num} title={c.happening.title} />
+            <div className={s.roomIntro} data-reveal>
+              <h2 className="h2">
+                {c.happening.h2[0]}
+                <br />
+                {c.happening.h2[1]}
+              </h2>
+              <p className="body">{c.happening.lede}</p>
+            </div>
+            <div data-reveal>
+              <ActivityReel lang={lang} />
+            </div>
+
+            <div className={s.audienceBlock}>
+              <p className={`eyebrow eyebrow--olive ${s.audienceEyebrow}`} data-reveal>
+                {c.audience.eyebrow}
+              </p>
+              <AudienceSplit lang={lang} />
+            </div>
+
+            {/* The third door: the room itself is for hire. The customer is
+                invited to book it, not only to attend the week. */}
+            <div className={s.bookStrip} data-reveal>
+              <div className={s.bookCopy}>
+                <p className={`eyebrow ${s.bookEyebrow}`}>{c.book.eyebrow}</p>
+                <h3 className={`h3 ${s.bookTitle}`}>{c.book.h2}</h3>
+                <p className={s.bookBody}>{c.book.body}</p>
+              </div>
+              <div className={s.bookActions}>
+                <a href="#visit" className="btn btn--ghost">
+                  {c.book.ctaVisit}
+                </a>
+                <a href={collaborateHref(lang)} className={s.bookAlt}>
+                  {c.book.ctaHost}
+                  <span aria-hidden="true"> →</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- 02 what you can do — four pillars, client copy ---------- */}
+        <section className="band band--linen" id="happens">
+          <div className="shell">
+            <SectionHead num={c.happens.num} title={c.happens.title} />
+            <div className={s.roomIntro} data-reveal>
+              <h2 className="h2">{c.happens.h2}</h2>
+            </div>
+            <ul className={`${s.cards} ${s.cards4}`}>
+              {c.happens.cards.map((card, i) => (
+                <li
+                  key={card.title}
+                  className={s.happensCard}
+                  data-reveal
+                  style={d(0.08 * i)}
+                >
+                  <div className={s.happensMedia} aria-hidden="true">
+                    {card.media.type === "video" ? (
+                      <BgVideo name={card.media.src} />
+                    ) : (
+                      <Shot
+                        name={card.media.src}
+                        alt=""
+                        sizes="(max-width: 1000px) 100vw, 25vw"
+                      />
+                    )}
+                  </div>
+                  <span className={s.happensNum} aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className={s.happensScrim} aria-hidden="true" />
+                  <div className={s.happensCopy}>
+                    <p className={`eyebrow ${s.happensEyebrow}`}>{card.idx}</p>
+                    <div className={s.cardTitle}>
+                      <h3 className={`h3 ${s.happensTitle}`}>{card.title}</h3>
+                      <span className={`${s.cardAr} ${s.happensAr} ar`} lang="ar">
+                        {card.ar}
+                      </span>
+                    </div>
+                    <p className={s.happensBody}>
+                      <span>{card.body}</span>
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className={s.modelNote} data-reveal>
+              <p className="eyebrow eyebrow--olive">{c.happens.noteEyebrow}</p>
+              <p className="body">{c.happens.noteBody}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- children band — kids stay visible, high on the page ---------- */}
+        <section className={s.children}>
+          <ParallaxDrift className={s.childrenMedia} strength={8}>
+            <Shot name="act-kidsart" alt={c.children.imgAlt} sizes="100vw" />
+          </ParallaxDrift>
+          <div className="shell">
+            <div className={s.childrenCopy} data-reveal>
+              <div>
+                <span className={s.hair} aria-hidden="true" />
+                <p className="eyebrow eyebrow--olive">
+                  {c.children.eyebrow}{" "}
+                  <span className="ar" lang="ar">
+                    — مجتمعنا
+                  </span>
+                </p>
+                <h2 className="h2" style={{ marginTop: "1.2rem" }}>
+                  {c.children.h2}
+                </h2>
+                <a
+                  href={childrenHref(lang)}
+                  className={`btn btn--outline ${s.childrenCta}`}
+                >
+                  {c.children.cta}
+                </a>
+              </div>
+              <div className={s.childrenMeta}>
+                <p className={`${s.childrenAr} ar`} lang="ar">
+                  مكان يكتشف فيه الأطفال مواهبهم
+                </p>
+                <p className="caps" style={{ color: "var(--brass-text)" }}>
+                  {c.children.tierLine1}
+                  <br />
+                  {c.children.tierLine2}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- 03 about ---------- */}
+        <section className="band" id="about">
           <div className="shell">
             <SectionHead num={c.idea.num} title={c.idea.title} />
             <div className={s.ideaGrid}>
@@ -238,90 +388,7 @@ export default function Site({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        {/* ---------- 04 what's on ---------- */}
-        <section className="band" id="happens">
-          <div className="shell">
-            <SectionHead num={c.happens.num} title={c.happens.title} />
-            <ul className={s.cards}>
-              {c.happens.cards.map((card, i) => (
-                <li
-                  key={card.title}
-                  className={s.happensCard}
-                  data-reveal
-                  style={d(0.08 * i)}
-                >
-                  <div className={s.happensMedia} aria-hidden="true">
-                    {card.media.type === "video" ? (
-                      <BgVideo name={card.media.src} />
-                    ) : (
-                      <Shot
-                        name={card.media.src}
-                        alt=""
-                        sizes="(max-width: 1000px) 100vw, 33vw"
-                      />
-                    )}
-                  </div>
-                  <span className={s.happensNum} aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className={s.happensScrim} aria-hidden="true" />
-                  <div className={s.happensCopy}>
-                    <p className={`eyebrow ${s.happensEyebrow}`}>{card.idx}</p>
-                    <div className={s.cardTitle}>
-                      <h3 className={`h3 ${s.happensTitle}`}>{card.title}</h3>
-                      <span className={`${s.cardAr} ${s.happensAr} ar`} lang="ar">
-                        {card.ar}
-                      </span>
-                    </div>
-                    <p className={s.happensBody}>
-                      <span>{card.body}</span>
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <div className={s.modelNote} data-reveal>
-              <p className="eyebrow eyebrow--olive">{c.happens.noteEyebrow}</p>
-              <p className="body">{c.happens.noteBody}</p>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- children band ---------- */}
-        <section className={s.children}>
-          <ParallaxDrift className={s.childrenMedia} strength={8}>
-            <Shot name="artclub" alt={c.children.imgAlt} sizes="100vw" />
-          </ParallaxDrift>
-          <div className="shell">
-            <div className={s.childrenCopy} data-reveal>
-              <div>
-                <span className={s.hair} aria-hidden="true" />
-                <p className="eyebrow eyebrow--olive">
-                  {c.children.eyebrow}{" "}
-                  <span className="ar" lang="ar">
-                    — مجتمعنا
-                  </span>
-                </p>
-                <h2 className="h2" style={{ marginTop: "1.2rem" }}>
-                  {c.children.h2}
-                </h2>
-              </div>
-              <div className={s.childrenMeta}>
-                <p className={`${s.childrenAr} ar`} lang="ar">
-                  مكان يكتشف فيه الأطفال مواهبهم
-                </p>
-                <p className="caps" style={{ color: "var(--brass-text)" }}>
-                  {c.children.tierLine1}
-                  <br />
-                  {c.children.tierLine2}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------- 05 fifteen years ---------- */}
+        {/* ---------- 06 fifteen years ---------- */}
         <Founders lang={lang} />
 
         {/* ---------- the house ---------- */}
@@ -347,6 +414,13 @@ export default function Site({ lang }: { lang: Lang }) {
               <p className="body">{c.partnerStrip.body}</p>
               <a href={partnersHref(lang)} className="btn btn--ghost">
                 {c.partnerStrip.cta}
+              </a>
+              <a
+                href={collaborateHref(lang)}
+                className={s.partnerStripAlt}
+              >
+                {c.partnerStrip.cta2}
+                <span aria-hidden="true"> →</span>
               </a>
             </div>
           </div>

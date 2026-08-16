@@ -9,7 +9,7 @@ import s from "./WhatsOn.module.css";
 
 /* Intrinsic sizes; anything not listed is a 1080×726 act-* generation. */
 const DIMS: Record<string, [number, number]> = {
-  "act-kidsart-v3": [1900, 1277],
+  "act-kidsart-v4": [1900, 1277],
   "club-community": [1050, 1406],
 };
 

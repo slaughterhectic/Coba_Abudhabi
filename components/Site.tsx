@@ -31,9 +31,9 @@ import s from "@/app/page.module.css";
 
 /* Intrinsic sizes of the processed brand photography. */
 const DIMS: Record<string, [number, number]> = {
-  "act-adultart-v3": [1080, 726],
+  "act-adultart-v4": [1080, 726],
   "act-birthday-w": [1080, 726],
-  "act-kidsart-v3": [1900, 1277],
+  "act-kidsart-v4": [1900, 1277],
   artclub: [1900, 1060],
   founders: [1140, 1700],
   "club-community": [1050, 1406],
@@ -252,7 +252,7 @@ export default function Site({ lang }: { lang: Lang }) {
         {/* ---------- children band — kids stay visible, high on the page ---------- */}
         <section className={s.children}>
           <ParallaxDrift className={s.childrenMedia} strength={8}>
-            <Shot name="act-kidsart-v3" alt={c.children.imgAlt} sizes="100vw" />
+            <Shot name="act-kidsart-v4" alt={c.children.imgAlt} sizes="100vw" />
           </ParallaxDrift>
           <div className="shell">
             <div className={s.childrenCopy} data-reveal>

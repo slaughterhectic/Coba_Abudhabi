@@ -1,0 +1,121 @@
+/* ============================================================
+   HeroSlides — the first three seconds.
+   Five communities cross-fading behind the headline.
+   ============================================================ */
+
+.stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.15s var(--ease);
+}
+
+.slide.on {
+  opacity: 1;
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* A slow push-in so a still frame still feels alive. */
+.slide.on .img {
+  animation: heroDrift 6s var(--ease) both;
+}
+
+@keyframes heroDrift {
+  from {
+    transform: scale(1.005);
+  }
+  to {
+    transform: scale(1.055);
+  }
+}
+
+/* ---------- the audience label ---------- */
+
+.tags {
+  position: absolute;
+  right: clamp(1.2rem, 4vw, 4rem);
+  bottom: clamp(9rem, 22vh, 14rem);
+  z-index: 3;
+  display: grid;
+  text-align: right;
+  pointer-events: none;
+}
+
+.tag {
+  grid-area: 1 / 1;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--plaster);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  text-shadow: 0 1px 12px rgba(20, 19, 15, 0.6);
+}
+
+.tagOn {
+  opacity: 0.92;
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  .tags {
+    display: none;
+  }
+}
+
+/* ---------- progress dots ---------- */
+
+.dots {
+  position: absolute;
+  right: clamp(1.2rem, 4vw, 4rem);
+  bottom: clamp(7.4rem, 19vh, 12.2rem);
+  z-index: 3;
+  display: flex;
+  gap: 7px;
+  pointer-events: none;
+}
+
+.dot {
+  width: 22px;
+  height: 2px;
+  background: rgba(241, 235, 223, 0.35);
+  transition: background-color 0.6s var(--ease);
+}
+
+.dotOn {
+  background: var(--oak);
+}
+
+@media (max-width: 860px) {
+  .dots {
+    left: var(--gutter);
+    right: auto;
+    bottom: clamp(1.4rem, 5vh, 2.4rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition: none;
+  }
+  .slide.on .img {
+    animation: none;
+  }
+  .tag {
+    transition: none;
+  }
+}

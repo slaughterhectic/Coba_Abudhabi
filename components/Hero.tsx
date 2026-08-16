@@ -1,5 +1,6 @@
 import Owl from "./Owl";
 import BgVideo from "./BgVideo";
+import HeroSlides from "./HeroSlides";
 import { WordsReveal, Rise, CountUp } from "./motion/Primitives";
 import { copy, type Lang, type Page } from "@/lib/i18n";
 import styles from "./Hero.module.css";
@@ -18,8 +19,14 @@ export default function Hero({
 
   return (
     <section className={styles.hero} id="top">
+      {/* The home hero shows the communities themselves, cycling. The
+          partner hero keeps its single clip — that page has one audience. */}
       <div className={styles.media}>
-        <BgVideo name={video} className={styles.video} preload="auto" />
+        {page === "partners" ? (
+          <BgVideo name={video} className={styles.video} preload="auto" />
+        ) : (
+          <HeroSlides lang={lang} />
+        )}
         <div className={styles.scrim} />
       </div>
 

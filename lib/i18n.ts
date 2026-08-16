@@ -113,7 +113,7 @@ const en = {
      themselves in the first three seconds (client ask, 2026-08-16). */
   heroSlides: [
     { img: "hero-kidsart-v4", tag: "Art clubs for children" },
-    { img: "hero-birthday-v4", tag: "Kids birthday parties" },
+    { img: "hero-birthday-v5", tag: "Kids birthday parties" },
     { img: "hero-family-v4", tag: "Mother & toddler mornings" },
     { img: "hero-ladies-v4", tag: "Workshops for ladies" },
     { img: "hero-networking-v4", tag: "Networking & private events" },
@@ -1001,7 +1001,7 @@ const ru: typeof en = {
   },
   heroSlides: [
     { img: "hero-kidsart-v4", tag: "Арт-клубы для детей" },
-    { img: "hero-birthday-v4", tag: "Детские дни рождения" },
+    { img: "hero-birthday-v5", tag: "Детские дни рождения" },
     { img: "hero-family-v4", tag: "Утро для мам и малышей" },
     { img: "hero-ladies-v4", tag: "Мастер-классы для леди" },
     { img: "hero-networking-v4", tag: "Нетворкинг и частные события" },

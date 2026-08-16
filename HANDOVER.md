@@ -404,3 +404,14 @@ ornamental line-art — no image model reproduces it faithfully, so it is
 Branded files carry a bumped suffix (`hero-*-v2`, `act-*-v3`) because
 bytes must never change under a reused filename — see the cache note above.
 Re-run the script rather than hand-editing if a room is ever regenerated.
+
+### Angled walls need `place_quad`, not `place`
+
+`place()` pastes the mark axis-aligned, which is only correct when the
+wall faces the camera. On the birthday room the mark landed across a
+wall corner and bent over two planes — the client flagged it. Use
+`place_quad(path, out, quad)` there instead: give it the four corners of
+the logo's footprint **on that wall** (TL, TR, BR, BL as frame
+fractions) and it warps the mark into the plane, so it recedes with the
+wall. Read the corners off the architecture — the ceiling line and the
+top edge of the shelving give you the wall's convergence.

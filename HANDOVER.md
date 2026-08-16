@@ -387,3 +387,20 @@ The grain overlay deliberately avoids `mix-blend-mode`. A blended full-viewport
 fixed layer forces the whole page to recomposite every animation frame (it
 visibly stalled the renderer against the marquee) and it crushed the contrast of
 light type on the ink bands.
+
+## The COBA mark is composited onto walls, not generated (2026-08-17)
+
+The client asked for the logo on the empty walls. The owl is intricate
+ornamental line-art — no image model reproduces it faithfully, so it is
+**never prompted**. Instead `social/logo/coba-owl-currentColor.svg` plus a
+`COBΛ` wordmark are composited in post with
+`scratchpad/logo/wall.py` (cairosvg + PIL):
+
+- Applied as a **multiply**, not a paste, so the wall's own lighting
+  gradient survives under the mark and it reads as applied signage.
+- Tint `(122,103,76)` — warm brass-brown against the beige wall.
+- Placement is per-image: `cx, cy, width` as fractions of the frame.
+
+Branded files carry a bumped suffix (`hero-*-v2`, `act-*-v3`) because
+bytes must never change under a reused filename — see the cache note above.
+Re-run the script rather than hand-editing if a room is ever regenerated.

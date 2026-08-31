@@ -90,7 +90,7 @@ const en = {
     /* The one link that changes audience, kept visually apart from the menu. */
     crossHome: "Work with COBA",
     crossPartners: "Visit the hub",
-    ctaHome: "Plan your visit",
+    ctaHome: "Join COBA",
     ctaPartners: "Start a conversation",
     openMenu: "Open menu",
     closeMenu: "Close menu",
@@ -99,10 +99,10 @@ const en = {
   hero: {
     title: ["A creative community hub for", "children, families and adults."],
     lede: "Discover activities, join workshops, meet your community and create meaningful experiences — all under one roof in Nation Towers Mall, Abu Dhabi.",
-    ctaPrimary: "See what's happening",
-    ctaPrimaryHref: "#happening",
-    ctaSecondary: "Plan your visit",
-    ctaSecondaryHref: "#visit",
+    ctaPrimary: "Join the COBA community",
+    ctaPrimaryHref: "#visit",
+    ctaSecondary: "Tell us what you'd like to see",
+    ctaSecondaryHref: "#wish",
     facts: [
       { label: "Experience", value: "years of community", count: 15 },
       { label: "Address", value: "Nation Towers Mall, 1st Floor" },
@@ -118,16 +118,59 @@ const en = {
     { img: "hero-ladies-v4", tag: "Workshops for ladies" },
     { img: "hero-networking-v4", tag: "Networking & private events" },
   ],
+  /* The four doors the client asked for (2026-08-31): before any philosophy,
+     a visitor should see the four things they can actually do here. */
+  doors: {
+    eyebrow: "Four ways in",
+    items: [
+      {
+        title: "Come to COBA",
+        ar: "تعال إلى كوبا",
+        body: "Events, workshops, clubs and community.",
+        cta: "See what's coming",
+        href: "#happening",
+        img: "act-networking",
+      },
+      {
+        title: "For children",
+        ar: "للأطفال",
+        body: "Creative, educational and social activities.",
+        cta: "Children's activities",
+        href: "/children",
+        img: "act-craft-w",
+      },
+      {
+        title: "For adults",
+        ar: "للكبار",
+        body: "Workshops, networking, talks and social events.",
+        cta: "Adult activities",
+        href: "/adults",
+        img: "act-floristry-w",
+      },
+      {
+        title: "Host at COBA",
+        ar: "استضِف لدينا",
+        body: "Private events, corporate gatherings and celebrations.",
+        cta: "Host your event",
+        href: "#host",
+        img: "act-private",
+      },
+    ],
+  },
   voice: { create: "Create", explore: "Explore", connect: "Connect" },
   /* The slideshow the client asked for, twice: "an image for each activity",
      changing as soon as the site opens, so a customer can visualize the week
      before reading a single paragraph of philosophy. */
   happening: {
     num: "01",
-    title: "What's Happening",
-    eyebrow: "What's happening at COBA",
+    title: "What's Coming",
+    eyebrow: "What's coming at COBA",
     h2: ["One roof.", "A week full of things to do."],
-    lede: "Kids birthday parties, floristic workshops, art for children and for adults, book club, mother & toddler mornings, image masterclasses, etiquette for kids and teens, art shows, movie nights, networking — this is what you can do at COBA. Join what's already running, or book the room and make one of these your own.",
+    lede: "Kids birthday parties, floristic workshops, art for children and for adults, book club, mother & toddler mornings, image masterclasses, etiquette for kids and teens, art shows, movie nights, networking — this is the week COBA is being built for.",
+    soonEyebrow: "Before the doors open",
+    soon: "Our first programme will be announced soon.",
+    soonCta: "Join the community to hear it first",
+    soonHref: "#visit",
     prevLabel: "Previous activity",
     nextLabel: "Next activity",
     pauseLabel: "Pause slideshow",
@@ -182,6 +225,20 @@ const en = {
     ctaVisit: "Book it for an occasion",
     ctaHost: "Host your own sessions",
   },
+  /* One sentence for the whole building: the same room, four rhythms. */
+  rhythm: {
+    eyebrow: "One space, all day",
+    h2: ["One space.", "Different rhythms throughout the day."],
+    rows: [
+      ["Morning", "Coffee mornings, moms and toddlers"],
+      [
+        "Afternoon",
+        "Workshops, clubs and classes for schoolchildren and teenagers",
+      ],
+      ["Evening", "Networking, talks and adult-only events"],
+      ["Weekends", "Family and community experiences, private parties"],
+    ],
+  },
   idea: {
     num: "03",
     title: "About COBA",
@@ -189,6 +246,7 @@ const en = {
     place: "Nation Towers Mall, Abu Dhabi",
     p1: "A premium community hub where people from different cultures, backgrounds and professions come together to inspire one another and build something meaningful.",
     p2: "Families, clubs, professionals, creators, entrepreneurs and communities — all under one roof, all part of the same ecosystem.",
+    note: "An international community in Abu Dhabi, with a strong Russian-speaking community within it.",
     imgAlt:
       "A resident leads a session at COBA, sketching on an easel while a group listens around an oak table.",
   },
@@ -335,7 +393,10 @@ const en = {
     portraitAlt:
       "Hana Kash and Natalia Scully, co-founders of COBA, beside the owl mark on a plaster wall.",
     plateCaption: "The founders",
-    h2: "15 Years of Experience. A New Chapter in Abu Dhabi.",
+    h2: [
+      "15 years of building communities in Ireland.",
+      "Now creating a new home for community in Abu Dhabi.",
+    ],
     quote: "A room only becomes a hub when someone tends it.",
     p1: "For more than fifteen years we have built and nurtured a thriving community hub in Ireland — a place where children discovered their talents, parents found friendships, professionals collaborated, and ideas turned into opportunities.",
     p2: "Today we are bringing that same spirit to Abu Dhabi.",
@@ -367,8 +428,17 @@ const en = {
   /* Visitor enquiry — the form on the home page. */
   visit: {
     eyebrow: "The invitation",
-    h2: "Come and see the house.",
-    lede: "Drop in, join a session, or bring the family for the morning. Tell us what you are looking for and we will point you to the right hour of the week.",
+    h2: "Join the COBA community.",
+    lede: "COBA opens soon at Nation Towers Mall. Join now and you will be the first to hear what is coming — and you can tell us what you would like to see in the week.",
+    receiveEyebrow: "Join our community to receive",
+    receiveItems: [
+      "Opening announcement",
+      "First event calendar",
+      "Children's programme",
+      "Adult workshops",
+      "Private event opportunities",
+      "Special launch invitations",
+    ],
     findUs: "Find us",
     address: [
       "Nation Towers Mall, 1st Floor",
@@ -379,24 +449,24 @@ const en = {
     social: "Social",
     open: "Open",
     openValue: "Seven days a week",
-    formEyebrow: "Plan your visit",
+    formEyebrow: "Join the COBA community",
     nameLabel: "Your name",
     orgLabel: "Your email or phone",
     tierLabel: "What brings you to COBA?",
     tiers: [
-      "Classes & workshops",
-      "Clubs & community",
-      "Children & teens",
-      "A birthday party",
-      "Meet-ups, talks & networking",
-      "A private gathering",
-      "Just looking around",
+      "I want to attend an event",
+      "I'm looking for children's activities",
+      "I want to host a private event",
+      "I want to run a workshop",
+      "I want to become a COBA partner",
+      "I'm interested in sponsorship",
+      "I just want to visit",
     ],
-    messageLabel: "Anything you would like us to know?",
-    submit: "Send",
+    messageLabel: "Tell us what you'd like to see at COBA",
+    submit: "Join COBA",
     sentNote: "WhatsApp should now be open with your message ready to send.",
     unsentNote: "Opens in your own WhatsApp, straight to us. This site stores nothing.",
-    mailSubjectPrefix: "Visit enquiry — ",
+    mailSubjectPrefix: "Join the COBA community — ",
     mailFields: {
       name: "Name",
       org: "Email or phone",
@@ -569,12 +639,39 @@ const en = {
   },
   /* The one place the home page speaks to collaborators — the doors to
      /partners (organisations) and /collaborate (individual practitioners). */
-  partnerStrip: {
-    eyebrow: "Work with COBA",
-    h2: "Run a club, class or community? Bring it to COBA.",
-    body: "Residents, collaborators, sponsors and freelancers take a standing slot in the week — with the audience already in the building.",
-    cta: "Work with us",
-    cta2: "A painter, a singer, a coach? Introduce yourself",
+  /* The three customers, named plainly (client, 2026-08-31): someone who
+     wants to attend, someone who wants to run something, someone who wants
+     to hire the room. Every visitor is one of the three. */
+  paths: {
+    eyebrow: "Three ways to be part of COBA",
+    h2: "Which one are you?",
+    items: [
+      {
+        num: "01",
+        label: "People",
+        quote: "I want to attend something.",
+        body: "Events, workshops, clubs and community — for children, for adults, for the whole family.",
+        cta: "See what's coming",
+        href: "#happening",
+      },
+      {
+        num: "02",
+        label: "Partners",
+        quote: "I want to run something.",
+        body: "Instructors, clubs, collaborators and sponsors who bring what they do to a community we are building together.",
+        cta: "Work with COBA",
+        href: "/partners",
+      },
+      {
+        num: "03",
+        label: "Event clients",
+        quote: "I want to hire COBA for my event.",
+        body: "Private celebrations, corporate gatherings and family occasions — up to 70 guests, dressed and ready before you arrive.",
+        cta: "Host at COBA",
+        href: "#host",
+      },
+    ],
+    altCta: "A painter, a singer, a coach? Introduce yourself",
   },
   /* ---- Collaborate — /collaborate. The individual practitioner's door. ---- */
   collab: {
@@ -654,8 +751,8 @@ const en = {
   },
   partners: {
     hero: {
-      title: ["Bring what you do", "to a room that's already full."],
-      lede: "For clubs, instructors, collaborators, sponsors and freelancers. You bring the talent — COBA holds the address, the audience and everything around it.",
+      title: ["Bring what you do", "to a community we're building together."],
+      lede: "For clubs, instructors, collaborators, sponsors and freelancers. COBA provides the space, visibility, marketing and community platform — while we work together to build the audience.",
       ctaPrimary: "Start a conversation",
       ctaPrimaryHref: "#apply",
       ctaSecondary: "How it works",
@@ -670,7 +767,7 @@ const en = {
       num: "01",
       title: "Who We Work With",
       h2: "Four ways to work with COBA.",
-      body: "A residency is the best known of them, but it is not the only one. Every arrangement below is built on the same thing: a permanent address and a community that already turns up.",
+      body: "A residency is the best known of them, but it is not the only one. Every arrangement below is built on the same thing: a permanent address, and a community the two of us build together.",
       items: [
         [
           "Residents & clubs",
@@ -696,18 +793,18 @@ const en = {
     title: "Why COBA",
     h2Lead: "A function room is somewhere you leave. ",
     h2Em: "COBA is somewhere you belong.",
-    body: "Everywhere else you rent the room and bring the audience. Here, ",
-    bodyStrong: "the audience is already in the building.",
+    body: "Everywhere else you rent the room and find the audience alone. Here, ",
+    bodyStrong: "you are not building it on your own.",
     quote: "We are not renting out a space — we are building a relationship.",
     cite: "COBA — Founders",
     reasons: [
       ["One", "A permanent community", "An address, not a booking."],
       ["Two", "Recurring residency", "The same room, the same hour, every week."],
-      ["Three", "A shared audience", "The room is full before you arrive."],
+      ["Three", "A shared audience", "We build it together and share it in both directions."],
       ["Four", "Cross-promotion", "Our following becomes yours."],
       ["Five", "Collaboration by design", "Residents find residents."],
       ["Six", "Design worth arriving for", "A room your members photograph unasked."],
-      ["Seven", "A premium experience", "You bring the talent. We hold the rest."],
+      ["Seven", "A premium experience", "You bring the expertise. We handle the rest."],
     ],
   },
   model: {
@@ -727,7 +824,7 @@ const en = {
     residency: [
       "One permanent address",
       "A standing slot in the week",
-      "A room full before you arrive",
+      "An audience we build together",
       "Materials stored on site",
       "Members who always know where to find you",
     ],
@@ -775,14 +872,14 @@ const en = {
   receive: {
     num: "05",
     title: "What You Receive",
-    h2: ["Everything except", "the talent."],
-    includedEyebrow: "Included in every residency",
-    items: [
-      "A permanent address, listed and findable",
-      "Marketing, social and your own listing",
-      "Concierge, reception and refreshments",
-      "The room dressed before your first guest",
-      "Introductions, referrals and member perks",
+    h2: ["You bring the expertise.", "We handle the rest."],
+    includedEyebrow: "Included in every partnership",
+    stack: [
+      ["Space", "Beautiful, ready-to-use room"],
+      ["Marketing", "Promotion across COBA channels"],
+      ["Community", "Access to our growing audience"],
+      ["Operations", "Reception, setup and refreshments"],
+      ["Growth", "Introductions, referrals and collaborations"],
     ],
     kitAlt:
       "The COBA membership kit — brass-foil keycard, olive notebook, black card wallet and a sage mug on lime plaster.",
@@ -794,7 +891,7 @@ const en = {
     ],
     partnershipTitle: "A partnership, not a tenancy.",
     partnershipLede:
-      "You bring your activity, your facilitators and your voice. We provide the space, the marketing, the community and the clients.",
+      "You bring your activity, your facilitators and your voice. We provide the space, the marketing and the community platform — and we build the audience together.",
     partnership: [
       [
         "Flexible basis",
@@ -871,7 +968,7 @@ const en = {
     ],
     visitEyebrow: "Visit",
     visitLinksHome: [
-      { href: "#happening", label: "What's happening" },
+      { href: "#happening", label: "What's coming" },
       { href: "/children", label: "For children" },
       { href: "/adults", label: "For adults" },
       { href: "#about", label: "About COBA" },
@@ -980,7 +1077,7 @@ const ru: typeof en = {
     ],
     crossHome: "Сотрудничество с COBA",
     crossPartners: "О центре",
-    ctaHome: "Запланировать визит",
+    ctaHome: "Присоединиться",
     ctaPartners: "Начать разговор",
     openMenu: "Открыть меню",
     closeMenu: "Закрыть меню",
@@ -989,10 +1086,10 @@ const ru: typeof en = {
   hero: {
     title: ["Креативный центр сообщества", "для детей, семей и взрослых."],
     lede: "Открывайте занятия, приходите на мастер-классы, знакомьтесь с сообществом и создавайте значимые впечатления — всё под одной крышей в Nation Towers Mall, Абу-Даби.",
-    ctaPrimary: "Что происходит",
-    ctaPrimaryHref: "#happening",
-    ctaSecondary: "Запланировать визит",
-    ctaSecondaryHref: "#visit",
+    ctaPrimary: "Присоединиться к сообществу",
+    ctaPrimaryHref: "#visit",
+    ctaSecondary: "Расскажите, что хотели бы видеть",
+    ctaSecondaryHref: "#wish",
     facts: [
       { label: "Опыт", value: "лет сообщества", count: 15 },
       { label: "Адрес", value: "Nation Towers Mall, 1-й этаж" },
@@ -1006,13 +1103,54 @@ const ru: typeof en = {
     { img: "hero-ladies-v4", tag: "Мастер-классы для леди" },
     { img: "hero-networking-v4", tag: "Нетворкинг и частные события" },
   ],
+  doors: {
+    eyebrow: "Четыре пути",
+    items: [
+      {
+        title: "Приходите в COBA",
+        ar: "تعال إلى كوبا",
+        body: "События, мастер-классы, клубы и сообщество.",
+        cta: "Что скоро будет",
+        href: "#happening",
+        img: "act-networking",
+      },
+      {
+        title: "Детям",
+        ar: "للأطفال",
+        body: "Творческие, образовательные и социальные занятия.",
+        cta: "Занятия для детей",
+        href: "/ru/children",
+        img: "act-craft-w",
+      },
+      {
+        title: "Взрослым",
+        ar: "للكبار",
+        body: "Мастер-классы, нетворкинг, лекции и встречи.",
+        cta: "Занятия для взрослых",
+        href: "/ru/adults",
+        img: "act-floristry-w",
+      },
+      {
+        title: "Проведите событие",
+        ar: "استضِف لدينا",
+        body: "Частные события, корпоративные встречи и праздники.",
+        cta: "Провести событие",
+        href: "#host",
+        img: "act-private",
+      },
+    ],
+  },
   voice: { create: "Твори", explore: "Исследуй", connect: "Общайся" },
   happening: {
     num: "01",
-    title: "Что происходит",
-    eyebrow: "Что происходит в COBA",
+    title: "Что скоро",
+    eyebrow: "Что скоро будет в COBA",
     h2: ["Одна крыша.", "Неделя, полная занятий."],
-    lede: "Детские дни рождения, флористика, творчество для детей и взрослых, книжный клуб, утро для мам и малышей, мастер-классы по имиджу, этикет для детей и подростков, выставки, киновечера, нетворкинг — всё это можно делать в COBA. Присоединяйтесь к тому, что уже идёт, или забронируйте зал и сделайте одно из этого своим.",
+    lede: "Детские дни рождения, флористика, творчество для детей и взрослых, книжный клуб, утро для мам и малышей, мастер-классы по имиджу, этикет для детей и подростков, выставки, киновечера, нетворкинг — вот та неделя, ради которой создаётся COBA.",
+    soonEyebrow: "До открытия",
+    soon: "Первая программа будет объявлена совсем скоро.",
+    soonCta: "Присоединяйтесь, чтобы узнать первыми",
+    soonHref: "#visit",
     prevLabel: "Предыдущее занятие",
     nextLabel: "Следующее занятие",
     pauseLabel: "Остановить слайд-шоу",
@@ -1063,6 +1201,16 @@ const ru: typeof en = {
     ctaVisit: "Забронировать для события",
     ctaHost: "Проводить свои занятия",
   },
+  rhythm: {
+    eyebrow: "Одно пространство, весь день",
+    h2: ["Одно пространство.", "Разные ритмы в течение дня."],
+    rows: [
+      ["Утро", "Кофейные утра, мамы и малыши"],
+      ["День", "Мастер-классы, клубы и занятия для школьников и подростков"],
+      ["Вечер", "Нетворкинг, лекции и события для взрослых"],
+      ["Выходные", "Семейные и общественные события, частные праздники"],
+    ],
+  },
   idea: {
     num: "03",
     title: "О COBA",
@@ -1070,6 +1218,7 @@ const ru: typeof en = {
     place: "Nation Towers Mall, Абу-Даби",
     p1: "Премиальный центр сообщества, где люди разных культур, происхождения и профессий собираются, чтобы вдохновлять друг друга и создавать что-то значимое.",
     p2: "Семьи, клубы, специалисты, творцы, предприниматели и сообщества — под одной крышей, в одной экосистеме.",
+    note: "Международное сообщество в Абу-Даби, с сильным русскоязычным сообществом внутри него.",
     imgAlt:
       "Резидент ведёт занятие в COBA, рисуя на мольберте, пока группа слушает за дубовым столом.",
   },
@@ -1215,7 +1364,10 @@ const ru: typeof en = {
     portraitAlt:
       "Хана Каш и Наталия Скалли, соучредители COBA, у знака совы на оштукатуренной стене.",
     plateCaption: "Основательницы",
-    h2: "15 лет опыта. Новая глава в Абу-Даби.",
+    h2: [
+      "15 лет создания сообществ в Ирландии.",
+      "Теперь — новый дом для сообщества в Абу-Даби.",
+    ],
     quote: "Зал становится центром притяжения только тогда, когда о нём кто-то заботится.",
     p1: "Более пятнадцати лет мы создавали и развивали процветающий центр сообщества в Ирландии — место, где дети раскрывали свои таланты, родители находили друзей, специалисты сотрудничали, а идеи превращались в возможности.",
     p2: "Сегодня мы привозим тот же дух в Абу-Даби.",
@@ -1246,8 +1398,17 @@ const ru: typeof en = {
   },
   visit: {
     eyebrow: "Приглашение",
-    h2: "Приходите посмотреть.",
-    lede: "Загляните, присоединитесь к занятию или приходите всей семьёй на утро. Расскажите, что вам интересно, и мы подскажем подходящий час недели.",
+    h2: "Присоединяйтесь к сообществу COBA.",
+    lede: "COBA скоро откроется в Nation Towers Mall. Присоединяйтесь сейчас — вы первыми узнаете, что мы готовим, и сможете рассказать, что хотели бы видеть в расписании.",
+    receiveEyebrow: "Присоединяйтесь, чтобы получать",
+    receiveItems: [
+      "Объявление об открытии",
+      "Первый календарь событий",
+      "Программу для детей",
+      "Мастер-классы для взрослых",
+      "Возможности для частных событий",
+      "Специальные приглашения на открытие",
+    ],
     findUs: "Как нас найти",
     address: [
       "Nation Towers Mall, 1-й этаж",
@@ -1258,24 +1419,24 @@ const ru: typeof en = {
     social: "Соцсети",
     open: "Часы работы",
     openValue: "Семь дней в неделю",
-    formEyebrow: "Запланировать визит",
+    formEyebrow: "Присоединиться к сообществу",
     nameLabel: "Ваше имя",
     orgLabel: "Ваш e-mail или телефон",
     tierLabel: "Что привело вас в COBA?",
     tiers: [
-      "Занятия и мастер-классы",
-      "Клубы и сообщества",
-      "Дети и подростки",
-      "День рождения",
-      "Встречи, беседы и нетворкинг",
-      "Частное мероприятие",
-      "Просто осмотреться",
+      "Хочу прийти на событие",
+      "Ищу занятия для детей",
+      "Хочу провести частное событие",
+      "Хочу проводить мастер-класс",
+      "Хочу стать партнёром COBA",
+      "Интересует спонсорство",
+      "Просто хочу зайти",
     ],
-    messageLabel: "Что нам стоит знать?",
-    submit: "Отправить",
+    messageLabel: "Расскажите, что вы хотели бы видеть в COBA",
+    submit: "Присоединиться",
     sentNote: "WhatsApp должен открыться с готовым сообщением.",
     unsentNote: "Откроется в вашем WhatsApp и попадёт прямо к нам. Этот сайт ничего не сохраняет.",
-    mailSubjectPrefix: "Запрос на визит — ",
+    mailSubjectPrefix: "Присоединиться к сообществу COBA — ",
     mailFields: {
       name: "Имя",
       org: "E-mail или телефон",
@@ -1444,12 +1605,36 @@ const ru: typeof en = {
       label: "Что проходит для детей",
     },
   },
-  partnerStrip: {
-    eyebrow: "Сотрудничество с COBA",
-    h2: "Ведёте клуб, занятия или сообщество? Приводите их в COBA.",
-    body: "Резиденты, партнёры, спонсоры и фрилансеры занимают постоянный слот в неделе — с аудиторией, которая уже в здании.",
-    cta: "Сотрудничать с нами",
-    cta2: "Художник, певец, коуч? Расскажите о себе",
+  paths: {
+    eyebrow: "Три способа быть частью COBA",
+    h2: "Кто вы?",
+    items: [
+      {
+        num: "01",
+        label: "Гости",
+        quote: "Я хочу прийти на событие.",
+        body: "События, мастер-классы, клубы и сообщество — для детей, для взрослых, для всей семьи.",
+        cta: "Что скоро будет",
+        href: "#happening",
+      },
+      {
+        num: "02",
+        label: "Партнёры",
+        quote: "Я хочу проводить своё.",
+        body: "Преподаватели, клубы, партнёры и спонсоры, которые приносят своё дело в сообщество, которое мы строим вместе.",
+        cta: "Сотрудничать с COBA",
+        href: "/ru/partners",
+      },
+      {
+        num: "03",
+        label: "Заказчики событий",
+        quote: "Я хочу арендовать COBA для своего события.",
+        body: "Частные праздники, корпоративные встречи и семейные торжества — до 70 гостей, зал оформлен и готов до вашего прихода.",
+        cta: "Провести событие",
+        href: "#host",
+      },
+    ],
+    altCta: "Художник, певец, коуч? Расскажите о себе",
   },
   collab: {
     hero: {
@@ -1528,8 +1713,8 @@ const ru: typeof en = {
   },
   partners: {
     hero: {
-      title: ["Приведите своё дело", "в зал, который уже полон."],
-      lede: "Для клубов, преподавателей, партнёров, спонсоров и фрилансеров. Вы приносите талант — COBA берёт на себя адрес, аудиторию и всё остальное.",
+      title: ["Приведите своё дело", "в сообщество, которое мы строим вместе."],
+      lede: "Для клубов, преподавателей, партнёров, спонсоров и фрилансеров. COBA даёт пространство, видимость, маркетинг и площадку сообщества — а аудиторию мы строим вместе.",
       ctaPrimary: "Начать разговор",
       ctaPrimaryHref: "#apply",
       ctaSecondary: "Как это работает",
@@ -1570,18 +1755,18 @@ const ru: typeof en = {
     title: "Почему COBA",
     h2Lead: "Банкетный зал — место, которое покидают. ",
     h2Em: "COBA — место, которому принадлежишь.",
-    body: "Везде и всегда вы арендуете зал и сами приводите аудиторию. Здесь ",
-    bodyStrong: "аудитория уже в здании.",
+    body: "Везде и всегда вы арендуете зал и сами ищете аудиторию. Здесь ",
+    bodyStrong: "вы строите её не в одиночку.",
     quote: "Мы не сдаём пространство в аренду — мы выстраиваем отношения.",
     cite: "COBA — основатели",
     reasons: [
       ["Один", "Постоянное сообщество", "Адрес, а не бронирование."],
       ["Два", "Регулярное резидентство", "Тот же зал, тот же час, каждую неделю."],
-      ["Три", "Общая аудитория", "Зал полон ещё до вашего прихода."],
+      ["Три", "Общая аудитория", "Мы строим её вместе и делимся ею в обе стороны."],
       ["Четыре", "Взаимное продвижение", "Наша аудитория становится вашей."],
       ["Пять", "Сотрудничество по замыслу", "Резиденты находят резидентов."],
       ["Шесть", "Дизайн, ради которого стоит приехать", "Зал, который ваши участники фотографируют без подсказки."],
-      ["Семь", "Премиальный опыт", "Вы приносите талант. Остальное берём на себя мы."],
+      ["Семь", "Премиальный опыт", "Вы приносите экспертизу. Остальное берём на себя мы."],
     ],
   },
   model: {
@@ -1601,7 +1786,7 @@ const ru: typeof en = {
     residency: [
       "Один постоянный адрес",
       "Постоянное место в расписании недели",
-      "Зал полон ещё до вашего прихода",
+      "Аудитория, которую мы строим вместе",
       "Материалы хранятся на месте",
       "Участники всегда знают, где вас найти",
     ],
@@ -1649,14 +1834,14 @@ const ru: typeof en = {
   receive: {
     num: "05",
     title: "Что вы получаете",
-    h2: ["Всё, кроме", "самого таланта."],
-    includedEyebrow: "Включено в каждое резидентство",
-    items: [
-      "Постоянный адрес, указанный в списках и легко находимый",
-      "Маркетинг, соцсети и собственная карточка в каталоге",
-      "Консьерж, ресепшен и угощения",
-      "Зал, оформленный к приходу первого гостя",
-      "Знакомства, рекомендации и привилегии для участников",
+    h2: ["Вы приносите экспертизу.", "Остальное берём на себя мы."],
+    includedEyebrow: "Включено в каждое партнёрство",
+    stack: [
+      ["Пространство", "Красивый, готовый к работе зал"],
+      ["Маркетинг", "Продвижение по всем каналам COBA"],
+      ["Сообщество", "Доступ к нашей растущей аудитории"],
+      ["Организация", "Ресепшен, подготовка зала и угощения"],
+      ["Рост", "Знакомства, рекомендации и совместные проекты"],
     ],
     kitAlt:
       "Членский набор COBA — карта с латунным тиснением, оливковый блокнот, чёрный картхолдер и кружка шалфейного цвета на известковой штукатурке.",
@@ -1668,7 +1853,7 @@ const ru: typeof en = {
     ],
     partnershipTitle: "Партнёрство, а не аренда.",
     partnershipLede:
-      "Вы приносите свою деятельность, своих специалистов и свой голос. Мы предоставляем пространство, маркетинг, сообщество и клиентов.",
+      "Вы приносите свою деятельность, своих специалистов и свой голос. Мы даём пространство, маркетинг и площадку сообщества — а аудиторию мы строим вместе.",
     partnership: [
       [
         "Гибкие условия",
@@ -1744,7 +1929,7 @@ const ru: typeof en = {
     ],
     visitEyebrow: "Разделы",
     visitLinksHome: [
-      { href: "#happening", label: "Что происходит" },
+      { href: "#happening", label: "Что скоро будет" },
       { href: "/ru/children", label: "Детям" },
       { href: "/ru/adults", label: "Взрослым" },
       { href: "#about", label: "О COBA" },

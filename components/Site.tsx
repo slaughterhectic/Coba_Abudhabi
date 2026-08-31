@@ -7,7 +7,7 @@ import Enquiry from "@/components/Enquiry";
 import Owl from "@/components/Owl";
 import RoomStrip from "@/components/RoomStrip";
 import ActivityReel from "@/components/ActivityReel";
-import AudienceSplit from "@/components/AudienceSplit";
+import Doors from "@/components/Doors";
 import MeetGrid from "@/components/MeetGrid";
 import Founders from "@/components/Founders";
 import BgVideo from "@/components/BgVideo";
@@ -20,13 +20,7 @@ import {
   StaggerItem,
   WordsReveal,
 } from "@/components/motion/Primitives";
-import {
-  childrenHref,
-  collaborateHref,
-  copy,
-  partnersHref,
-  type Lang,
-} from "@/lib/i18n";
+import { childrenHref, collaborateHref, copy, type Lang } from "@/lib/i18n";
 import s from "@/app/page.module.css";
 
 /* Intrinsic sizes of the processed brand photography. */
@@ -124,30 +118,10 @@ export default function Site({ lang }: { lang: Lang }) {
       <main>
         <Hero lang={lang} page="home" />
 
-        {/* ---------- voice strip ---------- */}
-        <section
-          className={s.voice}
-          aria-label={`${c.voice.create}. ${c.voice.explore}. ${c.voice.connect}.`}
-        >
-          <div className="shell">
-            <StaggerIn className={s.voiceRow} step={0.14}>
-              <StaggerItem>
-                <span className={s.voiceWord}>{c.voice.create}</span>
-              </StaggerItem>
-              <span className={s.voiceDot} aria-hidden="true" />
-              <StaggerItem>
-                <span className={s.voiceWord}>{c.voice.explore}</span>
-              </StaggerItem>
-              <span className={s.voiceDot} aria-hidden="true" />
-              <StaggerItem>
-                <span className={s.voiceWord}>{c.voice.connect}</span>
-              </StaggerItem>
-            </StaggerIn>
-            <p className={`${s.voiceAr} ar-display`} lang="ar">
-              أبدع. استكشف. تواصل.
-            </p>
-          </div>
-        </section>
+        {/* ---------- the four doors ----------
+            Before a word of philosophy: the four things a visitor can
+            actually do here, and one link each. Client, 2026-08-31. */}
+        <Doors lang={lang} />
 
         {/* ---------- 01 what's happening — the slideshow leads ----------
             A customer landing here shouldn't need the philosophy first.
@@ -168,16 +142,22 @@ export default function Site({ lang }: { lang: Lang }) {
               <ActivityReel lang={lang} />
             </div>
 
-            <div className={s.audienceBlock}>
-              <p className={`eyebrow eyebrow--olive ${s.audienceEyebrow}`} data-reveal>
-                {c.audience.eyebrow}
-              </p>
-              <AudienceSplit lang={lang} />
+            {/* The room is not open yet and the site must not pretend it is.
+                One line, in the open, instead of a calendar we cannot fill. */}
+            <div className={s.soon} data-reveal>
+              <div className={s.soonCopy}>
+                <p className="eyebrow eyebrow--olive">{c.happening.soonEyebrow}</p>
+                <p className={s.soonLine}>{c.happening.soon}</p>
+              </div>
+              <a href={c.happening.soonHref} className={s.soonCta}>
+                {c.happening.soonCta}
+                <span aria-hidden="true"> →</span>
+              </a>
             </div>
 
             {/* The third door: the room itself is for hire. The customer is
                 invited to book it, not only to attend the week. */}
-            <div className={s.bookStrip} data-reveal>
+            <div className={s.bookStrip} id="host" data-reveal>
               <div className={s.bookCopy}>
                 <p className={`eyebrow ${s.bookEyebrow}`}>{c.book.eyebrow}</p>
                 <h3 className={`h3 ${s.bookTitle}`}>{c.book.h2}</h3>
@@ -193,6 +173,31 @@ export default function Site({ lang }: { lang: Lang }) {
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ---------- one space, four rhythms ----------
+            The single sentence the client asked for to explain how one
+            room can be a toddler morning and a networking evening. */}
+        <section className={`band band--linen ${s.rhythm}`} aria-label={c.rhythm.h2.join(" ")}>
+          <div className="shell">
+            <div className={s.rhythmHead} data-reveal>
+              <p className="eyebrow eyebrow--olive">{c.rhythm.eyebrow}</p>
+              <h2 className={`h2 ${s.rhythmH2}`}>
+                <span>{c.rhythm.h2[0]}</span>
+                <span>{c.rhythm.h2[1]}</span>
+              </h2>
+              <span className={s.rhythmBar} aria-hidden="true" />
+            </div>
+            <ul className={s.rhythmRows}>
+              {c.rhythm.rows.map(([when, what], i) => (
+                <li key={when} data-reveal style={d(0.07 * i)}>
+                  <span className={s.rhythmDot} aria-hidden="true" />
+                  <span className={s.rhythmWhen}>{when}</span>
+                  <p className={s.rhythmWhat}>{what}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -288,6 +293,31 @@ export default function Site({ lang }: { lang: Lang }) {
           </div>
         </section>
 
+        {/* ---------- voice strip — the breath before the philosophy ---------- */}
+        <section
+          className={s.voice}
+          aria-label={`${c.voice.create}. ${c.voice.explore}. ${c.voice.connect}.`}
+        >
+          <div className="shell">
+            <StaggerIn className={s.voiceRow} step={0.14}>
+              <StaggerItem>
+                <span className={s.voiceWord}>{c.voice.create}</span>
+              </StaggerItem>
+              <span className={s.voiceDot} aria-hidden="true" />
+              <StaggerItem>
+                <span className={s.voiceWord}>{c.voice.explore}</span>
+              </StaggerItem>
+              <span className={s.voiceDot} aria-hidden="true" />
+              <StaggerItem>
+                <span className={s.voiceWord}>{c.voice.connect}</span>
+              </StaggerItem>
+            </StaggerIn>
+            <p className={`${s.voiceAr} ar-display`} lang="ar">
+              أبدع. استكشف. تواصل.
+            </p>
+          </div>
+        </section>
+
         {/* ---------- 03 about ---------- */}
         <section className="band" id="about">
           <div className="shell">
@@ -302,6 +332,11 @@ export default function Site({ lang }: { lang: Lang }) {
                   </p>
                   <p className="body" style={{ marginTop: "1.1rem" }}>
                     {c.idea.p2}
+                  </p>
+                  {/* Named plainly, because it is the single most useful
+                      thing a newcomer can know about the room. */}
+                  <p className="body" style={{ marginTop: "1.1rem" }}>
+                    <strong>{c.idea.note}</strong>
                   </p>
                 </div>
               </div>
@@ -403,26 +438,42 @@ export default function Site({ lang }: { lang: Lang }) {
           />
         </section>
 
-        {/* ---------- the one door to the partner page ---------- */}
-        <section className={`band ${s.partnerStrip}`}>
-          <div className={`shell ${s.partnerStripInner}`} data-reveal>
-            <div>
-              <p className="eyebrow">{c.partnerStrip.eyebrow}</p>
-              <h2 className={`h2 ${s.partnerStripTitle}`}>{c.partnerStrip.h2}</h2>
+        {/* ---------- three customers, three doors ----------
+            Client, 2026-08-31: someone who wants to attend, someone who
+            wants to run something, someone who wants to hire the room.
+            Every visitor is one of the three, so the page says so. */}
+        <section className={s.paths} id="paths">
+          <div className="shell">
+            <div className={s.pathsHead} data-reveal>
+              <p className="eyebrow">{c.paths.eyebrow}</p>
+              <h2 className={`h2 ${s.pathsH2}`}>{c.paths.h2}</h2>
             </div>
-            <div className={s.partnerStripAside}>
-              <p className="body">{c.partnerStrip.body}</p>
-              <a href={partnersHref(lang)} className="btn btn--ghost">
-                {c.partnerStrip.cta}
-              </a>
-              <a
-                href={collaborateHref(lang)}
-                className={s.partnerStripAlt}
-              >
-                {c.partnerStrip.cta2}
+
+            <ul className={s.pathsGrid}>
+              {c.paths.items.map((item, i) => (
+                <li key={item.label} data-reveal style={d(0.09 * i)}>
+                  <a className={s.pathCard} href={item.href}>
+                    <span className={s.pathNum} aria-hidden="true">
+                      {item.num}
+                    </span>
+                    <span className={s.pathLabel}>{item.label}</span>
+                    <p className={s.pathQuote}>“{item.quote}”</p>
+                    <p className={s.pathBody}>{item.body}</p>
+                    <span className={s.pathCta}>
+                      {item.cta}
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <p className={s.pathsAlt} data-reveal>
+              <a href={collaborateHref(lang)} className={s.pathsAltLink}>
+                {c.paths.altCta}
                 <span aria-hidden="true"> →</span>
               </a>
-            </div>
+            </p>
           </div>
         </section>
 

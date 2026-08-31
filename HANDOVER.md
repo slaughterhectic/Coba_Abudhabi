@@ -26,10 +26,33 @@ one per activity) — followed by the client's four pillars (Learn · Create ·
 Connect · Celebrate, her copy verbatim), the two audience doors
 (`components/AudienceSplit.tsx`), and only then philosophy.
 
-Home sections: 01 What's Happening (slideshow + audience doors) ·
-02 What You Can Do (four pillars) · children band · 03 About COBA ·
+The **2026-08-31 round** rebuilt the top of the page and the promise.
+`components/Doors.tsx` now sits directly under the hero — four typographic
+doors (Come to COBA · For Children · For Adults · Host at COBA), before a word
+of philosophy, exactly as the client asked. It replaced `AudienceSplit`, which
+said the same two things further down the page and was deleted rather than
+left as dead code. Three more things changed with it:
+
+- **"What's Happening" is now "What's Coming."** The room is not open, so the
+  section carries `happening.soon` — *"Our first programme will be announced
+  soon"* — instead of implying a live calendar.
+- **The partner promise is honest at launch.** "Bring what you do to a room
+  that's already full" and "the room is full before you arrive" are gone from
+  `partners.hero` and `why.reasons`; the replacement is *"a community we're
+  building together"* and *"COBA provides the space, visibility, marketing and
+  community platform — while we work together to build the audience."* Do not
+  reinstate the old lines: the client's objection was that an instructor would
+  arrive expecting an audience we had promised.
+- **The visit form became the join form.** `visit.h2` is "Join the COBA
+  community", the tier select is the client's seven "What brings you to COBA?"
+  answers, and the hero's secondary CTA points at `#wish` — the message field,
+  labelled "Tell us what you'd like to see at COBA".
+
+Home sections: the four doors · 01 What's Coming (slideshow + first-programme
+note + the bookable room, `#host`) · one space, four rhythms · 02 What You Can
+Do (four pillars) · children band · voice strip · 03 About COBA · the mission ·
 04 Who You'll Meet · 05 In the Room · 06 Fifteen Years · the house ·
-partner strip · visit form.
+three customers (People · Partners · Event clients, `#paths`) · join form.
 Partners sections: 01 Who We Work With · 02 Why COBA · 03 The Model ·
 04 Residency Formats · 05 What You Receive · 06 Who We Welcome.
 

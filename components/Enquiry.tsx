@@ -6,6 +6,7 @@ import Owl from "./Owl";
 import { waLink, WHATSAPP_DISPLAY } from "@/lib/contact";
 import { copy, type Lang } from "@/lib/i18n";
 import styles from "./Enquiry.module.css";
+import s from "@/app/page.module.css";
 
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Nation+Towers+Mall%2C+Abu+Dhabi";
@@ -64,6 +65,19 @@ export default function Enquiry({
           <p className="eyebrow">{c.eyebrow}</p>
           <h2 className={`h2 ${styles.title}`}>{c.h2}</h2>
           <p className={styles.lede}>{c.lede}</p>
+
+          {/* Before the doors open there is no calendar to sell, so the
+              section sells the list itself: here is what joining gets you. */}
+          {variant === "visit" ? (
+            <div className={styles.receive}>
+              <p className="eyebrow">{all.visit.receiveEyebrow}</p>
+              <ul className={s.receiveList}>
+                {all.visit.receiveItems.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
 
           <dl className={styles.details}>
             <div className={styles.detailRow}>
@@ -153,7 +167,10 @@ export default function Enquiry({
             </span>
           </label>
 
-          <label className={styles.field}>
+          {/* The secondary CTA in the hero points straight at this field —
+              "tell us what you'd like to see" is a real promise, so it gets
+              a real target rather than another scroll to the same band. */}
+          <label className={styles.field} id="wish">
             <span className={styles.label}>{c.messageLabel}</span>
             <textarea name="message" rows={4} />
           </label>

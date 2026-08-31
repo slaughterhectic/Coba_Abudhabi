@@ -1,0 +1,148 @@
+/* ============================================================
+   The four doors — the first thing under the hero.
+
+   Deliberately quiet: hairline rules, wide air, no photography.
+   The hero above and every band below carry the imagery; this is
+   the one screen where the choice is the only thing on it.
+   ============================================================ */
+
+.doors {
+  padding-block: clamp(3.2rem, 7vh, 5.6rem);
+  background: var(--plaster);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.eyebrow {
+  margin-bottom: clamp(1.8rem, 3.4vw, 2.8rem);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.6rem, 3vw, 3.2rem);
+}
+
+.door {
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+  height: 100%;
+  padding-top: 1.35rem;
+  position: relative;
+  transition: transform 0.55s var(--ease);
+}
+
+/* the hairline that fills brass on hover — the whole hover state, really */
+.rule {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 1px;
+  background: var(--rule-soft);
+  overflow: hidden;
+}
+
+.rule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease);
+}
+
+.door:hover,
+.door:focus-visible {
+  transform: translateY(-4px);
+}
+
+.door:hover .rule::after,
+.door:focus-visible .rule::after {
+  transform: scaleX(1);
+}
+
+.num {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-52);
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+/* Caps, but at display size and with a restrained 0.1em — the system's
+   0.30em is for small labels; at this size it would fall apart. */
+.title {
+  font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+.ar {
+  font-size: 0.92rem;
+  color: var(--brass-text);
+  opacity: 0.85;
+}
+
+.body {
+  font-size: 0.96rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink-70);
+  max-width: 30ch;
+}
+
+.cta {
+  margin-top: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--brass-text);
+}
+
+.arrow {
+  transition: transform 0.5s var(--ease);
+}
+
+.door:hover .arrow,
+.door:focus-visible .arrow {
+  transform: translateX(5px);
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.6rem, 4vw, 2.6rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .door {
+    padding-block: 1.35rem;
+  }
+
+  .body {
+    max-width: none;
+  }
+}

@@ -292,3 +292,15 @@
     top: 4px;
   }
 }
+
+/* Ireland then, Abu Dhabi now — two lines, two weights of ink, so the
+   distinction the client asked for cannot be read as one sentence. */
+.then {
+  display: block;
+  color: var(--olive-soft);
+}
+
+.now {
+  display: block;
+  color: var(--ink);
+}

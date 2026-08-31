@@ -912,16 +912,6 @@
   }
 }
 
-.audienceBlock {
-  margin-top: clamp(2.6rem, 5vw, 4.2rem);
-  padding-top: 2rem;
-  border-top: 1px solid var(--rule);
-}
-
-.audienceEyebrow {
-  margin-bottom: 1.4rem;
-}
-
 .childrenCta {
   margin-top: 1.8rem;
 }
@@ -1028,4 +1018,410 @@
 .bookAlt:hover {
   color: var(--plaster);
   border-color: var(--plaster);
+}
+
+/* ============================================================
+   The day's rhythms — one sentence for the whole building.
+   Client, 2026-08-31: "One space. Different rhythms throughout
+   the day." Four columns under one gradient hairline that runs
+   morning-light to evening-ink, left to right.
+   ============================================================ */
+
+.rhythm {
+  padding-block: clamp(3.4rem, 8vh, 6rem);
+}
+
+.rhythmHead {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: clamp(2.2rem, 4.5vw, 3.6rem);
+}
+
+.rhythmH2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.85rem);
+}
+
+.rhythmH2 span:last-child {
+  color: var(--ink);
+}
+
+/* the light of the day, drawn once */
+.rhythmBar {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--plaster) 0%,
+    var(--oak) 26%,
+    var(--brass) 52%,
+    var(--olive) 78%,
+    var(--ink) 100%
+  );
+}
+
+.rhythmRows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.4rem, 3vw, 3rem);
+}
+
+.rhythmRows > li {
+  padding-top: 1.3rem;
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+  position: relative;
+}
+
+/* the marker on each column, tinted to its hour */
+.rhythmDot {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--oak);
+  border: 1px solid var(--plaster);
+}
+
+.rhythmRows > li:nth-child(2) .rhythmDot {
+  background: var(--brass);
+}
+
+.rhythmRows > li:nth-child(3) .rhythmDot {
+  background: var(--olive);
+}
+
+.rhythmRows > li:nth-child(4) .rhythmDot {
+  background: var(--ink);
+}
+
+.rhythmWhen {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+.rhythmWhat {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink-70);
+}
+
+@media (max-width: 900px) {
+  .rhythmRows {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem 2rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .rhythmRows {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   The first programme — the honest pre-launch line.
+   ============================================================ */
+
+.soon {
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+  padding: clamp(1.4rem, 2.6vw, 2.2rem) 0 0;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
+.soonCopy {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.soonLine {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: -0.008em;
+  color: var(--olive);
+}
+
+.soonCta {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--brass-text);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+  white-space: nowrap;
+  transition:
+    color 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.soonCta:hover {
+  color: var(--olive);
+  border-color: var(--olive);
+}
+
+/* ============================================================
+   Three customers, named plainly — People, Partners, Event
+   clients. The router that replaced the single partner strip.
+   ============================================================ */
+
+.paths {
+  background: var(--ink);
+  color: var(--plaster);
+  padding-block: clamp(3.6rem, 8vh, 6.4rem);
+}
+
+.pathsHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(201, 169, 122, 0.28);
+}
+
+.pathsHead .eyebrow {
+  color: var(--oak);
+}
+
+.pathsH2 {
+  color: var(--plaster);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.pathsGrid {
+  list-style: none;
+  margin: clamp(2.2rem, 4.5vw, 3.6rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.8rem, 4vw, 4rem);
+}
+
+.pathCard {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  height: 100%;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(241, 235, 223, 0.14);
+  transition: border-color 0.55s var(--ease);
+}
+
+.pathCard:hover {
+  border-top-color: var(--oak);
+}
+
+.pathNum {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  color: rgba(241, 235, 223, 0.45);
+}
+
+.pathLabel {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--oak);
+}
+
+/* the customer's own sentence, in their own words */
+.pathQuote {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+  font-weight: 200;
+  line-height: 1.25;
+  letter-spacing: -0.014em;
+  color: var(--plaster);
+}
+
+.pathBody {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(241, 235, 223, 0.7);
+  max-width: 34ch;
+}
+
+.pathCta {
+  margin-top: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--oak);
+  border-bottom: 1px solid rgba(201, 169, 122, 0.4);
+  padding-bottom: 0.32rem;
+  justify-self: start;
+  transition:
+    color 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.pathCard:hover .pathCta {
+  color: var(--plaster);
+  border-color: var(--plaster);
+}
+
+.pathsAlt {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(241, 235, 223, 0.14);
+}
+
+.pathsAltLink {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: rgba(241, 235, 223, 0.62);
+  transition: color 0.4s var(--ease);
+}
+
+.pathsAltLink:hover {
+  color: var(--oak);
+}
+
+@media (max-width: 900px) {
+  .pathsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .pathBody {
+    max-width: none;
+  }
+}
+
+/* ============================================================
+   Ireland then, Abu Dhabi now — the distinction made visible.
+   ============================================================ */
+
+.foundersThen {
+  display: block;
+  color: var(--olive-soft);
+}
+
+.foundersNow {
+  display: block;
+  color: var(--ink);
+}
+
+/* ============================================================
+   The partner value stack — five things COBA handles.
+   ============================================================ */
+
+.stack {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.stack li {
+  display: grid;
+  grid-template-columns: 1.4rem minmax(0, 9rem) 1fr;
+  align-items: baseline;
+  gap: 0.9rem 1.4rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.stack li:first-child {
+  border-top: 1px solid var(--rule-soft);
+}
+
+.stackIcon {
+  width: 1.4rem;
+  color: var(--olive);
+  align-self: center;
+}
+
+.stackLabel {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+.stackBody {
+  font-size: 0.99rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--ink-70);
+}
+
+@media (max-width: 620px) {
+  .stack li {
+    grid-template-columns: 1.4rem 1fr;
+  }
+
+  .stackBody {
+    grid-column: 2;
+  }
+}
+
+/* ============================================================
+   Join the community — what a member receives before opening.
+   ============================================================ */
+
+.receiveList {
+  list-style: none;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1.6rem;
+}
+
+.receiveList li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(241, 235, 223, 0.82);
+}
+
+.receiveList li::before {
+  content: "";
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--oak);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 560px) {
+  .receiveList {
+    grid-template-columns: 1fr;
+  }
 }

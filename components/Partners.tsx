@@ -158,11 +158,12 @@ export default function Partners({ lang }: { lang: Lang }) {
                 <p className="eyebrow" style={{ marginTop: "2.6rem" }}>
                   {c.receive.includedEyebrow}
                 </p>
-                <ul className={s.receive}>
-                  {c.receive.items.map((x, i) => (
-                    <li key={x} data-reveal style={d(0.12 * i)}>
-                      <CheckMark className={s.receiveIcon} />
-                      <span>{x}</span>
+                <ul className={s.stack}>
+                  {c.receive.stack.map(([label, body], i) => (
+                    <li key={label} data-reveal style={d(0.12 * i)}>
+                      <CheckMark className={s.stackIcon} />
+                      <span className={s.stackLabel}>{label}</span>
+                      <span className={s.stackBody}>{body}</span>
                     </li>
                   ))}
                 </ul>

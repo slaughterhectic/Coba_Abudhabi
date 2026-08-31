@@ -56,8 +56,11 @@ export default function Founders({ lang }: { lang: Lang }) {
               <CountUp to={15} />
             </div>
 
+            {/* Two lines, two colours: what we did, and what we are doing
+                now. The client asked for the distinction to be unmissable. */}
             <h2 className={`h2 ${s.title}`} data-reveal>
-              {c.h2}
+              <span className={s.then}>{c.h2[0]}</span>
+              <span className={s.now}>{c.h2[1]}</span>
             </h2>
 
             <blockquote className={s.quote}>

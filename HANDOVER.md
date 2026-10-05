@@ -8,6 +8,29 @@ npm run dev      # development
 npm run build && npm run start -- -p 3477
 ```
 
+## Pottery at COBA — `/pottery` (client, 2026-10-05)
+
+Built from the client's *Pottery at COBA – Page Content* PDF. The English
+copy in `potteryPage` (`lib/i18n.ts`) is **hers, word for word**: page one
+of the PDF (workshops) is the top half of the page, page two (group
+bookings) the bottom half. The Russian is our translation. Get it checked.
+
+- **Type follows her PDF, not the house system:** Fraunces headings with a
+  brass italic accent, Plex body. Fraunces is loaded in `app/fonts.ts` and
+  applied on the page wrapper only. It has no Cyrillic, so `/ru/pottery`
+  adds Lora behind it in the stack.
+- **Photos** are the six images embedded in the PDF (`pottery-*.webp`,
+  500–700px squares, the size she supplied). Irina's portrait is
+  `pottery-irina.webp`.
+- **"Reserve a place" / "Enquire now"** open WhatsApp with a composed
+  message via `waLink`, like every other form.
+- **The next-workshop card is dated** (Feelings in Form, Monday 12 October
+  2026). Update `potteryPage.next` in both languages when the date passes.
+- **How you reach it:** a "Pottery" item in the header menu on home,
+  `/children` and `/adults`; its own home section directly under the four
+  doors (`components/PotteryBand.tsx`, `#pottery`, all copy read from
+  `potteryPage`); and the footer Visit column.
+
 ## Two audiences — customer routes and one partner door
 
 | Route | Audience | Component |
@@ -15,6 +38,7 @@ npm run build && npm run start -- -p 3477
 | `/`, `/ru` | **The customer.** What's happening, what you can do, about, contact. | `components/Site.tsx` |
 | `/children`, `/ru/children` | **The parent.** What's On for children + birthday parties (up to 70 guests). | `components/WhatsOn.tsx` (`page="children"`) |
 | `/adults`, `/ru/adults` | **The adult customer.** What's On for adults + private events. | `components/WhatsOn.tsx` (`page="adults"`) |
+| `/pottery`, `/ru/pottery` | **The pottery customer.** A standalone landing page — open hand-building workshops + pottery for groups. | `components/Pottery.tsx` |
 | `/partners`, `/ru/partners` | **The organisation.** Residency, collaboration, sponsorship, freelance practice. Deliberately a side door, never a main-nav peer. | `components/Partners.tsx` |
 | `/collaborate`, `/ru/collaborate` | **The individual practitioner.** "Who are you — a painter, a singer?" An interactive craft picker (12 crafts) and format chips (7 formats) whose selections are played back in the page and carried into the mailto introduction. Reached from `/partners` nav+footer and the home partner strip's second link — never from the customer menu. | `components/Collaborate.tsx` (client; form styling reuses `Enquiry.module.css`) |
 

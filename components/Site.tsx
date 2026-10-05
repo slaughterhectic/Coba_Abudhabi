@@ -8,6 +8,7 @@ import Owl from "@/components/Owl";
 import RoomStrip from "@/components/RoomStrip";
 import ActivityReel from "@/components/ActivityReel";
 import Doors from "@/components/Doors";
+import PotteryBand from "@/components/PotteryBand";
 import MeetGrid from "@/components/MeetGrid";
 import Founders from "@/components/Founders";
 import BgVideo from "@/components/BgVideo";
@@ -122,6 +123,11 @@ export default function Site({ lang }: { lang: Lang }) {
             Before a word of philosophy: the four things a visitor can
             actually do here, and one link each. Client, 2026-08-31. */}
         <Doors lang={lang} />
+
+        {/* ---------- pottery — its own section ----------
+            The one programme already bookable, given a section of its own
+            straight after the doors (client, 2026-10-05). */}
+        <PotteryBand lang={lang} />
 
         {/* ---------- 01 what's happening — the slideshow leads ----------
             A customer landing here shouldn't need the philosophy first.

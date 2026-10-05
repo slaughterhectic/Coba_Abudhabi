@@ -1,0 +1,407 @@
+/* ============================================================
+   Pottery — /pottery
+   Set to the client's page content PDF: Fraunces for headings and
+   the lede, Plex for body and caps, linen cards with soft corners.
+   ============================================================ */
+
+.page {
+  /* Every var needs a fallback: an undefined one (no Lora on the English
+     page) would invalidate the whole stack. */
+  --serif: var(--font-fraunces, Georgia), var(--font-lora, Georgia), Georgia,
+    serif;
+  --card: color-mix(in srgb, var(--linen) 72%, var(--plaster));
+  --radius: 14px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- type ---------- */
+
+.display {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 6.4vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 1.2rem 0 0;
+}
+
+/* The brass italic accent — large display, so brass is permitted here. */
+.display em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--brass);
+}
+
+.lede {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  line-height: 1.55;
+  color: var(--ink-52);
+  max-width: 42ch;
+  margin: 1.4rem 0 0;
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0.55rem 0 0;
+}
+
+.h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.body {
+  color: var(--ink-70);
+  max-width: none;
+  margin: 1rem 0 0;
+}
+
+.body + .body {
+  margin-top: 0.75rem;
+}
+
+/* ---------- layout ---------- */
+
+.intro {
+  padding-top: clamp(8rem, 16vh, 11rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.section {
+  padding-block: clamp(1.5rem, 3.4vw, 2.6rem);
+}
+
+.groupsHead {
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(0.5rem, 2vw, 1.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: clamp(1.4rem, 2.6vw, 2rem) clamp(1.3rem, 2.6vw, 2.1rem);
+}
+
+.cardBody {
+  color: var(--ink-70);
+  margin: 0.6rem 0 0;
+}
+
+.meta {
+  margin: 0.9rem 0 0;
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--brass-text);
+}
+
+.btn {
+  border-radius: 6px;
+  white-space: nowrap;
+  margin-top: 1.6rem;
+}
+
+/* ---------- two ways to work ---------- */
+
+.ways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+  margin-top: 0.9rem;
+}
+
+/* ---------- next workshop ---------- */
+
+.next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+
+.next .h3 {
+  margin-top: 0.4rem;
+}
+
+.next .btn {
+  margin-top: 0;
+  flex: none;
+}
+
+.nextMeta {
+  margin: 0.35rem 0 0;
+  color: var(--ink-70);
+  font-size: 0.95rem;
+}
+
+/* ---------- gallery ---------- */
+
+.gallery {
+  list-style: none;
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(0.6rem, 1.2vw, 1rem);
+}
+
+.tile {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--sand);
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+
+.tile:hover img {
+  transform: scale(1.04);
+}
+
+/* ---------- group formats ---------- */
+
+.formats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.8rem, 3.4vw, 2.6rem) clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.formatHead {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--sand);
+}
+
+.dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  flex: none;
+}
+
+.dotOlive {
+  background: var(--olive);
+}
+
+.dotBrass {
+  background: var(--brass);
+}
+
+.dotInk {
+  background: var(--ink);
+}
+
+.dotSage {
+  background: var(--sage);
+}
+
+/* ---------- how booking works ---------- */
+
+.steps {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem clamp(1rem, 2.4vw, 2rem);
+}
+
+.stepNum {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--brass-text);
+}
+
+.stepTitle {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  margin: 0.35rem 0 0;
+}
+
+.stepBody {
+  margin: 0.35rem 0 0;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--ink-70);
+}
+
+/* ---------- good to know ---------- */
+
+.faq {
+  margin: 0.9rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.q {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.a {
+  margin: 0.3rem 0 0;
+  color: var(--ink-70);
+}
+
+/* ---------- plan + your guide ---------- */
+
+.plan {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.plan::before {
+  content: "";
+  grid-column: 1 / -1;
+  height: 2px;
+  background: var(--ink);
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.plan .body {
+  max-width: 44ch;
+}
+
+.guide {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.3rem;
+}
+
+.portrait {
+  width: clamp(110px, 12vw, 150px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: none;
+  background: var(--sand);
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.guideBody {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink-70);
+}
+
+.guideLinks {
+  margin: 0.3rem 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-70);
+}
+
+.guideLinks a {
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.3s var(--ease);
+}
+
+.guideLinks a:hover {
+  border-color: var(--ink);
+}
+
+/* ---------- credit line (the PDF's page footer) ---------- */
+
+.credit {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+  margin: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--sand);
+  font-size: 0.82rem;
+  color: var(--ink-52);
+}
+
+.credit strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .plan {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .ways,
+  .formats,
+  .faq {
+    grid-template-columns: 1fr;
+  }
+
+  .next {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Five tiles in a two-up grid: let the last one span the row. */
+  .tile:last-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 2 / 1;
+  }
+}
+
+@media (max-width: 460px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .guide {
+    flex-direction: column;
+  }
+}

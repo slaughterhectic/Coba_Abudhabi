@@ -18,7 +18,9 @@ export default function Footer({
         ? c.visitLinksCollab
         : page === "home"
           ? c.visitLinksHome
-          : c.visitLinksWhatsOn;
+          : page === "pottery"
+            ? c.visitLinksPottery
+            : c.visitLinksWhatsOn;
 
   /* The cross-link always points at the audience you are not currently reading as. */
   const cross =

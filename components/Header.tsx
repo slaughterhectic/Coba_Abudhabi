@@ -9,6 +9,7 @@ import {
   copy,
   homeHref,
   partnersHref,
+  potteryHref,
   type Lang,
   type Page,
 } from "@/lib/i18n";
@@ -49,10 +50,17 @@ export default function Header({
           ? c.header.navChildren
           : page === "adults"
             ? c.header.navAdults
-            : c.header.navHome;
+            : page === "pottery"
+              ? c.header.navPottery
+              : c.header.navHome;
   const partnerSide = page === "partners" || page === "collaborate";
-  const cta = partnerSide ? c.header.ctaPartners : c.header.ctaHome;
-  const ctaHref = partnerSide ? "#apply" : "#visit";
+  /* /pottery carries no visit form — its CTA goes to "Plan a pottery session". */
+  const cta = partnerSide
+    ? c.header.ctaPartners
+    : page === "pottery"
+      ? c.header.ctaPottery
+      : c.header.ctaHome;
+  const ctaHref = partnerSide ? "#apply" : page === "pottery" ? "#plan" : "#visit";
 
   /* The single route-changing link. It sits outside the anchor list because a
      link that leaves the page should never look like one that scrolls it.
@@ -94,7 +102,9 @@ export default function Header({
           ? childrenHref(l)
           : page === "adults"
             ? adultsHref(l)
-            : homeHref(l);
+            : page === "pottery"
+              ? potteryHref(l)
+              : homeHref(l);
 
   const langSwitch = (className: string) => (
     <nav className={className} aria-label={c.header.langSwitchLabel}>

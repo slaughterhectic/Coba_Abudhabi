@@ -4,12 +4,20 @@ export type Lang = "en" | "ru";
  *  "home"     — the world of COBA: what's happening, what you can do.
  *  "children" — What's On for children, incl. birthday parties.
  *  "adults"   — What's On for adults, incl. private events.
+ *  "pottery"  — a standalone landing page for Pottery at COBA
+ *               (client-supplied page content, 2026-10-05).
  *  The collaborator side stays deliberately minor —
  *  "partners"    — residency, sponsorship, freelance practice (B2B).
  *  "collaborate" — the individual practitioner: a painter, a singer,
  *                  a coach introducing themselves and what they'd host.
  *  Header, footer and the enquiry form all read this to pick their copy. */
-export type Page = "home" | "children" | "adults" | "partners" | "collaborate";
+export type Page =
+  | "home"
+  | "children"
+  | "adults"
+  | "pottery"
+  | "partners"
+  | "collaborate";
 
 /** A hero footer fact. `count` opts the number into the scroll count-up. */
 type Fact = { label: string; value: string; count?: number };
@@ -40,6 +48,14 @@ const en = {
     ogDescription:
       "Floristry, art, book club, coffee mornings, masterclasses and networking — mornings and evenings for you.",
   },
+  metaPottery: {
+    title: "Pottery at COBA — Hand-building Workshops in Abu Dhabi",
+    description:
+      "Regular hand-building workshops at COBA, Nation Towers. Join one of our open sessions, or book pottery of your own for a private group, a celebration or your team.",
+    ogTitle: "Pottery at COBA",
+    ogDescription:
+      "Two hours with clay. Hand-building workshops and private pottery sessions, led by Irina Dyachenko of Aesthii.",
+  },
   metaCollab: {
     title: "Collaborate with COBA — Bring Your Craft",
     description:
@@ -64,18 +80,26 @@ const en = {
     navHome: [
       { href: "/children", label: "For Children" },
       { href: "/adults", label: "For Adults" },
+      { href: "/pottery", label: "Pottery" },
       { href: "#about", label: "About" },
       { href: "#visit", label: "Contact" },
     ],
     navChildren: [
       { href: "#parties", label: "Birthday Parties" },
       { href: "/adults", label: "For Adults" },
+      { href: "/pottery", label: "Pottery" },
       { href: "#visit", label: "Contact" },
     ],
     navAdults: [
       { href: "#private", label: "Private Events" },
+      { href: "/pottery", label: "Pottery" },
       { href: "/children", label: "For Children" },
       { href: "#visit", label: "Contact" },
+    ],
+    navPottery: [
+      { href: "#workshops", label: "Workshops" },
+      { href: "#groups", label: "Group Bookings" },
+      { href: "#faq", label: "Good to Know" },
     ],
     navPartners: [
       { href: "#roles", label: "Who We Work With" },
@@ -92,6 +116,7 @@ const en = {
     crossPartners: "Visit the hub",
     ctaHome: "Join COBA",
     ctaPartners: "Start a conversation",
+    ctaPottery: "Enquire now",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     langSwitchLabel: "Language",
@@ -637,6 +662,151 @@ const en = {
       label: "See what's on for children",
     },
   },
+  /* ---- Pottery at COBA — /pottery ----
+     Copy is the client's "Pottery at COBA – Page Content" PDF (2026-10-05),
+     verbatim and in her order: page one is the workshops, page two the
+     group bookings. Don't rewrite it — change it only when she does. */
+  potteryPage: {
+    hero: {
+      eyebrow: "COBA · Pottery",
+      title: "Pottery at",
+      accent: "COBA",
+      lede: "Regular hand-building workshops at COBA, Nation Towers. Join one of our open sessions, or book pottery of your own for a private group, a celebration or your team.",
+    },
+    about: {
+      eyebrow: "About",
+      h2: "Two hours with clay",
+      body: [
+        "Pottery at COBA is a slow, hands-on way to spend an afternoon or evening. There is no screen between you and the material, and for a couple of hours that is the whole of it. No experience is needed. Every session is guided from start to finish, and everyone leaves having made something of their own.",
+        "Sessions are led by Irina Dyachenko, the ceramicist behind Aesthii, a hand-built stoneware practice in Abu Dhabi. All clay, tools, aprons, glazes and kiln firings are included.",
+      ],
+    },
+    ways: {
+      eyebrow: "Two ways to work",
+      items: [
+        {
+          title: "Hand-building",
+          body: "Shape your own piece from raw stoneware clay, pinching, coiling and smoothing it into a bowl or small vessel. Pieces are dried, glazed and fired twice after the session.",
+          meta: [
+            "Regular workshops and group bookings",
+            "Two hours",
+            "Ready in about three weeks",
+          ],
+        },
+        {
+          title: "Ceramic painting",
+          body: "Paint a ready-made bisque piece, such as a vase or bowl, with ceramic glazes in your own design. A relaxed option that works well for larger groups and themed events.",
+          meta: ["Group bookings only", "Two hours", "Ready in about two weeks"],
+        },
+      ],
+    },
+    regular: {
+      eyebrow: "Regular workshops",
+      h2: "A place at the table",
+      body: "Hand-building workshops run at COBA on a regular basis, in small groups of up to eight people, so everyone gets time and attention. Book a single place and come on your own or with a friend. New dates open as each one fills.",
+    },
+    next: {
+      eyebrow: "Next workshop",
+      title: "Feelings in Form, a hand-building workshop",
+      meta: ["Monday, 12 October 2026", "6:00 to 8:00 pm", "350 AED per person"],
+      cta: "Reserve a place",
+      /* The home-page band's link through to /pottery. */
+      homeCta: "Discover pottery at COBA",
+      message:
+        "Hello COBA, I'd like to reserve a place at Feelings in Form, the hand-building workshop on Monday, 12 October 2026, 6:00 to 8:00 pm.",
+    },
+    gallery: [
+      { img: "pottery-speckled-bowl", alt: "A speckled hand-built stoneware bowl with a wavy rim" },
+      { img: "pottery-vase-flowers", alt: "A curving brown vase holding red and pink roses" },
+      { img: "pottery-terracotta", alt: "A round terracotta vessel" },
+      { img: "pottery-fluted-vase", alt: "A pale fluted stoneware vase" },
+      { img: "pottery-ruffled-vessel", alt: "A glazed vessel with a ruffled rim" },
+    ],
+    groups: {
+      eyebrow: "Book a session",
+      title: "Pottery for your",
+      accent: "group",
+      lede: "Every format below can be booked on a date that suits you, as a hand-building session or, for groups, ceramic painting. Tell us about your group and we will shape the session around it.",
+      items: [
+        {
+          title: "Private workshops",
+          body: "A session reserved for you and the people you choose: friends, family, a couple, or a small group who want the table to themselves. The pace, the piece and the time are all arranged around you.",
+        },
+        {
+          title: "Corporate events",
+          body: "A team session that gets everyone off their screens and working with their hands. Suitable for team building, offsites, client events and national occasions, held at COBA in Nation Towers.",
+        },
+        {
+          title: "Private events",
+          body: "Birthdays, bridal and baby showers, anniversaries and other celebrations. Guests make or paint a piece together, and each one takes home a keepsake from the day.",
+        },
+        {
+          title: "Personalisation",
+          body: "Pieces can carry names, initials, dates, a colour palette or a company motif. A good fit for gifts, team keepsakes and events built around a theme.",
+        },
+      ],
+    },
+    steps: {
+      eyebrow: "How booking works",
+      items: [
+        {
+          title: "Enquire",
+          body: "Share your preferred date, the number of guests and the occasion.",
+        },
+        {
+          title: "Choose the format",
+          body: "Hand-building or ceramic painting, plus any personalisation or theme.",
+        },
+        {
+          title: "The session",
+          body: "Everything is prepared before you arrive. Two hours, guided throughout.",
+        },
+        {
+          title: "Collect",
+          body: "Pieces are glazed and fired, then ready to collect from COBA.",
+        },
+      ],
+    },
+    faq: {
+      eyebrow: "Good to know",
+      items: [
+        {
+          q: "Do I need any experience?",
+          a: "No. Most people at the table are working with clay for the first time.",
+        },
+        {
+          q: "What is included?",
+          a: "Clay or a bisque piece, tools, aprons, glazes, guidance and all kiln firings.",
+        },
+        {
+          q: "When can I take my piece home?",
+          a: "Hand-built pieces are ready in about three weeks, painted pieces in about two.",
+        },
+        {
+          q: "Can the pieces be used for food?",
+          a: "Workshop pieces are made for display and gentle handling, not for the oven or dishwasher.",
+        },
+      ],
+    },
+    plan: {
+      h2: "Plan a pottery session",
+      body: "Pricing and group arrangements for private, corporate and personalised sessions are shared on request.",
+      cta: "Enquire now",
+      message:
+        "Hello COBA, I'd like to plan a pottery session. Preferred date: … Number of guests: … Occasion: …",
+    },
+    guide: {
+      eyebrow: "Your guide",
+      body: "Irina Dyachenko is the ceramicist behind Aesthii, working under the idea that objects carry feeling before they carry function.",
+      portraitAlt: "Irina Dyachenko holding a hand-built bowl",
+      site: "aesthii.com",
+      instagram: "@aesthii.co",
+    },
+    credit: {
+      place: "Nation Towers Mall, First Floor, Abu Dhabi",
+      led: "Pottery sessions led by Irina Dyachenko, Aesthii",
+    },
+  },
   /* The one place the home page speaks to collaborators — the doors to
      /partners (organisations) and /collaborate (individual practitioners). */
   /* The three customers, named plainly (client, 2026-08-31): someone who
@@ -971,6 +1141,7 @@ const en = {
       { href: "#happening", label: "What's coming" },
       { href: "/children", label: "For children" },
       { href: "/adults", label: "For adults" },
+      { href: "/pottery", label: "Pottery at COBA" },
       { href: "#about", label: "About COBA" },
       { href: "#visit", label: "Contact" },
     ],
@@ -980,7 +1151,15 @@ const en = {
       { href: "/", label: "The hub" },
       { href: "/children", label: "For children" },
       { href: "/adults", label: "For adults" },
+      { href: "/pottery", label: "Pottery at COBA" },
       { href: "#visit", label: "Contact" },
+    ],
+    visitLinksPottery: [
+      { href: "/", label: "The hub" },
+      { href: "#workshops", label: "Regular workshops" },
+      { href: "#groups", label: "Pottery for your group" },
+      { href: "#faq", label: "Good to know" },
+      { href: "/adults", label: "For adults" },
     ],
     visitLinksPartners: [
       { href: "#roles", label: "Who we work with" },
@@ -1031,6 +1210,14 @@ const ru: typeof en = {
     ogDescription:
       "Флористика, живопись, книжный клуб, кофейные утра, мастер-классы и нетворкинг — утра и вечера для вас.",
   },
+  metaPottery: {
+    title: "Керамика в COBA — мастер-классы по ручной лепке в Абу-Даби",
+    description:
+      "Регулярные мастер-классы по ручной лепке в COBA, Nation Towers. Присоединяйтесь к открытому занятию или забронируйте собственное — для частной группы, праздника или вашей команды.",
+    ogTitle: "Керамика в COBA",
+    ogDescription:
+      "Два часа с глиной. Мастер-классы по ручной лепке и частные занятия керамикой под руководством Ирины Дьяченко, Aesthii.",
+  },
   metaCollab: {
     title: "Сотрудничество с COBA — принесите своё ремесло",
     description:
@@ -1052,18 +1239,26 @@ const ru: typeof en = {
     navHome: [
       { href: "/ru/children", label: "Детям" },
       { href: "/ru/adults", label: "Взрослым" },
+      { href: "/ru/pottery", label: "Керамика" },
       { href: "#about", label: "О нас" },
       { href: "#visit", label: "Контакты" },
     ],
     navChildren: [
       { href: "#parties", label: "Дни рождения" },
       { href: "/ru/adults", label: "Взрослым" },
+      { href: "/ru/pottery", label: "Керамика" },
       { href: "#visit", label: "Контакты" },
     ],
     navAdults: [
       { href: "#private", label: "Частные события" },
+      { href: "/ru/pottery", label: "Керамика" },
       { href: "/ru/children", label: "Детям" },
       { href: "#visit", label: "Контакты" },
+    ],
+    navPottery: [
+      { href: "#workshops", label: "Мастер-классы" },
+      { href: "#groups", label: "Для групп" },
+      { href: "#faq", label: "Полезно знать" },
     ],
     navPartners: [
       { href: "#roles", label: "С кем мы работаем" },
@@ -1079,6 +1274,7 @@ const ru: typeof en = {
     crossPartners: "О центре",
     ctaHome: "Присоединиться",
     ctaPartners: "Начать разговор",
+    ctaPottery: "Оставить заявку",
     openMenu: "Открыть меню",
     closeMenu: "Закрыть меню",
     langSwitchLabel: "Язык",
@@ -1605,6 +1801,150 @@ const ru: typeof en = {
       label: "Что проходит для детей",
     },
   },
+  potteryPage: {
+    hero: {
+      eyebrow: "COBA · Керамика",
+      title: "Керамика в",
+      accent: "COBA",
+      lede: "Регулярные мастер-классы по ручной лепке в COBA, Nation Towers. Присоединяйтесь к одному из открытых занятий или забронируйте собственное — для частной группы, праздника или вашей команды.",
+    },
+    about: {
+      eyebrow: "О занятиях",
+      h2: "Два часа с глиной",
+      body: [
+        "Керамика в COBA — неспешный способ провести день или вечер, работая руками. Между вами и материалом нет экрана, и на пару часов больше ничего не нужно. Опыт не требуется. Каждое занятие проходит под руководством от начала до конца, и каждый уходит с вещью, сделанной своими руками.",
+        "Занятия ведёт Ирина Дьяченко — керамист, стоящий за Aesthii, студией керамики ручной лепки из каменной массы в Абу-Даби. Глина, инструменты, фартуки, глазури и обжиг входят в стоимость.",
+      ],
+    },
+    ways: {
+      eyebrow: "Два способа работы",
+      items: [
+        {
+          title: "Ручная лепка",
+          body: "Создайте свою вещь из сырой каменной массы — защипывая, выкладывая жгутами и разглаживая её в чашу или небольшой сосуд. После занятия изделия сушат, глазуруют и дважды обжигают.",
+          meta: [
+            "Регулярные мастер-классы и групповые бронирования",
+            "Два часа",
+            "Готово примерно через три недели",
+          ],
+        },
+        {
+          title: "Роспись керамики",
+          body: "Распишите готовое изделие из бисквита, например вазу или чашу, керамическими глазурями по собственному замыслу. Спокойный формат, который хорошо подходит для больших групп и тематических мероприятий.",
+          meta: [
+            "Только групповые бронирования",
+            "Два часа",
+            "Готово примерно через две недели",
+          ],
+        },
+      ],
+    },
+    regular: {
+      eyebrow: "Регулярные мастер-классы",
+      h2: "Место за столом",
+      body: "Мастер-классы по ручной лепке проходят в COBA регулярно, в небольших группах до восьми человек, чтобы каждому хватило времени и внимания. Забронируйте одно место и приходите одни или с другом. Новые даты открываются по мере заполнения.",
+    },
+    next: {
+      eyebrow: "Ближайший мастер-класс",
+      title: "«Чувства в форме», мастер-класс по ручной лепке",
+      meta: ["Понедельник, 12 октября 2026", "18:00–20:00", "350 AED с человека"],
+      cta: "Забронировать место",
+      homeCta: "Подробнее о керамике в COBA",
+      message:
+        "Здравствуйте, COBA! Я хотел(а) бы забронировать место на мастер-классе по ручной лепке «Feelings in Form» в понедельник, 12 октября 2026, 18:00–20:00.",
+    },
+    gallery: [
+      { img: "pottery-speckled-bowl", alt: "Крапчатая чаша ручной лепки с волнистым краем" },
+      { img: "pottery-vase-flowers", alt: "Изогнутая коричневая ваза с красными и розовыми розами" },
+      { img: "pottery-terracotta", alt: "Круглый терракотовый сосуд" },
+      { img: "pottery-fluted-vase", alt: "Светлая рифлёная ваза из каменной массы" },
+      { img: "pottery-ruffled-vessel", alt: "Глазурованный сосуд с волнистым краем" },
+    ],
+    groups: {
+      eyebrow: "Забронировать занятие",
+      title: "Керамика для вашей",
+      accent: "группы",
+      lede: "Каждый формат ниже можно забронировать на удобную вам дату — как занятие по ручной лепке или, для групп, роспись керамики. Расскажите о вашей группе, и мы выстроим занятие под неё.",
+      items: [
+        {
+          title: "Частные мастер-классы",
+          body: "Занятие только для вас и тех, кого вы выберете: друзей, семьи, пары или небольшой группы, которая хочет стол в своё распоряжение. Темп, изделие и время подстраиваются под вас.",
+        },
+        {
+          title: "Корпоративные мероприятия",
+          body: "Командное занятие, которое отрывает всех от экранов и занимает руки. Подходит для тимбилдинга, выездных встреч, мероприятий для клиентов и национальных праздников, проходит в COBA в Nation Towers.",
+        },
+        {
+          title: "Частные праздники",
+          body: "Дни рождения, девичники, бэби-шауэры, годовщины и другие торжества. Гости вместе лепят или расписывают изделие, и каждый уносит домой память об этом дне.",
+        },
+        {
+          title: "Персонализация",
+          body: "На изделиях могут быть имена, инициалы, даты, цветовая палитра или фирменный мотив компании. Хорошо подходит для подарков, памятных вещей для команды и тематических мероприятий.",
+        },
+      ],
+    },
+    steps: {
+      eyebrow: "Как проходит бронирование",
+      items: [
+        {
+          title: "Заявка",
+          body: "Сообщите желаемую дату, число гостей и повод.",
+        },
+        {
+          title: "Выбор формата",
+          body: "Ручная лепка или роспись керамики, а также персонализация или тема.",
+        },
+        {
+          title: "Занятие",
+          body: "Всё подготовлено к вашему приходу. Два часа, с сопровождением на всём протяжении.",
+        },
+        {
+          title: "Получение",
+          body: "Изделия глазуруют и обжигают, после чего их можно забрать в COBA.",
+        },
+      ],
+    },
+    faq: {
+      eyebrow: "Полезно знать",
+      items: [
+        {
+          q: "Нужен ли опыт?",
+          a: "Нет. Большинство участников работают с глиной впервые.",
+        },
+        {
+          q: "Что входит в стоимость?",
+          a: "Глина или изделие из бисквита, инструменты, фартуки, глазури, сопровождение и весь обжиг.",
+        },
+        {
+          q: "Когда можно забрать изделие?",
+          a: "Изделия ручной лепки готовы примерно через три недели, расписанные — примерно через две.",
+        },
+        {
+          q: "Можно ли использовать изделия для еды?",
+          a: "Изделия с мастер-классов предназначены для декора и бережного обращения, а не для духовки или посудомоечной машины.",
+        },
+      ],
+    },
+    plan: {
+      h2: "Спланировать занятие керамикой",
+      body: "Цены и условия для частных, корпоративных и персонализированных занятий — по запросу.",
+      cta: "Оставить заявку",
+      message:
+        "Здравствуйте, COBA! Я хотел(а) бы спланировать занятие керамикой. Желаемая дата: … Число гостей: … Повод: …",
+    },
+    guide: {
+      eyebrow: "Ваш мастер",
+      body: "Ирина Дьяченко — керамист, стоящий за Aesthii. Её принцип: вещи несут чувство прежде, чем функцию.",
+      portraitAlt: "Ирина Дьяченко с чашей ручной лепки",
+      site: "aesthii.com",
+      instagram: "@aesthii.co",
+    },
+    credit: {
+      place: "Nation Towers Mall, 1-й этаж, Абу-Даби",
+      led: "Занятия керамикой ведёт Ирина Дьяченко, Aesthii",
+    },
+  },
   paths: {
     eyebrow: "Три способа быть частью COBA",
     h2: "Кто вы?",
@@ -1932,6 +2272,7 @@ const ru: typeof en = {
       { href: "#happening", label: "Что скоро будет" },
       { href: "/ru/children", label: "Детям" },
       { href: "/ru/adults", label: "Взрослым" },
+      { href: "/ru/pottery", label: "Керамика в COBA" },
       { href: "#about", label: "О COBA" },
       { href: "#visit", label: "Контакты" },
     ],
@@ -1939,7 +2280,15 @@ const ru: typeof en = {
       { href: "/ru", label: "Главная" },
       { href: "/ru/children", label: "Детям" },
       { href: "/ru/adults", label: "Взрослым" },
+      { href: "/ru/pottery", label: "Керамика в COBA" },
       { href: "#visit", label: "Контакты" },
+    ],
+    visitLinksPottery: [
+      { href: "/ru", label: "Главная" },
+      { href: "#workshops", label: "Регулярные мастер-классы" },
+      { href: "#groups", label: "Керамика для вашей группы" },
+      { href: "#faq", label: "Полезно знать" },
+      { href: "/ru/adults", label: "Взрослым" },
     ],
     visitLinksPartners: [
       { href: "#roles", label: "С кем мы работаем" },
@@ -1989,4 +2338,8 @@ export function adultsHref(lang: Lang) {
 
 export function collaborateHref(lang: Lang) {
   return lang === "ru" ? "/ru/collaborate" : "/collaborate";
+}
+
+export function potteryHref(lang: Lang) {
+  return lang === "ru" ? "/ru/pottery" : "/pottery";
 }

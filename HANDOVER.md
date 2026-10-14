@@ -8,6 +8,24 @@ npm run dev      # development
 npm run build && npm run start -- -p 3477
 ```
 
+## Real photography, share image, exclusive event (2026-10-14)
+
+- **Real photos.** Julia's "final" folder (Ismoilova Family Photography) is in
+  `public/img/real/` (WebP). `lib/spaceShots.ts` lists the 21 shown in the
+  home **The Space** gallery (`components/SpaceGallery.tsx`: filter chips,
+  masonry, keyboard/swipe viewer). `real/7`, `real/10`, `real/16` were upscaled
+  with Higgsfield; real shots also lead the hero slideshow, the door reveal
+  and the About image. The AI people images elsewhere are unchanged.
+- **About figure fix.** `.ideaFigure`/`.ideaBadge` rules are scoped under
+  `.ideaFigureWrap` so they beat the global `.figure` — the arch and the
+  frame are correct again, and the frame matches the photo's 3:2.
+- **Link previews.** `public/og.jpg` (real storefront, 1200x630) is the share
+  image for `/` and `/ru`; domain set to `https://www.cobauae.com`.
+- **Exclusive section.** `components/ExclusiveRoom.tsx` (`exclusive` in
+  `lib/i18n.ts`): The Rooms® x COBA, Sustainable Fashion Room, 15 November.
+  Copy and prices are the organiser's; both CTAs link to their page. Russian
+  is our translation — get it checked. **Remove or replace after the event.**
+
 ## Pottery at COBA — `/pottery` (client, 2026-10-05)
 
 Built from the client's *Pottery at COBA – Page Content* PDF. The English
@@ -122,7 +140,7 @@ old line are deleted, not commented out. Don't reinstate it.
 
 | Item | Where | Note |
 |---|---|---|
-| `https://coba.ae` | `app/(en)/layout.tsx`, `app/ru/layout.tsx` (`metadataBase`, OG url) | Set to the real domain. |
+| `https://www.cobauae.com` | `app/(en)/layout.tsx`, `app/ru/layout.tsx`, every page `openGraph.url` (`metadataBase`) | The real domain, from the client's own message (was `coba.ae`). Share image is `public/og.jpg` (1200x630, the real storefront). |
 | Children's Art Club tier | `components/TheWeek.tsx` | The deck says "every Saturday" but gives no time; it is placed in Tier B. |
 
 ## Contact routes to WhatsApp (client-supplied, 2026-08-16)

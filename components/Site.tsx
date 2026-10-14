@@ -14,6 +14,8 @@ import Founders from "@/components/Founders";
 import BgVideo from "@/components/BgVideo";
 import OrbitBadge from "@/components/OrbitBadge";
 import HouseReveal from "@/components/HouseReveal";
+import SpaceGallery from "@/components/SpaceGallery";
+import ExclusiveRoom from "@/components/ExclusiveRoom";
 import {
   CurtainReveal,
   ParallaxDrift,
@@ -35,7 +37,6 @@ const DIMS: Record<string, [number, number]> = {
   idea: [1750, 1174],
   invitation: [1750, 985],
   kit: [1410, 1750],
-  shopfront: [1900, 535],
   "who-books": [1200, 896],
   "who-creative": [1200, 896],
   "who-cultural": [1200, 896],
@@ -129,6 +130,11 @@ export default function Site({ lang }: { lang: Lang }) {
             straight after the doors (client, 2026-10-05). */}
         <PotteryBand lang={lang} />
 
+        {/* ---------- exclusive collaboration ----------
+            The Rooms® x COBA — the Sustainable Fashion Room, 15 November
+            (client, 2026-10-14). */}
+        <ExclusiveRoom lang={lang} />
+
         {/* ---------- 01 what's happening — the slideshow leads ----------
             A customer landing here shouldn't need the philosophy first.
             The week itself opens the page: one image per activity,
@@ -204,6 +210,27 @@ export default function Site({ lang }: { lang: Lang }) {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* ---------- the real room ----------
+            Julia's photographs of COBA as it stands (2026-10-14): a
+            filterable gallery with a full-screen viewer, straight after
+            the line about one room serving four rhythms. */}
+        <section className="band" id="space" aria-label={c.space.title}>
+          <div className="shell">
+            <div className={s.roomIntro} data-reveal>
+              <div>
+                <p className="eyebrow eyebrow--olive">{c.space.eyebrow}</p>
+                <h2 className="h2" style={{ marginTop: "1.2rem" }}>
+                  {c.space.h2[0]}
+                  <br />
+                  {c.space.h2[1]}
+                </h2>
+              </div>
+              <p className="body">{c.space.body}</p>
+            </div>
+            <SpaceGallery lang={lang} />
           </div>
         </section>
 
@@ -349,9 +376,11 @@ export default function Site({ lang }: { lang: Lang }) {
               <div className={s.ideaFigureWrap}>
                 <span className={s.ideaArchGhost} aria-hidden="true" />
                 <CurtainReveal className={`figure ${s.ideaFigure}`} delay={0.1}>
-                  <Shot
-                    name="idea"
+                  <Image
+                    src="/img/real/dsc09871.webp"
                     alt={c.idea.imgAlt}
+                    width={2200}
+                    height={1467}
                     sizes="(max-width: 900px) 100vw, 46vw"
                   />
                 </CurtainReveal>

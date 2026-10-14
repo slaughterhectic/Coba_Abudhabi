@@ -1,0 +1,211 @@
+/* ============================================================
+   ExclusiveRoom — The Rooms® x COBA feature band.
+   A dark, photographic band so it reads as a headline event,
+   distinct from the plaster/linen programme sections around it.
+   ============================================================ */
+
+.band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--plaster);
+  background: var(--ink);
+  padding-block: var(--band);
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.bgImg {
+  object-fit: cover;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(20, 19, 15, 0.94) 0%, rgba(20, 19, 15, 0.82) 48%, rgba(20, 19, 15, 0.7) 100%);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(201, 169, 122, 0.55);
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--oak);
+}
+
+.dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--oak);
+}
+
+.band .presented {
+  margin-top: 1.6rem;
+  color: var(--oak);
+}
+
+.title {
+  margin: 0.9rem 0 0;
+  font-size: clamp(2.3rem, 5.2vw, 4.4rem);
+  font-weight: 200;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  color: var(--plaster);
+}
+
+.tagline {
+  margin: 1.2rem 0 0;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--oak);
+}
+
+.lede {
+  margin: 1.2rem 0 0;
+  max-width: 46ch;
+  line-height: 1.7;
+  color: rgba(241, 235, 223, 0.8);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 2rem;
+  margin: clamp(1.8rem, 3vw, 2.4rem) 0 0;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(241, 235, 223, 0.2);
+}
+
+.facts dt {
+  color: var(--oak);
+}
+
+.facts dd {
+  margin: 0.25rem 0 0;
+  font-size: 1.05rem;
+  color: var(--plaster);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.note {
+  margin: 1.1rem 0 0;
+  font-size: 0.78rem;
+  color: rgba(241, 235, 223, 0.55);
+}
+
+/* ---------- right column ---------- */
+
+.side {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.card {
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+  border: 1px solid rgba(241, 235, 223, 0.18);
+  border-radius: 4px;
+  background: rgba(241, 235, 223, 0.06);
+  backdrop-filter: blur(6px);
+}
+
+.band .cardEyebrow {
+  color: var(--oak);
+}
+
+.parts,
+.tickets {
+  list-style: none;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.15rem;
+}
+
+.parts li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.8rem;
+}
+
+.num {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--oak);
+  padding-top: 0.35rem;
+}
+
+.partTitle {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--plaster);
+}
+
+.partBody {
+  margin: 0.25rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(241, 235, 223, 0.72);
+}
+
+.tickets li + li {
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(241, 235, 223, 0.16);
+}
+
+.ticketHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ticketName {
+  font-size: 1.05rem;
+  color: var(--plaster);
+}
+
+.price {
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 200;
+  letter-spacing: -0.01em;
+  color: var(--oak);
+  white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+  .scrim {
+    background: rgba(20, 19, 15, 0.86);
+  }
+}

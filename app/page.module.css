@@ -61,8 +61,8 @@
 }
 
 /* Arched window mask — the mall's own arch motif. */
-.ideaFigure {
-  aspect-ratio: 3 / 2.35;
+.ideaFigureWrap .ideaFigure {
+  aspect-ratio: 3 / 2; /* matches the real photograph — no cropping of the lettering */
   border-radius: clamp(90px, 11vw, 170px) clamp(90px, 11vw, 170px) 2px 2px;
 }
 
@@ -82,7 +82,7 @@
   pointer-events: none;
 }
 
-.ideaBadge {
+.ideaFigureWrap .ideaBadge {
   position: absolute;
   left: clamp(-30px, -2.4vw, -18px);
   bottom: clamp(26px, 4vw, 48px);

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: c.metaCollab.ogTitle,
     description: c.metaCollab.ogDescription,
-    url: "https://coba.ae/collaborate",
+    url: "https://www.cobauae.com/collaborate",
     siteName: "COBA",
     locale: c.meta.ogLocale,
     type: "website",

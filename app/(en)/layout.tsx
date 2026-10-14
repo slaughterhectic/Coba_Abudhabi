@@ -8,7 +8,7 @@ import "../globals.css";
 const c = copy("en");
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://coba.ae"),
+  metadataBase: new URL("https://www.cobauae.com"),
   title: {
     default: c.meta.title,
     template: "%s · COBA",
@@ -30,11 +30,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: c.meta.ogTitle,
     description: c.meta.ogDescription,
-    url: "https://coba.ae",
+    url: "https://www.cobauae.com",
     siteName: "COBA",
     locale: c.meta.ogLocale,
     type: "website",
-    images: [{ url: "/media/hero-poster.webp", width: 1920, height: 1080 }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "The COBA shopfront at Nation Towers Mall, Abu Dhabi" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: c.meta.ogTitle,
+    description: c.meta.ogDescription,
+    images: ["/og.jpg"],
   },
   icons: {
     icon: [

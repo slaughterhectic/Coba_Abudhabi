@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: c.metaAdults.ogTitle,
     description: c.metaAdults.ogDescription,
-    url: "https://coba.ae/ru/adults",
+    url: "https://www.cobauae.com/ru/adults",
     siteName: "COBA",
     locale: c.meta.ogLocale,
     type: "website",
